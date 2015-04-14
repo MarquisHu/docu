@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback Configuration.  -->
+<configuration debug="false">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                <![CDATA[
+                %n%date{yyyy-MM-dd HH:mm:ss} %-5level %logger %m%n
+                ]]>
+            </pattern>
+        </encoder>
+    </appender>
+	<appender name="PROJECT-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.dir}/docu.log</file>
+		<encoding>${log.charset}</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.dir}/wyh.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				<![CDATA[
+				%n%date{yyyy-MM-dd HH:mm:ss} %X{remoteAddr} -{userNick} %X{method} %X{requestURIWithQueryString}]%n[UserAgent: %X{userAgent}]%n[Referrer: %X{referrer}]%n%-5level %logger %m%n
+				]]>
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="SERVICE-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.dir}/service.log</file>
+		<encoding>${log.charset}</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.dir}/service.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				<![CDATA[
+				%n%date{yyyy-MM-dd HH:mm:ss} %-5level %logger %m%n
+				]]>
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="EXP-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.dir}/exp.log</file>
+		<encoding>${log.charset}</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.dir}/exp.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				<![CDATA[
+				%n%date{yyyy-MM-dd HH:mm:ss} %-5level %logger %m%n
+				]]>
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="SPRING-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.dir}/spring.log</file>
+		<encoding>${log.charset}</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.dir}/spring.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				<![CDATA[
+				%n%date{yyyy-MM-dd HH:mm:ss} %-5level %logger %m%n
+				]]>
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="WEBX3-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.dir}/webx.log</file>
+		<encoding>${log.charset}</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.dir}/webx.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				<![CDATA[
+				%n%date{yyyy-MM-dd HH:mm:ss} %-5level %logger %m%n
+				]]>
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="DB-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.dir}/db.log</file>
+		<encoding>${log.charset}</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.dir}/db.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>
+				<![CDATA[
+				%n%date{yyyy-MM-dd HH:mm:ss} %-5level %logger %m%n
+				]]>
+			</pattern>
+		</encoder>
+	</appender>
+ 
+	<logger name="com.ibatis" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="DB-APPENDER" />
+	</logger>
+	<logger name="org.springframework.jdbc" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="DB-APPENDER" />
+	</logger>
+	<logger name="org.springframework.orm" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="DB-APPENDER" />
+	</logger>
+	<logger name="org.springframework" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="SPRING-APPENDER" />
+	</logger>
+	<logger name="com.alibaba.citrus" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="WEBX3-APPENDER" />
+	</logger>
+    <logger name="biz" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="SERVICE-APPENDER" />
+    </logger>
+    <logger name="exp" additivity="false">
+        <level value="ERROR" />
+        <appender-ref ref="EXP-APPENDER" />
+    </logger>
+    
+	<logger name="java.sql" level="debug"/>
+	
+    <root>
+        <level value="WARN" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="PROJECT-APPENDER" />
+    </root>
+</configuration>

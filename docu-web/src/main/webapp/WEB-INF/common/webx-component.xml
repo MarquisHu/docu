@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:pull-factories="http://www.alibaba.com/schema/services/pull/factories"
+             xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <services:webx-configuration />
+
+    <services:pull>
+        <pull-factories:utils />
+        <pull-factories:rundata-tool />
+        <pull-factories:csrfToken />
+        <pull-factories:form-tool />
+        <pull-factories:control-tool />
+        <pull-factories:uris-tool />
+        <pull-factories:bean-tool id="userUtil" class="com.docu.web.common.context.UserUtil" scope="request"/> 
+        <pull-factories:bean-tool id="envUtil" class="com.docu.web.common.context.EnvUtils" scope="global"/> 
+        <pull-factories:bean-tool id="jsonUtil" scope="global" class="com.docu.components.util.JsonUtil"/>
+        <pull-factories:bean-tool id="vmUtil" scope="global" class="com.docu.components.util.VmUtil"/>
+        <pull-factories:bean-tool id="imgUtil" scope="global" class="com.docu.components.util.ImgUtil"/>
+    </services:pull>
+
+</beans:beans>

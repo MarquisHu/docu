@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="docu-web">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="docu-components-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/docu-components/docu-components">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="docu-config-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/docu-config/docu-config">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="docu-web"/>
+        <property name="java-output-path" value="/docu-web/target/classes"/>
+    </wb-module>
+</project-modules>

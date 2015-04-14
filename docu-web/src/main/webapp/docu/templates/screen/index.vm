@@ -1,0 +1,79 @@
+#set($title = "DOCU Financial Management System")
+<link rel="stylesheet" type="text/css" href="${docuCdnServer}css/front/login.css">
+<!-- main Start -->	
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+	<div>IRIS-4 <span>DOCU-ERP</span></div>
+</div>
+<br>
+<div class="login">
+	<div class="login-form">
+		<form method="post">
+			<input type="hidden" name="redirectUrl" value="$!redirectUrl" />
+			<input type="hidden" name="action" value="/LoginAction" />
+			<input type="hidden" name="event_submit_do_login" value="1" />
+			
+			<input type="text" id="userId" name="userId" value="$!userId" placeholder="username" />
+			<input type="password" id="password" name="password" placeholder="password" />
+			<input type="submit" value="Login" onclick="return loginCheck();"/>
+		</form>
+		<br><br />
+		<div class="error-tip">
+			#if($errorMsg) <label> $errorMsg </label>#end 
+		</div>
+	</div>
+</div>
+<!-- main End -->
+<script type="text/javascript">
+ function loginCheck(){
+ 	var userId = $("#userId");
+	var password = $("#password");
+	
+	if($.trim(userId.val()).length == 0) {
+		$('.error-tip').html("<label>用户编码不能为空</label>");
+        return false;
+    }
+	
+	if($.trim(password.val()).length == 0) {
+		$('.error-tip').html("<label>用户密码不能为空</label>");
+		return false;
+	}
+	return true;
+ }
+<script language="JavaScript" type="text/javascript">  
+   function addListener(element,e,fn){
+        if(element.addEventListener){      
+             element.addEventListener(e, fn, false);      
+         } else {      
+             element.attachEvent("on" + e, fn);      
+          }
+   }
+   var myuserId = document.getElementById("userId");  
+   var mypassword = document.getElementById("password");  
+   
+   addListener(myuserId,"click",function(){  
+    myuserId.placeholder = "";  
+   })
+   
+   addListener(myuserId,"focus",function(){  
+    myuserId.placeholder = "";  
+   }) 
+   
+   addListener(myuserId,"blur",function(){  
+    myuserId.placeholder = "Please input username";  
+   })
+   
+   addListener(mypassword,"click",function(){  
+    mypassword.placeholder = "";  
+   })
+   
+   addListener(mypassword,"focus",function(){  
+    mypassword.placeholder = "";  
+   })
+   
+   addListener(mypassword,"blur",function(){  
+    mypassword.placeholder = "Please input password";  
+   })
+</script> 
+ 

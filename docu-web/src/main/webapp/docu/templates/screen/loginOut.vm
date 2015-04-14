@@ -1,0 +1,10 @@
+#set($title = "DOCU Financial Management System")
+logout success
+<form method="post" id="loginOut">
+	<input type="hidden" name="redirectUrl" value="$!redirectUrl" />
+	<input type="hidden" name="action" value="/LoginAction" />
+	<input type="hidden" name="event_submit_do_loginOut" value="1" />
+</form>
+<script language="JavaScript" type="text/javascript">
+	$("#loginOut")[0].submit();
+</script>

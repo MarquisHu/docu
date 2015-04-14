@@ -1,0 +1,31 @@
+<!--Header-part-->
+<div id="header">
+  <h1><a href="#">logo</a></h1>
+</div>
+<!--close-Header-part-->
+<div class="logotip tooltip right" style="position:absolute;top:15px; left:110px; z-index:1000;">  
+  <div class="tooltip-inner" style="background:#FFF;color:#4C637B;box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);">DOCU Financial Management System</div>
+</div>
+<!--top-Header-menu--> 
+<div id="user-nav" class="navbar navbar-inverse">
+  <ul class="nav">
+	<li class=""><a href="$!envUtil.getContextPath()/user/index.vm"><span class="text">DOCU Financial Management System</span></a></li>
+    <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><img src="${docuCdnServer}/images/atr/default_avatar.png" alt="" class="atr" /> <span class="text">您好:</span><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li class="divider"></li>
+        <li><a id="login_out" href="#"><i class="icon-signout"></i>Logging Out</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--close-top-Header-menu-->
+<form method="post" id="loginOut">
+	<input type="hidden" name="redirectUrl" value="$!redirectUrl" />
+	<input type="hidden" name="action" value="/LoginAction" />
+	<input type="hidden" name="event_submit_do_loginOut" value="1" />
+</form>
+<script language="JavaScript" type="text/javascript">
+	$("#login_out").click(function(){
+		$("#loginOut")[0].submit();
+	});
+</script>

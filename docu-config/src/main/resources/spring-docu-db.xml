@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       "
+	default-autowire="byName">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/docu_erp?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"/>
+		<property name="username" value="root"></property>
+		<property name="password" value="marquis"></property>
+		<property name="maxActive" value="100"></property>
+		<property name="maxIdle" value="30"></property>
+		<property name="maxWait" value="500"></property>
+		<property name="defaultAutoCommit" value="true"></property>
+		<!-- sql心跳检查 -->
+		<property name="testWhileIdle" value="true"></property>
+		<property name="testOnBorrow" value="true"></property>
+		<property name="testOnReturn" value="true"></property>
+		<property name="validationQuery" value="SELECT 1"></property>
+		<property name="validationQueryTimeout" value="1"></property>
+		<property name="timeBetweenEvictionRunsMillis" value="30000"></property>
+		<property name="numTestsPerEvictionRun" value="16"></property>
+
+	</bean>
+
+	<!-- define the MyBatis SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:sql-map-docu.xml" />
+	</bean>
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!--注释事务 ，少了这配置，好像事务无效-->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+	<bean id="sequenceDao" class="com.docu.components.sequence.impl.DefaultSequenceDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 为用户表生成主键 -->
+	<bean id="userSequence" class="com.docu.components.sequence.impl.DefaultSequence">
+		<property name="sequenceDao" ref="sequenceDao" />
+		<property name="name" value="seq_user_id" />
+	</bean>
+</beans>

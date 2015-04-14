@@ -1,0 +1,25 @@
+<!--close-main-Header-menu-->  
+<!--sidebar-menu-->
+<div id="sidebar">
+  <ul stype='display:block;'>
+    <li class="submenu open">
+		<a href="#">
+          <i class="icon icon-th-list"></i>
+          <span>user management</span>
+          <i class="icon icon-updown icon-chevron-down"></i>
+		  <i class="icon icon-updown icon-chevron-up"></i>
+        </a>
+	    <ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'userAdd'))active#end"><a href="$!envUtil.getContextPath()/user/userAdd.htm">&emsp;&emsp;&emsp;New members</a></li>
+	    </ul>
+    </li>
+    
+    <li> 
+      <a href="$!envUtil.getContextPath()/loginOut.htm">
+        <i class="icon-signout"></i>
+        <span>log out</span>
+      </a> 
+    </li>
+  </ul>
+</div>
+<!--sidebar-menu--> 

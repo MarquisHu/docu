@@ -1,0 +1,86 @@
+#macro (showMessage $field)
+    #if (!$field.valid) <span class="msg"><span class="error">$field.message</span></span> #end
+#end
+
+#macro (showErrorMessage $field)
+    #if (!$field.valid) <span class="gxui-tip-min error" ><i class="gxui-icon"></i> <span>$field.message</span></span> #end
+#end
+
+#macro(G_RequestValue $field $default)$!rundata.parameters.getString($field,$default)#end
+
+#*
+selected
+*#
+#macro(showSelect $s $compareValue)
+	#if("$!s" == "$compareValue")
+		selected
+	#end
+#end
+
+#*
+checked
+*#
+#macro(showChecked $s $compareValue)
+	#if("$!s" == "$compareValue")
+		checked
+	#end
+#end
+
+#macro(prep_url $url)
+	#if($url == "http://" || $url == "https://" || $url == "")
+		
+	#elseif($tbStringUtil.substring($url,0,7) != "http://" && $tbStringUtil.substring($url,0,8) != "https://")
+		http://${url}
+	#else
+		$url
+	#end
+#end
+
+#macro(getAppraise $appraise)
+	#set($v1 = $appraise / 10)
+	#set($v2 = $appraise % 10)
+	#if($v2 == 0)
+		$!v1%
+	#else
+		$!v1.$!v2%
+	#end
+#end
+
+
+#macro( cpIsNotNull $npList $cp )
+	#if($npList &&$npList.contains($!cp.propertyId) )<div class="alert alert-error">$!{cp.propertyNameAlias}不能为空</div>#end
+#end
+
+#macro(colorRange $pv $rangePairs)#if($rangePairs && !$rangePairs.contains($pv)) none#end#end
+
+#macro(image5Url $pv $imageList)#if($imageList && $imageList.size()>0)#foreach($p in $imageList)#if($p.properties==$pv && $p.url)$p.url#end#end#end#end
+
+#macro( hintError $field )
+#if ( !$field.valid )<div class="alert alert-error">$!securityUtil.ignoretext($field.message)</div>#end
+#end
+
+#macro(G_ShowWangWang $nick)
+#if($tbStringUtil.isNotEmpty("$!nick"))
+	#if($!nick.indexOf(":") > 0)
+		<a target="_blank" href="http://amos.im.alisoft.com/msg.aw?v=2&uid=$tbStringUtil.encodeUrl($!nick,"utf-8")&site=cntaobao&s=1&charset=utf-8">
+			<img border="0" src="http://amos.im.alisoft.com/online.aw?v=2&uid=$tbStringUtil.encodeUrl($!nick,"utf-8")&site=cntaobao&s=1&charset=utf-8" alt="点击这里给我发消息"/>
+		</a>
+	#else
+		<span class="J_WangWang aliww" data-nick="$!nick" data-display="inline"></span>
+	#end
+#end
+#end
+
+#macro(tms $url)
+$tmsTool.importRgn($url,1)
+#end
+
+#macro(exchange $value1 $value2)
+	#set($temp = $value1)
+	#set($value1 = $value2)
+	#set($value2 = $temp)
+#end
+
+#macro(setSpmPageId $spmPageId)
+	#set($globalSpmPageId = $spmPageId)
+#end

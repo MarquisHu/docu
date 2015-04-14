@@ -1,0 +1,23 @@
+﻿#set($title = "error page")
+<body class="no-js">
+	
+	$control.setTemplate("/frontHeader.vm")
+	
+	$control.setTemplate("/frontNavigation.vm")
+	
+	<div id="main" class="wrap">
+            <div class="error_page">
+              <h1>Sorry! the page cannot be accessed……</h1>
+              <div class="reason">
+                    <p>maybe:</p>
+                    <ul class="reason-list">
+                        <li>web site there is an error<span><i class="gt">&gt;</i>please check the address is incomplete or there are redundant character</span></li>
+                        <li>url is invalid<span><i class="gt">&gt;</i>the page maybe has been deleted, activities have rolled off the production line, etc</span></li>
+                    </ul>
+                </div>
+          </div>
+	</div>
+	
+	$control.setTemplate("/frontFooter.vm")
+</body>
+<!-- $exception -->

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit"> 
+<title>${title}</title>
+<link rel="stylesheet" type="text/css/front" href="${docuCdnServer}css/front/base.css">
+<link rel="stylesheet" type="text/css/front" href="${docuCdnServer}css/front/style.css">
+<link rel="stylesheet" type="text/css/front" href="${docuCdnServer}css/front/icons.css">
+<link rel="stylesheet" type="text/css/front" href="${docuCdnServer}css/front/linkbutton.css">
+<link rel="stylesheet" type="text/css/front" href="${docuCdnServer}css/front/jquery.fancybox.css?v=2.1.5" media="screen" />
+<script src="http://lib.sinaapp.com/js/front/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+!window.jQuery && document.write('<script src="${docuCdnServer}js/front/jquery-1.11.1.min.js"><\/script>');
+</script>
+<script type="text/javascript" src="${docuCdnServer}js/front/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- <script type="text/javascript" src="${docuCdnServer}js/front/jquery.form.js"></script> -->
+<script type="text/javascript" src="${docuCdnServer}js/front/jquery.turnpic.js"></script>
+<script type="text/javascript" src="${docuCdnServer}js/front/modernizr.custom.js"></script>
+<!--[if IE 6]>
+<link rel="stylesheet" type="text/css/front" href="${docuCdnServer}css/front/ie6.css">
+<script src="${docuCdnServer}js/front/DDPngMin.js"></script>
+<script>DD_belatedPNG.fix('.pngFix,.pngFix:hover,.pngFix img');</script>
+<![endif]-->
+<!--[if lte IE 9]>
+		<script type="text/javascript" src="${docuCdnServer}js/front/jquery.placeholder.js"></script>
+		<script type="text/javascript">
+		$(function(){
+		//$('input, textarea').placeholder();
+		});
+		</script>
+<![endif]-->
+</head>
+<body>
+##杩欐槸澶撮儴锛侊紒锛侊紒锛�
+$screen_placeholder
+##杩欐槸搴曢儴锛侊紒锛侊紒锛�
+
+<script type="text/javascript" src="${docuCdnServer}js/front/jquery.etalage.min.js"></script>
+	<script type="text/javascript" src="${docuCdnServer}js/front/jquery.lazyload.min.js"></script>
+	<script type="text/javascript" src="${docuCdnServer}js/front/jquery.scrollstop.min.js"></script>
+	<script type="text/javascript" src="${docuCdnServer}js/front/docu.public.js"></script>
+	<script type="text/javascript">
+		$(function(){
+       		$("img.lazy").lazyload({         
+			    effect : "fadeIn",
+			    event: "scrollstop"
+			});
+		});
+</script>
+</body>
+</html>

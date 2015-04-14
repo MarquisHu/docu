@@ -1,0 +1,37 @@
+<div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers">
+	#if($page.pageNum==1)  
+     <a class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">first page</a>
+    #else  
+	 <a class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('1');">first page</a>
+	#end  
+	#if($page.pageNum==1)  
+     <a class="fg-button ui-button ui-state-default ui-state-disabled">上一页</a>
+    #else  
+	 <a class="fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$page.pre');">previous page</a>
+	#end  
+   <span>
+	#foreach($p in $page.pages)
+		#if($p==$page.pageNum)
+			<a class="fg-button ui-button ui-state-default ui-state-disabled">$p</a>
+        #else  
+	        <a class="fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$p');">$p</a>
+	    #end  
+    #end  
+   </span>
+   #if($page.pageNum==$page.totalPage || $page.totalPage==0)  
+      <a class="fg-button ui-button ui-state-default ui-state-disabled" >下一页</a>
+   #else  
+	  <a class="fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$page.next');">next page</a>
+   #end  
+   #if($page.pageNum==$page.totalPage || $page.totalPage==0)  
+      <a class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">last page</a>
+   #else  
+	  <a class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$page.totalPage');">last page</a>
+   #end	
+</div>
+<script>
+function paging(num){
+   $('#$form').find("input[name=pageNum]").val(num);
+   $('#$form').submit();
+}
+</script>

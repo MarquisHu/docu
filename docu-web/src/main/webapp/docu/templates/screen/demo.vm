@@ -1,0 +1,9 @@
+#set($title = "demo")
+this is the homepage screen party
+<hr />
+<a href="login.htm">click this to login</a>
+<hr />
+<a href="loginOut.htm?action=/LoginAction&event_submit_do_loginOut=1">click this to register</a>
+	
+<hr />
+<a href="logins.htm">The new login page</a>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gb2312"?>
+<config description="">
+    <group>
+		<property name="docu.db.url" defaultValue="127.0.0.1:3306/docu_erp" description="" />
+		<property name="docu.db.user.name" defaultValue="root" description="" />
+		<property name="docu.db.user.pass" defaultValue="marquis" description="" />
+		<property name="docu.base.address" defaultValue="http://127.0.0.1:8082" description="" />
+	</group>
+	
+	<script>
+    	<generate template="spring-docu-db.xml"/>
+    	<generate template="spring-docu-svc.xml"/>
+    </script>
+</config>

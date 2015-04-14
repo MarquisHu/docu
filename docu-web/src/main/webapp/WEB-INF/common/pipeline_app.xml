@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:services="http://www.alibaba.com/schema/services"
+	xmlns:pl-conditions="http://www.alibaba.com/schema/services/pipeline/conditions"
+	xmlns:pl-valves="http://www.alibaba.com/schema/services/pipeline/valves"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services                     http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/pipeline/conditions http://localhost:8080/schema/services-pipeline-conditions.xsd
+                 http://www.alibaba.com/schema/services/pipeline/valves     http://localhost:8080/schema/services-pipeline-valves.xsd
+                 http://www.springframework.org/schema/beans                http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+	<services:pipeline>
+
+		<pl-valves:prepareForTurbine />
+
+		<pl-valves:setLoggingContext />
+
+		<pl-valves:analyzeURL />
+
+		<pl-valves:checkCsrfToken />
+		<pl-valves:try-catch-finally>
+			<try>
+				<pl-valves:loop>
+					<pl-valves:choose>
+						<when>
+							<pl-conditions:target-extension-condition extension="null,vm" />
+							<pl-valves:performAction />
+							<pl-valves:performTemplateScreen />
+							<pl-valves:renderTemplate />
+						</when>
+						<when>
+							<pl-conditions:target-extension-condition extension="do" />
+							<pl-valves:performAction />
+							<pl-valves:performScreen />
+						</when>
+						<when>
+							<pl-conditions:target-extension-condition extension="json" />
+							<pl-valves:performScreen />
+							<pl-valves:renderResultAsJson />
+						</when>
+						<otherwise>
+							<pl-valves:exit />
+						</otherwise>
+					</pl-valves:choose>
+
+					<pl-valves:breakUnlessTargetRedirected />
+				</pl-valves:loop>
+			</try>
+			<catch>
+				<pl-valves:valve class="com.docu.web.common.valves.ExceptionProcessValve" />
+				<pl-valves:performTemplateScreen />
+				<pl-valves:renderTemplate />
+			</catch>
+			<finally>
+				<pl-valves:valve class="com.docu.web.common.valves.LoginUserCleanValve" />
+			</finally>
+		</pl-valves:try-catch-finally>
+	</services:pipeline>
+
+</beans:beans>

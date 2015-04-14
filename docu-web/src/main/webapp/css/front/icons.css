@@ -1,0 +1,42 @@
+/*通过滤镜对引入图片，滤镜引入图片的时候是相对于HTML文件，而不是相对于CSS文件*/
+
+.icon-group{ position: relative;}
+.icon{cursor:pointer; display:inline-block;_display：inline;_zoom:1}
+.icon-m{ width: 32px; height: 32px;}
+.icon-s{width: 16px; height: 16px;}
+.icon-large{ width: 50px; height: 50px;}
+.icon-50-1{width: 50px; }
+.icon:hover{ opacity: 0.5}
+.icon-unhover:hover{opacity: 1}
+.icon-r{position: absolute;right:2px; top: 2px}
+.icon-group-l{  display: block; height: 32px; padding: 1px 0 1px 34px; line-height: 32px;}
+.icon-group-l .icon{position: absolute;left:1px; top: 1px}
+.icon-m-zhubao{ background: url(icons/icons_m_cats.jpg) no-repeat ;}
+.icon-m-shuma{ background: url(icons/icons_m_cats.jpg) no-repeat 0 -64px;}
+.icon-m-muyin{ background: url(icons/icons_m_cats.jpg) no-repeat  0 -128px;}
+.icon-m-shipin{ background: url(icons/icons_m_cats.jpg) no-repeat  0 -192px;}
+.icon-m-search{ background: url(icons/icons_m_search.jpg) no-repeat center center;}
+.icon-m-right-arrow{ background: url(icons/icons.jpg) no-repeat 0px -64px;}
+.icon-m-more{ background: url(icons/icons.jpg) no-repeat -96px -64px;}
+.icon-m-more-green{ background: url(icons/icons.jpg) no-repeat -96px -96px;}
+.icon-m-up{ background: url(icons/icons.jpg) no-repeat -32px -96px;}
+.icon-m-down{ background: url(icons/icons.jpg) no-repeat 0px -96px;}
+.icon-s-up{ background: url(icons/icons.jpg) no-repeat -71px -72px;}
+.icon-s-down{ background: url(icons/icons.jpg) no-repeat -71px -103px;}
+
+.icon-s-down-2{ background: url(icons/icon_m_down2.png) no-repeat center center;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='css/icons/icon_m_down2.png',sizingMethod='crop');
+		_background-image: none; }
+.icon-m-prev{ background: url(icons/icons_m_prev.jpg) no-repeat center center;}
+.icon-m-next{background: url(icons/icons_m_next.jpg) no-repeat center center;}
+.icon-50-1-line{ border-top:1px solid #ccc}
+.icon-line-gray{ border-top:2px solid #eee}
+.icon-line-green{border-top:2px solid #22ddbe}
+.icon-large-toTop{background: url(icons/icons.jpg) no-repeat  -71px -6px;}
+
+.icon-large-circle{ text-align: center; vertical-align: middle; line-height: 50px;}
+.icon-large-circle-gray{ background: url(icons/icon_large_circle_gray.png) no-repeat center center}
+.current .icon-large-circle-gray{background: url(icons/icon_large_circle.jpg) no-repeat center center; color: #FFF}
+.current .icon-line-gray{ border-top:2px solid #22ddbe}
+
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb2312"?>
+<config description="">
+    <group>
+		<property name="docu.cdn.server.address" defaultValue="/" description="" />
+	</group>
+	<script>
+    	<generate template="WEB-INF/common/uris.xml" />
+    </script>
+</config>

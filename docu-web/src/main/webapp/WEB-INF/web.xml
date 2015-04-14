@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+             http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd
+         "> 
+	<context-param>
+		<param-name>logSystem</param-name>
+		<param-value>logback</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log.dir</param-name>
+		<param-value>/home/docu/erp/logs</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log.charset</param-name>
+		<param-value>UTF-8</param-value>
+	</context-param>
+    <!-- 初始化日志系统 -->
+    <listener>
+        <listener-class>com.alibaba.citrus.logconfig.LogConfiguratorListener</listener-class>
+    </listener>
+    <listener>
+	    <listener-class>com.docu.web.common.context.EnvUtils</listener-class>
+    </listener>
+    <!-- -->
+    <listener>
+        <listener-class>com.alibaba.citrus.webx.context.WebxContextLoaderListener</listener-class>
+    </listener>
+    <filter>
+        <filter-name>webx</filter-name>
+        <filter-class>com.alibaba.citrus.webx.servlet.WebxFrameworkFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>webx</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>    
+</web-app>

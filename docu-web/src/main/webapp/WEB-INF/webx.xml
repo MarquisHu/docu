@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Webx Root Context Configuration.  -->
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:services="http://www.alibaba.com/schema/services"
+	xmlns:ml-factories="http://www.alibaba.com/schema/services/module-loader/factories"
+	xmlns:pull-factories="http://www.alibaba.com/schema/services/pull/factories"
+	xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services                         http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
+                 http://www.alibaba.com/schema/services/pull/factories          http://localhost:8080/schema/services-pull-factories.xsd
+                 http://www.alibaba.com/schema/services/request-contexts        http://localhost:8080/schema/services-request-contexts.xsd
+                 http://www.springframework.org/schema/beans                    http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+	<services:property-placeholder>
+		<property key="component">common</property>
+	</services:property-placeholder>
+
+	<beans:import resource="common/webx-component-and-root.xml" />
+
+	<beans:import resource="common/pipeline-exception.xml" />
+
+	<beans:import resource="common/resources.xml" />
+
+	<beans:import resource="common/uris.xml" />
+	<beans:import resource="classpath:spring-docu.xml" />
+	<services:webx-configuration>
+		<productionMode>${productionMode:true}</productionMode>
+		<components defaultComponent="docu" />
+	</services:webx-configuration>
+
+	<services:request-contexts>
+		<request-contexts:basic />
+		<request-contexts:buffered />
+		<request-contexts:lazy-commit />
+		<request-contexts:parser />
+		<request-contexts:set-locale defaultLocale="zh_CN" defaultCharset="UTF-8" />
+	</services:request-contexts>
+
+	<services:upload sizeMax="5M" />
+
+	<services:pull>
+		<pull-factories:utils />
+		<pull-factories:page-tool />
+		<pull-factories:control-tool />
+		<pull-factories:uris-tool />
+		<pull-factories:csrfToken />
+	</services:pull>
+
+	<services:module-loader>
+		<ml-factories:class-modules>
+			<search-packages type="$1" packages="com.docu.web.home.*" />
+		</ml-factories:class-modules>
+	</services:module-loader>
+</beans:beans>

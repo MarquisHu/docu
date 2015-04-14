@@ -1,0 +1,32 @@
+<div class="pagination" >
+	<ul class="pagination-page">
+		<li class="pagination-count"><span >total </span><b class="color-green">$!page.total</b><span> record</span></li>
+		<li class="page-prev">
+		#if($page.pageNum==1)  
+         <i class="icon icon-m icon-m-prev"></i>
+        #else  
+		<a class="l-btn"  href="javascript:;" onclick="paging('$page.pre');" title="上一页"><i class="icon icon-m icon-m-prev"></i></a>	
+    	#end 	
+		</li>
+		#foreach($p in $page.pages)
+    		#if($p==$page.pageNum)
+				<li ><a class="l-btn" href="javascript:;" >$p</a></li>
+            #else  
+				<li class="page-cur"><a  class="l-btn" href="javascript:;" onclick="paging('$p');return false;">$p</a></li>
+    	    #end  
+		#end  
+		<li class="page-next" >
+		#if($page.pageNum==$page.totalPage || $page.totalPage==0)  
+			<i class="icon icon-m icon-m-next"></i>
+       #else  
+			<a class="l-btn"  href="javascript:;" onclick="paging('$page.next');" title="下一页"><i class="icon icon-m icon-m-next"></i></a>
+       #end  
+		</li>
+	</ul>
+</div>
+<script>
+function paging(num){
+   $('#$form').find("input[name=pageNum]").val(num);
+   $('#$form').submit();
+}
+</script>
