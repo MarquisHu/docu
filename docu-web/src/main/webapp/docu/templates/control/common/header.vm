@@ -9,8 +9,8 @@
 <!--top-Header-menu--> 
 <div id="user-nav" class="navbar navbar-inverse">
   <ul class="nav">
-	<li class=""><a href="$!envUtil.getContextPath()/user/index.vm"><span class="text">DOCU Financial Management System</span></a></li>
-    <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><img src="${docuCdnServer}/images/atr/default_avatar.png" alt="" class="atr" /> <span class="text">您好:</span><b class="caret"></b></a>
+	<li class=""><a href="$!envUtil.getContextPath()/admin/index.vm"><span class="text">DOCU Financial Management System</span></a></li>
+    <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><img src="${docuCdnServer}images/atr/default_avatar.png" alt="" class="atr" /> <span class="text">Hello $!userId</span><b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li class="divider"></li>
         <li><a id="login_out" href="#"><i class="icon-signout"></i>Logging Out</a></li>

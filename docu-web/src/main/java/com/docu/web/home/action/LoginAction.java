@@ -47,7 +47,7 @@ public class LoginAction {
 			session.setMaxInactiveInterval(15*60);//15 minutes
 			
 			if (StringUtils.isEmpty(redirectUrl)) {
-				URIBroker loginPageURI = uriBrokerService.getURIBroker("demoLink"); 
+				URIBroker loginPageURI = uriBrokerService.getURIBroker("adminLink"); 
 				String page = loginPageURI.render();
 				redirectUrl = EnvUtils.addContextPath(page, rundata); 
 			}
