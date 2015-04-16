@@ -25,7 +25,7 @@
 				<pl-valves:loop>
 					<pl-valves:choose>
 						<when>
-							<pl-conditions:target-extension-condition extension="null,vm" />
+							<pl-conditions:target-extension-condition extension="null,vm,html" />
 							<pl-valves:performAction />
 							<pl-valves:performTemplateScreen />
 							<pl-valves:renderTemplate />

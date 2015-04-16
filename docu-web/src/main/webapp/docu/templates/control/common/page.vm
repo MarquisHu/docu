@@ -1,13 +1,13 @@
 <div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers">
 	#if($page.pageNum==1)  
-     <a class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">first page</a>
+     <a class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled">第一页</a>
     #else  
-	 <a class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('1');">first page</a>
+	 <a class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('1');">第一页</a>
 	#end  
 	#if($page.pageNum==1)  
      <a class="fg-button ui-button ui-state-default ui-state-disabled">上一页</a>
     #else  
-	 <a class="fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$page.pre');">previous page</a>
+	 <a class="fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$page.pre');">上一页</a>
 	#end  
    <span>
 	#foreach($p in $page.pages)
@@ -21,12 +21,12 @@
    #if($page.pageNum==$page.totalPage || $page.totalPage==0)  
       <a class="fg-button ui-button ui-state-default ui-state-disabled" >下一页</a>
    #else  
-	  <a class="fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$page.next');">next page</a>
+	  <a class="fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$page.next');">下一页</a>
    #end  
    #if($page.pageNum==$page.totalPage || $page.totalPage==0)  
-      <a class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">last page</a>
+      <a class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default ui-state-disabled">最后一页</a>
    #else  
-	  <a class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$page.totalPage');">last page</a>
+	  <a class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default" href="javascript:;" onclick="paging('$page.totalPage');">最后一页</a>
    #end	
 </div>
 <script>
