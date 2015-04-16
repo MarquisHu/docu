@@ -4,16 +4,16 @@
 </div>
 <!--close-Header-part-->
 <div class="logotip tooltip right" style="position:absolute;top:15px; left:110px; z-index:1000;">  
-  <div class="tooltip-inner" style="background:#FFF;color:#4C637B;box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);">DOCU Financial Management System</div>
+  <div class="tooltip-inner" style="background:#FFF;color:#4C637B;box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);">DOCU账务管理系统</div>
 </div>
 <!--top-Header-menu--> 
 <div id="user-nav" class="navbar navbar-inverse">
   <ul class="nav">
-	<li class=""><a href="$!envUtil.getContextPath()/admin/index.vm"><span class="text">DOCU Financial Management System</span></a></li>
-    <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><img src="${docuCdnServer}/images/atr/default_avatar.png" alt="" class="atr" /> <span class="text">Hello $!userId</span><b class="caret"></b></a>
+	<li class=""><a href="$!envUtil.getContextPath()/admin/index.vm"><span class="text">DOCU账务管理系统</span></a></li>
+    <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><img src="${docuCdnServer}/images/atr/default_avatar.png" alt="" class="atr" /> <span class="text">您好  $!userId</span><b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li class="divider"></li>
-        <li><a id="login_out" href="#"><i class="icon-signout"></i>Logging Out</a></li>
+        <li><a id="login_out" href="#"><i class="icon-signout"></i>安全退出</a></li>
       </ul>
     </li>
   </ul>

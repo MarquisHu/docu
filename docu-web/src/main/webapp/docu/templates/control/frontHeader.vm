@@ -3,9 +3,9 @@
 	<div class="wrap h30 lh30 f12 ">
 		<div class="fr">
 			<ul>
-				<li><a href="/login.htm">Login</a></li>
+				<li><a href="/login.htm">登录</a></li>
 				<li class="pipe">|</li>
-				<li><a href="/register.htm">Register</a></li>
+				<li><a href="/register.htm">注册</a></li>
 			</ul>
 		</div>
 	</div>

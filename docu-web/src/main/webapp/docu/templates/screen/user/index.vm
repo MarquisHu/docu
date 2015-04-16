@@ -1,16 +1,16 @@
-#set($title = "DOCU Financial Management System")
+#set($title = "DOCU账务管理系统")
 #set($menu = "index")
 <!--Begin breadcrumbs-->
 <div id="content-header">
 	<div id="breadcrumb"> 
-	<a title="back homepage" class="current"><i class="icon-home"></i>homepage</a>
+	<a title="back homepage" class="current"><i class="icon-home"></i>首页</a>
 	   
 	</div>
 </div>
 <!--End-breadcrumbs--> 
   
-<div><h1>$!name. Welcome to login DOCU Financial Management System</h1></div>
-<div><h3>username:$!user.userId</h3></div>
+<div><h1>$!name. 欢迎登录DOCU账务管理系统</h1></div>
+<div><h3>用户名称:$!user.userId</h3></div>
   
 <!--Action boxes-->
 <div class="container-fluid">

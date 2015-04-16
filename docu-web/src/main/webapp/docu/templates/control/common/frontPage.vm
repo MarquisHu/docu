@@ -1,6 +1,6 @@
 <div class="pagination" >
 	<ul class="pagination-page">
-		<li class="pagination-count"><span >total </span><b class="color-green">$!page.total</b><span> record</span></li>
+		<li class="pagination-count"><span >共有 </span><b class="color-green">$!page.total</b><span> 跳记录</span></li>
 		<li class="page-prev">
 		#if($page.pageNum==1)  
          <i class="icon icon-m icon-m-prev"></i>

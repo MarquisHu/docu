@@ -1,9 +1,15 @@
-#set($title = "demo")
-this is the homepage screen party
+#set($title = "示例")
+这里的首页的screen部分
 <hr />
-<a href="login.htm">click this to login</a>
+<a href="login.htm">点击这里登录</a>
 <hr />
-<a href="loginOut.htm?action=/LoginAction&event_submit_do_loginOut=1">click this to register</a>
+<a href="merchantConsole.htm">点击这里进入后台</a>
+<hr />
+<a href="loginOut.htm?action=/LoginAction&event_submit_do_loginOut=1">点击这里注销</a>
+<hr />
+<a href="/distributor/supplierItemList.htm">页面初始化样例</a>
+<hr />
+<a href="/json/sampleJson.htm">页面异步请求样例</a>
 	
 <hr />
-<a href="logins.htm">The new login page</a>
+<a href="logins.htm">新页面登录</a>

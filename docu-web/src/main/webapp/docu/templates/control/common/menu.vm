@@ -4,19 +4,19 @@
     <li class="submenu open">
 		<a href="#">
           <i class="icon icon-th-list"></i>
-          <span>user management</span>
+          <span>用户管理</span>
           <i class="icon icon-updown icon-chevron-down"></i>
 		  <i class="icon icon-updown icon-chevron-up"></i>
         </a>
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'userAdd'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;New members</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'userAdd'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;新增用户</a></li>
 	    </ul>
     </li>
     
     <li> 
       <a href="$!envUtil.getContextPath()/loginOut.htm">
         <i class="icon-signout"></i>
-        <span>log out</span>
+        <span>安全退出</span>
       </a> 
     </li>
   </ul>

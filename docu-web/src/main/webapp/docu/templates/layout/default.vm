@@ -20,6 +20,7 @@
 $screen_placeholder
 ##杩欐槸搴曢儴锛侊紒锛侊紒锛�
 
+$control.setTemplate("/common/footer.vm")
 <script type="text/javascript" src="${docuCdnServer}/js/front/jquery.etalage.min.js"></script>
 <script type="text/javascript" src="${docuCdnServer}/js/front/jquery.lazyload.min.js"></script>
 <script type="text/javascript" src="${docuCdnServer}/js/front/jquery.scrollstop.min.js"></script>

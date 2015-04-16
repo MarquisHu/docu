@@ -1,12 +1,8 @@
-#set($title = "DOCU Financial Management System")
+#set($title = "DOCU账务管理系统")
 <link rel="stylesheet" type="text/css" href="${docuCdnServer}/css/front/login.css">
 <!-- main Start -->	
 <div class="body"></div>
 <div class="grad"></div>
-<div class="header">
-	<div>IRIS-4 <span>DOCU</span></div>
-</div>
-<br>
 <div class="login">
 	<div class="login-form">
 		<form method="post">
@@ -14,9 +10,9 @@
 			<input type="hidden" name="action" value="/LoginAction" />
 			<input type="hidden" name="event_submit_do_login" value="1" />
 			
-			<input type="text" id="userId" name="userId" value="$!userId" placeholder="username" />
-			<input type="password" id="password" name="password" placeholder="password" />
-			<input type="submit" value="Login" onclick="return loginCheck();"/>
+			<input type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
+			<input type="password" id="password" name="password" placeholder="用户密码" />
+			<input type="submit" value="登录" onclick="return loginCheck();"/>
 		</form>
 		<br><br />
 		<div class="error-tip">
@@ -31,7 +27,7 @@
 	var password = $("#password");
 	
 	if($.trim(userId.val()).length == 0) {
-		$('.error-tip').html("<label>用户编码不能为空</label>");
+		$('.error-tip').html("<label>用户账号不能为空</label>");
         return false;
     }
 	
@@ -61,7 +57,7 @@
    }) 
    
    addListener(myuserId,"blur",function(){  
-    myuserId.placeholder = "Please input username";  
+    myuserId.placeholder = "请输入用户账号";  
    })
    
    addListener(mypassword,"click",function(){  
@@ -73,7 +69,7 @@
    })
    
    addListener(mypassword,"blur",function(){  
-    mypassword.placeholder = "Please input password";  
+    mypassword.placeholder = "请输入用户密码";  
    })
 </script> 
  
