@@ -8,14 +8,16 @@
 		<result property="chineseName" column="CN_NAME" />
 		<result property="telphoneNumber" column="TEL_NUMBER" />
 		<result property="password" column="PASSWORD" />
+		<result property="active" column="IS_ACTIVE" />
 	</resultMap>
 
 	<sql id="USER_DO_QUERY_COLUMNS">
-		A1.USER_ID userId, 
-		A1.EN_NAME englishName, 
-		A1.CN_NAME chineseName, 
-		A1.TEL_NUMBER telphoneNumber,
-		A1.PASSWORD password
+		A1.USER_ID 		userId, 
+		A1.EN_NAME 		englishName, 
+		A1.CN_NAME 		chineseName, 
+		A1.TEL_NUMBER 	telphoneNumber,
+		A1.PASSWORD 	password,
+		A1.IS_ACTIVE 	active
 	</sql>
 
 	<sql id="USER_DO_QUERY_PARAMS">
@@ -25,6 +27,7 @@
 			<if test="chineseName != null">AND CN_NAME = #{chineseName,jdbcType=VARCHAR}</if>
 			<if test="telphoneNumber != null">AND TEL_NUMBER = #{telphoneNumber,jdbcType=VARCHAR}</if>
 			<if test="password != null">AND PASSWORD = #{password,jdbcType=VARCHAR}</if>
+			<if test="active != null">AND IS_ACTIVE = #{active,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
 	
@@ -34,13 +37,15 @@
 			EN_NAME, 
 			CN_NAME, 
 			TEL_NUMBER,
-			PASSWORD
+			PASSWORD,
+			IS_ACTIVE
 		) VALUES (
 		 	#{userId,jdbcType=VARCHAR},
 		 	#{englishName,jdbcType=VARCHAR},
 		 	#{chineseName,jdbcType=VARCHAR},
 		 	#{telphoneNumber,jdbcType=VARCHAR},
-		 	#{password,jdbcType=VARCHAR}
+		 	#{password,jdbcType=VARCHAR},
+		 	#{active,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -91,6 +96,11 @@
 			    	PASSWORD = #{entity.password,jdbcType=VARCHAR}
 				]]>
 			</if>
+			<if test="entity.active != null">
+			    <![CDATA[
+			    	IS_ACTIVE = #{entity.active,jdbcType=VARCHAR}
+				]]>
+			</if>
 		</where>
 	</select>
 	
@@ -124,6 +134,11 @@
 			<if test="entity.password != null">
 			    <![CDATA[
 			    	PASSWORD = #{entity.password,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.active != null">
+			    <![CDATA[
+			    	IS_ACTIVE = #{entity.active,jdbcType=VARCHAR}
 				]]>
 			</if>
 		</where>

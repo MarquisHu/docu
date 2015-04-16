@@ -12,7 +12,7 @@ public class Index {
 		HttpSession session = rundata.getRequest().getSession();
 		String userId = (String) session.getAttribute("userId");
 		if(userId != null && userId.length() != 0){
-			rundata.setRedirectTarget("/index.vm");
+			rundata.setRedirectTarget("/index.htm");
 		}
 	}
 }

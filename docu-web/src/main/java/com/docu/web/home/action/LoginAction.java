@@ -57,7 +57,7 @@ public class LoginAction {
 			log4j.error("", errmsg);
 		} finally {
 			if(StringUtils.isNotEmpty(errmsg)){
-				rundata.setRedirectTarget("/index.vm");
+				rundata.setRedirectTarget("/index.htm");
 				context.put(REDIRECT_URL, redirectUrl);
 				context.put("userId", userId);
 				context.put("errorMsg", errmsg); 
@@ -71,7 +71,7 @@ public class LoginAction {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            rundata.setRedirectTarget("/index.vm");
+            rundata.setRedirectTarget("/index.htm");
         }
 	}
 }
