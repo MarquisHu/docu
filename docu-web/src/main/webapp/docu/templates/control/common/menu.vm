@@ -9,7 +9,7 @@
 		  <i class="icon icon-updown icon-chevron-up"></i>
         </a>
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'userAdd'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;新增用户</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'userSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;用户查询</a></li>
 	    </ul>
     </li>
     

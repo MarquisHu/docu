@@ -1,4 +1,4 @@
-package com.docu.web.home.screen.admin;
+package com.docu.web.home.screen.user;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +12,7 @@ public class Index {
 		HttpSession session = rundata.getRequest().getSession();
 		String userId = (String) session.getAttribute("userId");
 		if(userId != null && userId.length() != 0){
-			rundata.setRedirectTarget("/admin/index.vm");
+			rundata.setRedirectTarget("/user/index.vm");
 			context.put("userId", userId);
 		}
 	}

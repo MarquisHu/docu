@@ -1,4 +1,4 @@
-﻿#set($title = "我有货-出错页面")
+﻿#set($title = "DOCU账务管理系统")
 <body class="no-js">
 	
 	$control.setTemplate("/frontHeader.vm")

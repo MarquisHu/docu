@@ -5,7 +5,7 @@
 <!--top-Header-menu--> 
 <div id="user-nav" class="navbar navbar-inverse">
   <ul class="nav">
-	<li class=""><a href="$!envUtil.getContextPath()/admin/index.vm"><span class="text">DOCU账务管理系统</span></a></li>
+	<li class=""><a href="$!envUtil.getContextPath()/user/index.vm"><span class="text">DOCU账务管理系统</span></a></li>
     <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><img src="${docuCdnServer}/images/atr/default_avatar.png" alt="" class="atr" /> <span class="text">您好  $!userId</span><b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li class="divider"></li>

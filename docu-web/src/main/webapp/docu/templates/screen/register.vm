@@ -1,4 +1,4 @@
-#set($title = "DOCU Financial Management System")
+#set($title = "DOCU账务管理系统")
 <link rel="stylesheet" type="text/css" href="${docuCdnServer}/css/front/base.css">
 <link rel="stylesheet" type="text/css" href="${docuCdnServer}/css/front/style.css">
 <link rel="stylesheet" type="text/css" href="${docuCdnServer}/css/front/icons.css">
