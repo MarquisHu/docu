@@ -1,13 +1,13 @@
 <!-- top-bar Start -->
-	<div id="top-bar" class="bgbl">
-		<div class="wrap h30 lh30 f12 ">
-			<div class="fr">
-				<ul>
-					<li><a href="/login.htm">Login</a></li>
-					<li class="pipe">|</li>
-					<li><a href="/register.htm">Register</a></li>
-				</ul>
-			</div>
+<div id="top-bar" class="bgbl">
+	<div class="wrap h30 lh30 f12 ">
+		<div class="fr">
+			<ul>
+				<li><a href="/login.htm">Login</a></li>
+				<li class="pipe">|</li>
+				<li><a href="/register.htm">Register</a></li>
+			</ul>
 		</div>
 	</div>
+</div>
 <!-- top-bar End -->

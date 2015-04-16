@@ -1,10 +1,10 @@
 #set($title = "DOCU Financial Management System")
-<link rel="stylesheet" type="text/css" href="${docuCdnServer}css/front/login.css">
+<link rel="stylesheet" type="text/css" href="${docuCdnServer}/css/front/login.css">
 <!-- main Start -->	
 <div class="body"></div>
 <div class="grad"></div>
 <div class="header">
-	<div>IRIS-4 <span>DOCU-ERP</span></div>
+	<div>IRIS-4 <span>DOCU</span></div>
 </div>
 <br>
 <div class="login">

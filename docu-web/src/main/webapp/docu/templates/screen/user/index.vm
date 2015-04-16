@@ -18,13 +18,13 @@
 <input type="hidden" id="result" value="$result"/>
 
 <script type="text/javascript">
-$(function(){
-	var result = $("#result").val();
-	if(result == 'success'){
-		alert("修改成功");
-	}
-});
-$(function(){
-	$('.logotip').delay(500).animate({opacity: 1, left: 130});
-});
+    $(function(){
+    	var result = $("#result").val();
+    	if(result == 'success'){
+    		alert("修改成功");
+    	}
+    });
+    $(function(){
+    	$('.logotip').delay(500).animate({opacity: 1, left: 130});
+    });
 </script>

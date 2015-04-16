@@ -1,8 +1,8 @@
 <!-- header Start -->
-	<div id="header" class="bb3b">
-		<div class="wrap  pt17 pb17 h55">
-			<ul id="nav" class="fl">
-			</ul>
-		</div>
+<div id="header" class="bb3b">
+	<div class="wrap  pt17 pb17 h55">
+		<ul id="nav" class="fl">
+		</ul>
 	</div>
+</div>
 <!-- header End -->

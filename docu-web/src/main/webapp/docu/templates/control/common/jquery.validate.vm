@@ -1,10 +1,10 @@
-<script src="${docuCdnServer}js/common/jquery.validate.js"></script>
-<script src="${docuCdnServer}js/common/jquery.metadata.js"></script>
-<script src="${docuCdnServer}js/common/messages_cn.js"></script>
+<script src="${docuCdnServer}/js/common/jquery.validate.js"></script>
+<script src="${docuCdnServer}/js/common/jquery.metadata.js"></script>
+<script src="${docuCdnServer}/js/common/messages_cn.js"></script>
 <script>
-$(function(){
-	$(".validate_form").each(function(index,element){
-		$(element).validate();
-	});
-});
+    $(function(){
+    	$(".validate_form").each(function(index,element){
+    		$(element).validate();
+    	});
+    });
 </script>

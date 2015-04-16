@@ -30,8 +30,8 @@
    #end	
 </div>
 <script>
-function paging(num){
-   $('#$form').find("input[name=pageNum]").val(num);
-   $('#$form').submit();
-}
+    function paging(num){
+       $('#$form').find("input[name=pageNum]").val(num);
+       $('#$form').submit();
+    }
 </script>

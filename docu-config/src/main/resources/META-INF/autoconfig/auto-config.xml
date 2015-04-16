@@ -4,7 +4,7 @@
 		<property name="docu.db.url" defaultValue="127.0.0.1:3306/docu_erp" description="" />
 		<property name="docu.db.user.name" defaultValue="root" description="" />
 		<property name="docu.db.user.pass" defaultValue="marquis" description="" />
-		<property name="docu.base.address" defaultValue="http://127.0.0.1:8082" description="" />
+		<property name="docu.base.address" defaultValue="http://127.0.0.1:8080" description="" />
 	</group>
 	
 	<script>

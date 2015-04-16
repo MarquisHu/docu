@@ -9,9 +9,9 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/docu_erp?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"/>
-		<property name="username" value="root"></property>
-		<property name="password" value="marquis"></property>
+		<property name="url" value="jdbc:mysql://${docu_db_url}?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"/>
+		<property name="username" value="${docu_db_user_name}"></property>
+		<property name="password" value="${docu_db_user_pass}"></property>
 		<property name="maxActive" value="100"></property>
 		<property name="maxIdle" value="30"></property>
 		<property name="maxWait" value="500"></property>
