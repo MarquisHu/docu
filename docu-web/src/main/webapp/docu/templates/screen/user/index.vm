@@ -5,15 +5,6 @@ $!msg
 	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
 	.line{height:auto;}
 </style>
-<!--Start-breadcrumbs-->
-<div id="content-header"> <!-- InstanceBeginEditable name="breadcrumb" -->
-    <div id="breadcrumb">  
-    <a href="$!envUtil.getContextPath()/user/index.vm" title="返回首页" class="tip-bottom"><i class="icon-home"></i>首页</a>
-    <a class="current">用户管理</a>
-    <a class="current">用户查询</a>
-    </div>
-    <!-- InstanceEndEditable -->
-</div>
 <!--End-breadcrumbs-->
 <div class="container-fluid">
 	<div class="widget-box">
