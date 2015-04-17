@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="gb2312"?>
 <config description="">
     <group>
-		<property name="docu.cdn.server.address" defaultValue="/" description="" />
+		<property name="docu.cdn.server.address" defaultValue="http://127.0.0.1" description="" />
 	</group>
 	<script>
     	<generate template="WEB-INF/common/uris.xml" />

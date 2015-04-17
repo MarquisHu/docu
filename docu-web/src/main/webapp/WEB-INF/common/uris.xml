@@ -17,9 +17,6 @@
     	<uris:turbine-uri id="loginLink" exposed="true" extends="docuServer">
             <contextPath>/index.htm</contextPath>
         </uris:turbine-uri>
-        <uris:turbine-uri id="adminLink" exposed="true" extends="docuServer">
-            <contextPath>/user/index.htm</contextPath>
-        </uris:turbine-uri>
 		<uris:uri id="docuCdnServer" exposed="true">
 			<serverURI>${docu_cdn_server_address}</serverURI>
 		</uris:uri>

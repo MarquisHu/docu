@@ -47,7 +47,7 @@ public class LoginAction {
 			session.setMaxInactiveInterval(15*60);//15 minutes
 			
 			if (StringUtils.isEmpty(redirectUrl)) {
-				URIBroker loginPageURI = uriBrokerService.getURIBroker("adminLink"); 
+				URIBroker loginPageURI = uriBrokerService.getURIBroker("loginLink"); 
 				String page = loginPageURI.render();
 				redirectUrl = EnvUtils.addContextPath(page, rundata); 
 			}
@@ -71,7 +71,12 @@ public class LoginAction {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            rundata.setRedirectTarget("/index.htm");
+            rundata.setRedirectTarget("/index.vm");
         }
+	}
+	
+	public void doJsonTest(TurbineRunData rundata, Context context){
+		HttpSession session = rundata.getRequest().getSession();
+		session.setAttribute("data", "test data");
 	}
 }

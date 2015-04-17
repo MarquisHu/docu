@@ -11,7 +11,6 @@ import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
 import com.docu.user.dto.DocumentUser;
 import com.docu.user.service.DocumentUserService;
-import com.docu.web.common.context.EnvUtils;
 
 public class Index {
 	@Autowired
@@ -31,8 +30,6 @@ public class Index {
 			
 			context.put("page", page);
 			context.put("userId", criteria);
-		} else {
-			rundata.setRedirectLocation(EnvUtils.getContextPath() + "/index.htm");
 		}
 	}
 }
