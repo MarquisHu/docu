@@ -38,7 +38,7 @@ body {
 	background-color: #28b779;
 }
  #sidebar > ul li ul li.active a {
-	background:#28b779 url("../img/menu-active.png") no-repeat scroll right center;
+	background:#28b779 url("images/menu-active.png") no-repeat scroll right center;
 	text-decoration:none;
 }
 

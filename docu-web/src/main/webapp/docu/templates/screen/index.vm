@@ -37,6 +37,7 @@
 	}
 	return true;
  }
+</script> 
 <script language="JavaScript" type="text/javascript">  
    function addListener(element,e,fn){
         if(element.addEventListener){      
