@@ -94,9 +94,9 @@ $!msg
 		</div>
 	</div>
 </div>
-<script src="${docuCdnServer}/js/select2.min.js"></script>
-<script src="${docuCdnServer}/js/jquery.gritter.min.js"></script>
-<script src="${docuCdnServer}/js/jquery.uniform.js"></script>
+<script src="${docuCdnServer}/docu/js/select.min.js"></script>
+<script src="${docuCdnServer}/docu/js/jquery.gritter.min.js"></script>
+<script src="${docuCdnServer}/docu/js/jquery.uniform.js"></script>
 <script>
 	function clearQuery(){
 		$("#userId").val("");

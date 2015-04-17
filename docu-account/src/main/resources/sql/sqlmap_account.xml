@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.docu.account.dao.AccountDao">
+    
+    <resultMap id="USER_RESULT_MAP" type="Account">
+        <result property="accountId" column="ACCOUNT_ID" />
+		<result property="userId" column="USER_ID" />
+		<result property="balanceAmount" column="BALANCE_AMOUNT" />
+		<result property="privateAmount" column="PRIVATE_AMOUNT" />
+		<result property="commonAmount" column="COMMON_AMOUNT" />
+		<result property="updateBy" column="UPDATE_BY" />
+		<result property="updateTime" column="UPDATE_TIME" />
+	</resultMap>
+
+	<sql id="USER_DO_QUERY_COLUMNS">
+	    A1.ACCOUNT_ID		accountId,
+		A1.USER_ID 			userId, 
+		A1.BALANCE_AMOUNT 	balanceAmount, 
+		A1.PRIVATE_AMOUNT 	privateAmount, 
+		A1.COMMON_AMOUNT 	commonAmount,
+		A1.UPDATE_BY 		updateBy,
+		A1.UPDATE_TIME 		updateTime
+	</sql>
+
+	<sql id="USER_DO_QUERY_PARAMS">
+		<where>
+		    <if test="accountId != null">ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}</if>
+			<if test="userId != null">USER_ID = #{userId,jdbcType=VARCHAR}</if>
+			<if test="balanceAmount != null">AND BALANCE_AMOUNT = #{balanceAmount,jdbcType=VARCHAR}</if>
+			<if test="privateAmount != null">AND PRIVATE_AMOUNT = #{privateAmount,jdbcType=VARCHAR}</if>
+			<if test="commonAmount != null">AND COMMON_AMOUNT = #{commonAmount,jdbcType=VARCHAR}</if>
+			<if test="updateBy != null">AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}</if>
+			<if test="updateTime != null">AND UPDATE_TIME = #{updateTime,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+    <insert id="insertUser" parameterType="Account">
+		INSERT INTO DOCU_ERP_USER(
+			ACCOUNT_ID,
+			USER_ID, 
+			BALANCE_AMOUNT, 
+			PRIVATE_AMOUNT, 
+			COMMON_AMOUNT,
+			UPDATE_BY,
+			UPDATE_TIME
+		) VALUES (
+		 	#{accountId,jdbcType=VARCHAR},
+		 	#{userId,jdbcType=VARCHAR},
+		 	#{balanceAmount,jdbcType=VARCHAR},
+		 	#{privateAmount,jdbcType=VARCHAR},
+		 	#{commonAmount,jdbcType=VARCHAR},
+		 	#{updateBy,jdbcType=VARCHAR},
+		 	#{updateTime,jdbcType=VARCHAR}
+		)
+	</insert>
+</mapper>
