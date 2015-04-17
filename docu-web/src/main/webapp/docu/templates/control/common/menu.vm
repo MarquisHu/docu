@@ -1,6 +1,24 @@
 <!--sidebar-menu-->
 <div id="sidebar">
   <ul stype='display:block;'>
+	<li class="submenu closed">
+		<a href="#">
+          <i class="icon icon-th-list"></i>
+          <span>账务管理</span>
+          <i class="icon icon-updown icon-chevron-down"></i>
+		  <i class="icon icon-updown icon-chevron-up"></i>
+        </a>
+        <ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'balanceSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;余额查询</a></li>
+	    </ul>
+	    <ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargeSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;充值查询</a></li>
+	    </ul>
+		<ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'billSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;消费查询</a></li>
+	    </ul>
+    </li>
+	
     <li class="submenu open">
 		<a href="#">
           <i class="icon icon-th-list"></i>
@@ -11,6 +29,34 @@
 		<ul stype='display:block;'>
 	      <li class="#if($!vmUtil.menuEq($menu,'userSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;用户查询</a></li>
 	    </ul>
+		<ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'userAdd'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;新增用户</a></li>
+	    </ul>
+		<ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'userUpdate'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;修改用户</a></li>
+	    </ul>
+    </li>
+	
+	<li class="submenu closed">
+		<a href="#">
+          <i class="icon icon-th-list"></i>
+          <span>活动管理</span>
+          <i class="icon icon-updown icon-chevron-down"></i>
+		  <i class="icon icon-updown icon-chevron-up"></i>
+        </a>
+        <ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'balanceSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;活动查询</a></li>
+	    </ul>
+	    <ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargeSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;新增活动</a></li>
+	    </ul>
+    </li>
+	
+	<li>
+	  <a href="$!envUtil.getContextPath()/user/index.htm">
+		<i class="icon icon-th-list"></i>
+		<span>修改密码</span>
+	  </a>
     </li>
     
     <li> 

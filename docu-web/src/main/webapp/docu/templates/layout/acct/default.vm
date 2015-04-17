@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>${title}</title>
+<meta charset="UTF-8" />
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/bootstrap.min.css" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/fullcalendar.css" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/matrix-style.css" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/matrix-media.css" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/uniform.css" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/select.css" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/font-awesome.css" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/jquery.gritter.css" />
+<link rel="stylesheet" href="${docuCdnServer}/css/docu/datepicker.css" />
+<script type="text/javascript" src="${docuCdnServer}/js/docu/jquery.min.js"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap.min.js"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/matrix.js"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/select.min.js"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/jquery.gritter.min.js"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap.bootbox.js"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap-datepicker.js"></script>
+</head>
+<body>
+$control.setTemplate("/common/header.vm")
+$control.setTemplate("/common/menu.vm")
+##main-container-part start
+<div id="content">
+$screen_placeholder
+</div>
+##main-container-part end
+$control.setTemplate("/common/footer.vm")
+<script type="text/javascript">
+    $(document).ready(function(){
+    	//日期调用
+    	$('.datepicker').datepicker();
+    });
+</script>
+</body>
+</html>
