@@ -1,7 +1,7 @@
 <!--sidebar-menu-->
 <div id="sidebar">
   <ul stype='display:block;'>
-	<li class="submenu closed">
+	<li class="submenu open">
 		<a href="#">
           <i class="icon icon-th-list"></i>
           <span>账务管理</span>
@@ -9,17 +9,17 @@
 		  <i class="icon icon-updown icon-chevron-up"></i>
         </a>
         <ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'balanceSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;余额查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'balanceSearch'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;余额查询</a></li>
 	    </ul>
 	    <ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'chargeSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;充值查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargeSearch'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;充值查询</a></li>
 	    </ul>
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'billSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;消费查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'billSearch'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;消费查询</a></li>
 	    </ul>
     </li>
 	
-    <li class="submenu open">
+    <li class="submenu closed">
 		<a href="#">
           <i class="icon icon-th-list"></i>
           <span>用户管理</span>

@@ -57,7 +57,7 @@ public class LoginAction {
 			log4j.error("", errmsg);
 		} finally {
 			if(StringUtils.isNotEmpty(errmsg)){
-				rundata.setRedirectTarget("/index.htm");
+				rundata.setRedirectTarget("/index.vm");
 				context.put(REDIRECT_URL, redirectUrl);
 				context.put("userId", userId);
 				context.put("errorMsg", errmsg); 

@@ -1,5 +1,5 @@
 #set($title = "DOCU账务管理系统")
-#set($menu = "user#userSearch")
+#set($menu = "acct#balanceSearch")
 $!msg
 <style >
 	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
@@ -43,7 +43,6 @@ $!msg
 				                <th style="width: 15px;">中文姓名</th>
 				                <th style="width: 15px;">手机号码</th>
 								<th style="width: 15px;">用户状态</th>
-				                <th style="width: 5px;">操作</th>
 				            </tr>
 				        </thead>
 				        <tbody>
