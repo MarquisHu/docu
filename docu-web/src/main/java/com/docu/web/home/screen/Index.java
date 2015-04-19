@@ -10,8 +10,8 @@ public class Index {
 
 	public void execute(TurbineRunData rundata, Context context) throws WebxException {
 		HttpSession session = rundata.getRequest().getSession();
-		String userId = (String) session.getAttribute("userId");
-		if(userId != null && userId.length() != 0){
+		String systemUserId = (String) session.getAttribute("systemUserId");
+		if(systemUserId != null && systemUserId.length() != 0){
 			rundata.setRedirectTarget("/acct/index.vm");
 		}
 	}

@@ -5,10 +5,16 @@ import java.util.List;
 import com.docu.components.common.BaseDao;
 import com.docu.components.common.QueryBase;
 import com.docu.user.dao.DocumentUserDao;
+import com.docu.user.dto.DocumentSystemUser;
 import com.docu.user.dto.DocumentUser;
 
 public class IbatisDocumentUserDao extends BaseDao implements DocumentUserDao {
 	private static final String NAMESPACE = "com.docu.user.dao.DocumentUserDao.";
+	
+	@Override
+	public DocumentSystemUser findSystemUser(String userId) {
+		return (DocumentSystemUser) getSqlSessionTemplate().selectOne(NAMESPACE + "findSystemUser", userId);
+	}
 	
 	@Override
 	public Long insertUser(DocumentUser user) {
@@ -19,7 +25,7 @@ public class IbatisDocumentUserDao extends BaseDao implements DocumentUserDao {
 	public DocumentUser findUser(String userId) {
 		return (DocumentUser) getSqlSessionTemplate().selectOne(NAMESPACE + "findUser", userId);
 	}
-
+	
 	@Override
 	public int queryDocumentUserTotal(QueryBase query) {
 		return (Integer) getSqlSessionTemplate().selectOne(NAMESPACE + "queryDocumentUserTotal", query);

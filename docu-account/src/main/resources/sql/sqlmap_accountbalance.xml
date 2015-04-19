@@ -92,6 +92,7 @@
 				]]>
 			</if>
 		</where>
+		ORDER BY A2.ACCOUNT_ID, A1.USER_ID 
 		LIMIT #{preEndNum}, #{pageSize}
 	</select>
 </mapper>

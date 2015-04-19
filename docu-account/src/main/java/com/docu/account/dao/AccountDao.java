@@ -3,12 +3,17 @@ package com.docu.account.dao;
 import java.util.List;
 
 import com.docu.account.dto.Account;
+import com.docu.account.dto.ChargeAccountDetail;
 import com.docu.components.common.QueryBase;
 
 public interface AccountDao {
-	Long insertAccount(Account account);
+	Integer insertAccount(Account account);
+	
+	Integer updateAccount(Account account);
 	
 	Account findAccount(String userId);
+	
+	ChargeAccountDetail findChargeAccountDetail(String userId);
 	
 	int queryAccountTotal(QueryBase query);
 	

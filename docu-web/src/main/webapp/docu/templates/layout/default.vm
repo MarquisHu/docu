@@ -16,10 +16,13 @@
 <script type="text/javascript" src="${docuCdnServer}/js/front/modernizr.custom.js"></script>
 </head>
 <body>
-##杩欐槸澶撮儴锛侊紒锛侊紒锛�
+$control.setTemplate("/common/header.vm")
+$control.setTemplate("/user/menu.vm")
+##main-container-part start
+<div id="content">
 $screen_placeholder
-##杩欐槸搴曢儴锛侊紒锛侊紒锛�
-
+</div>
+##main-container-part end
 $control.setTemplate("/common/footer.vm")
 <script type="text/javascript" src="${docuCdnServer}/js/front/jquery.etalage.min.js"></script>
 <script type="text/javascript" src="${docuCdnServer}/js/front/jquery.lazyload.min.js"></script>

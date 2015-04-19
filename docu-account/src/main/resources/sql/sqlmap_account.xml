@@ -11,6 +11,13 @@
 		<result property="updateBy" column="UPDATE_BY" />
 		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
+	
+    <resultMap id="ACCOUNT_BALANCE_RESULT_MAP" type="ChargeAccountDetail">
+        <result property="userId" column="USER_ID" />
+        <result property="englishName" column="EN_NAME" />
+        <result property="accountId" column="ACCOUNT_ID" />
+		<result property="balance" column="BALANCE_AMOUNT" />
+	</resultMap>
 
 	<sql id="ACCOUNT_DO_QUERY_COLUMNS">
 	    A1.ACCOUNT_ID		accountId,
@@ -20,6 +27,13 @@
 		A1.COMMON_AMOUNT 	commonAmount,
 		A1.UPDATE_BY 		updateBy,
 		A1.UPDATE_TIME 		updateTime
+	</sql>
+	
+	<sql id="ACCOUNT_BALANCE_DO_QUERY_COLUMNS">
+	    A1.USER_ID 			userId,
+	    A1.EN_NAME 			englishName,
+	    A2.ACCOUNT_ID		accountId,
+		A2.BALANCE_AMOUNT 	balance
 	</sql>
 
 	<sql id="ACCOUNT_DO_QUERY_PARAMS">
@@ -54,6 +68,40 @@
 		)
 	</insert>
 	
+    <update id="updateAccount" parameterType="Account">
+	    <![CDATA[
+			UPDATE DOCU_ERP_ACCOUNT
+		]]>
+		<set>
+			<if test="balanceAmount != null">
+			    <![CDATA[
+			    	BALANCE_AMOUNT = #{balanceAmount,jdbcType=FLOAT},
+				]]>
+			</if>
+			<if test="privateAmount != null">
+			    <![CDATA[
+			    	PRIVATE_AMOUNT = #{privateAmount,jdbcType=FLOAT},
+				]]>
+			</if>
+			<if test="commonAmount != null">
+			    <![CDATA[
+			    	COMMON_AMOUNT = #{commonAmount,jdbcType=FLOAT},
+				]]>
+			</if>
+			<if test="updateBy != null">
+			    <![CDATA[
+			    	UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="updateTime != null">
+			    <![CDATA[
+			    	UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</set>
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+	</update>
+	
     <select id="findAccount" parameterType="String" resultMap="ACCOUNT_RESULT_MAP">
 		SELECT
 		<include refid="ACCOUNT_DO_QUERY_COLUMNS" />
@@ -67,6 +115,16 @@
 		<include refid="ACCOUNT_DO_QUERY_COLUMNS" />
 		FROM DOCU_ERP_ACCOUNT A1
 		<include refid="ACCOUNT_DO_QUERY_PARAMS" />
+	</select>
+	
+	<select id="findChargeAccountDetail" parameterType="String" resultMap="ACCOUNT_BALANCE_RESULT_MAP">
+		SELECT
+		<include refid="ACCOUNT_BALANCE_DO_QUERY_COLUMNS" />
+	    <![CDATA[  
+	     FROM DOCU_ERP_USER A1, DOCU_ERP_ACCOUNT A2 
+	   	WHERE A1.USER_ID = A2.USER_ID
+	   	  AND A1.USER_ID = #{userId,jdbcType=VARCHAR}
+	    ]]>
 	</select>
 	
 	<select id="queryAccountTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">

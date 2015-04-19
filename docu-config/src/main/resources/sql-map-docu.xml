@@ -14,8 +14,10 @@
 	
 	<typeAliases>
         <typeAlias type="com.docu.user.dto.DocumentUser" alias="DocumentUser" />
+        <typeAlias type="com.docu.user.dto.DocumentSystemUser" alias="DocumentSystemUser" />
         <typeAlias type="com.docu.account.dto.Account" alias="Account" />
         <typeAlias type="com.docu.account.dto.AccountBalance" alias="AccountBalance" />
+        <typeAlias type="com.docu.account.dto.ChargeAccountDetail" alias="ChargeAccountDetail" />
         <typeAlias type="com.docu.account.dto.ChargeDetails" alias="ChargeDetails" />
         <typeAlias type="com.docu.account.dto.BillDetails" alias="BillDetails" />
     </typeAliases>

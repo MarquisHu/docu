@@ -5,125 +5,105 @@ $!msg
 	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
 	.line{height:auto;}
 </style>
-<!--End-breadcrumbs-->
 <div class="container-fluid">
-	<div class="widget-box">
-		<div class="widget-content tab-content">
-			<div id="tab1" class="tab-pane active">
-				<div class="widget-content nopadding">
-			        <form id="query_page_form" class="form-horizontal" method="post" action="$!envUtil.getContextPath()/acct/index.htm">
-						<input type="hidden" name="pageNum" value="1" />
-			            <div class="tablesearchcase">
-			                <div class="dataTables_length" id="">
-								<input class="span2" style="margin-left:10px;" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
-								<button class="btn btn-success" style="margin-left:10px;" type="submit">查询</button>
-								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
-			                </div>
-			            </div>
-			        </form>
-			        <br />
-			    </div>
-			</div>			    	
-		    <div class="container-fluid"> 
-				<!-- InstanceBeginEditable name="content" -->
-		    	<br />
-		    	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
-		    	<div class="widget-box">
-		    		<form id="query_page_form" class="form-horizontal" method="post" action="">
-		    			<input type="hidden" name="pageNum" value="1" />
-		    		</form>
-				    <table class="table table-bordered table-striped with-check">
-				    	<thead>
-				            <tr>
-								<th style="width: 5px;">账号编码</th>
-				            	<th style="width: 5px;">用户编码</th>
-				                <th style="width: 5px;">用户姓名</th>
-				                <th style="width: 5px;">账户余额</th>
-								<th style="width: 5px;">更新时间</th>
-								<th style="width: 10px;">操作</th>
-				            </tr>
-				        </thead>
-				        <tbody>
-				            #foreach($account in $!page.rows)
-				            	<td colspan="6" class="tablegroup nopadding">
-					        		<tr id="$!account.userId">
-										<td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.accountId
-					                        </span>
-					                    </td>
-					        			<td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.userId
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.englishName
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.balance
-					                        </span>
-					                    </td>
-										<td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.updateTime
-					                        </span>
-					                    </td>
-										<td style="width: 10px;" class="center">
-				                            <p>
-												<a href="$!envUtil.getContextPath()/user/index.htm?userId=$!{user.userId}"><span style="color:red">充值</span></a>
-												<a href="$!envUtil.getContextPath()/user/index.htm?userId=$!{user.userId}"><span style="color:red">明细</span></a>
-											</p>
-				                        </td>
-					                </tr>
-				                </td>
-				             #end
-				        </tbody>
-				    </table>
+	<div class="row-fluid">
+		<div id="chargeaccount" class="span12">
+			<form class="form-horizontal" method="post" action="" name="basic_validate" id="basic_validate" novalidate>
+				<div class="widget-box">
+					<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+						<h5>账户充值</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<div class="widget-content "> 
+						<div class="control-group">
+							<label class="control-label">用户编码：</label>
+							<div class="controls">
+								<input type="text" name="userId" id="userId" value="$!account.userId" style="width:120px" readonly="readonly" autocomplete="off" />
+								<label style="margin-left:10px">用户姓名：</label>
+								<input type="text" name="englishName" id="englishName" value="$!account.englishName" style="width:150px" readonly="readonly" autocomplete="off" />
+                			</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">账户编码：</label>
+							<div class="controls">
+								<input type="text" name="accountId" id="accountId" value="$!account.accountId" style="width:120px" readonly="readonly" autocomplete="off" />
+                			</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">账户余额：</label>
+							<div class="controls">
+								<input type="text" name="balance" id="balance" value="$!account.balance" style="width:90px" readonly="readonly" autocomplete="off" />
+                			</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label"><span style="color:red">* </span>充值金额：</label>
+							<div class="controls">
+								<input type="text" name="recvAmount" id="recvAmount" style="width:90px" placeholder="请输入充值金额" />
+								<div class="s_recvAmount" style="color:red;display:none;"></div>
+                			</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label"><span style="color:red">* </span>百分比：</label>
+							<div class="controls">
+								<select style="width:60px" name="percent">
+                                    <option>20</option>
+                                    <option>50</option>
+                               </select>
+							<label >公共账户所占比例</label>
+                			</div>
+						</div>
+						
+						<div class="form-actions">
+							<input type="hidden" name="action" value="/acct/AccountAction" />
+							<input type="hidden" name="event_submit_do_save_charge" value="1" />
+							<div class="controls">
+								<input type="submit" value="提交" class="btn btn-success" onclick="return onSubmit();" />
+								&emsp;&emsp;
+								<span style="color:red">$!msg</span>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
-	             	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
-	          	</div>
-			</div>
-		</div>
-	</div>
+            </form>
+        </div>
+    </div>
 </div>
-<script src="${docuCdnServer}/js/docu/select.min.js"></script>
-<script src="${docuCdnServer}/js/docu/jquery.gritter.min.js"></script>
-<script src="${docuCdnServer}/js/docu/jquery.uniform.js"></script>
-<script>
-	function clearQuery(){
-		$("#userId").val("");
-		$(".select2-choice span").html("所有");
+<script type="text/javascript">
+	function onSubmit() {
+		var recvAmount = $("#recvAmount");
+	
+		if($.trim(recvAmount.val()).length == 0){
+			$('.s_recvAmount').html("<label/>充值金额不能为空</label>");
+			$('.s_recvAmount').css('display','block');
+        	return false;
+		}
+		return true;
+ 	}
+ </script>
+ <script type="text/javascript">
+ 	function addListener(element, e, fn) {
+		if (element.addEventListener) {
+			element.addEventListener(e, fn, false);
+		} else {
+			element.attachEvent("on" + e, fn);
+		}
 	}
-    $(document).ready(function () {
-        $('select').select2({minimumResultsForSearch: 1});
-        $('.logotip').delay(500).animate({opacity: 1, left: 130});
-        //单选，勾选美化调用
-        $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
-        //勾选全部选中
-        $("span.icon input:checkbox, th input:checkbox").click(function () {
-            var checkedStatus = this.checked;
-            var checkbox;
-            if (this.id == 'tab1chka') {
-                checkbox = $("#tab1 input[type=checkbox] ");
-            }
-            else {
-                checkbox = $("#tab2 input[type=checkbox] ");
-            }
-            //var checkbox = $(this).parents('.widget-box').find('tr td:first-child input:checkbox');
-            checkbox.each(function () {
-                this.checked = checkedStatus;
-                if (checkedStatus == this.checked) {
-                    $(this).closest('.checker > span').removeClass('checked');
-                }
-                if (this.checked) {
-                    $(this).closest('.checker > span').addClass('checked');
-                }
-            });
-        });
-    });
-</script>
+   	var myRecvAmount = document.getElementById("recvAmount");  
+   
+   	addListener(myRecvAmount,"click",function(){  
+    	myRecvAmount.placeholder = ""; 
+		$('.s_recvAmount').css('display','none');
+   	})
+   
+   	addListener(myRecvAmount,"focus",function(){  
+    	myRecvAmount.placeholder = "";  
+		$('.s_recvAmount').css('display','none');
+   	})
+   
+   	addListener(myRecvAmount,"blur",function(){  
+    	myRecvAmount.placeholder = "请输入充值金额"; 
+		$('.s_recvAmount').css('display','none');
+   	})
+</script>  

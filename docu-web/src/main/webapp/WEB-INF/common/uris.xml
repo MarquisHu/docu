@@ -15,7 +15,7 @@
     <services:uris>
     	<uris:uri id="docuServer" requestAware="true" />
     	<uris:turbine-uri id="loginLink" exposed="true" extends="docuServer">
-            <contextPath>/index.htm</contextPath>
+            <contextPath>/acct/index.htm</contextPath>
         </uris:turbine-uri>
 		<uris:uri id="docuCdnServer" exposed="true">
 			<serverURI>${docu_cdn_server_address}</serverURI>

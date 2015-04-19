@@ -74,9 +74,9 @@ $!msg
 					                    </td>
 										<td style="width: 25px;" class="center">
 				                            <p>
-												<a href="$!envUtil.getContextPath()/acct/chargeaccount.htm?userId=$!{user.userId}"><span style="color:red">充值</span></a>
-												<a href="$!envUtil.getContextPath()/acct/chargedetails.htm?userId=$!{user.userId}"><span style="color:red">充值查询</span></a>
-												<a href="$!envUtil.getContextPath()/acct/billdetails.htm?userId=$!{user.userId}"><span style="color:red">账单查询</span></a>
+												<a href="$!envUtil.getContextPath()/acct/chargeAccount.htm?userId=$!{account.userId}"><span style="color:red">充值</span></a>
+												<a href="$!envUtil.getContextPath()/acct/chargedetails.htm?userId=$!{account.userId}"><span style="color:red">充值查询</span></a>
+												<a href="$!envUtil.getContextPath()/acct/billdetails.htm?userId=$!{account.userId}"><span style="color:red">账单查询</span></a>
 											</p>
 				                        </td>
 					                </tr>

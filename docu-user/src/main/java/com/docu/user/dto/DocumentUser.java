@@ -5,7 +5,6 @@ public class DocumentUser {
 	private String englishName;
 	private String chineseName;
 	private String telphoneNumber;
-	private String password;
 	private String active;
 	
 	public String getUserId() {
@@ -31,12 +30,6 @@ public class DocumentUser {
 	}
 	public void setTelphoneNumber(String telphoneNumber) {
 		this.telphoneNumber = telphoneNumber;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	public String getActive() {
 		return active;

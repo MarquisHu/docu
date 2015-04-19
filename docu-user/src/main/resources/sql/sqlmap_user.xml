@@ -2,21 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.docu.user.dao.DocumentUserDao">
     
+    <resultMap id="SYSTEM_USER_RESULT_MAP" type="DocumentSystemUser">
+		<result property="userId" column="USER_ID" />
+		<result property="password" column="PASSWORD" />
+	</resultMap>
+	
     <resultMap id="USER_RESULT_MAP" type="DocumentUser">
 		<result property="userId" column="USER_ID" />
 		<result property="englishName" column="EN_NAME" />
 		<result property="chineseName" column="CN_NAME" />
 		<result property="telphoneNumber" column="TEL_NUMBER" />
-		<result property="password" column="PASSWORD" />
 		<result property="active" column="IS_ACTIVE" />
 	</resultMap>
+	
+    <sql id="SYSTEM_USER_DO_QUERY_COLUMNS">
+		A1.USER_ID 		userId, 
+		A1.PASSWORD 	password
+	</sql>
 
 	<sql id="USER_DO_QUERY_COLUMNS">
 		A1.USER_ID 		userId, 
 		A1.EN_NAME 		englishName, 
 		A1.CN_NAME 		chineseName, 
 		A1.TEL_NUMBER 	telphoneNumber,
-		A1.PASSWORD 	password,
 		A1.IS_ACTIVE 	active
 	</sql>
 
@@ -26,10 +34,17 @@
 			<if test="englishName != null">AND EN_NAME = #{englishName,jdbcType=VARCHAR}</if>
 			<if test="chineseName != null">AND CN_NAME = #{chineseName,jdbcType=VARCHAR}</if>
 			<if test="telphoneNumber != null">AND TEL_NUMBER = #{telphoneNumber,jdbcType=VARCHAR}</if>
-			<if test="password != null">AND PASSWORD = #{password,jdbcType=VARCHAR}</if>
 			<if test="active != null">AND IS_ACTIVE = #{active,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
+	
+	<select id="findSystemUser" parameterType="String" resultMap="SYSTEM_USER_RESULT_MAP">
+		SELECT
+		<include refid="SYSTEM_USER_DO_QUERY_COLUMNS" />
+	    <![CDATA[  
+	     FROM DOCU_ERP_SYSTEM_USER A1 WHERE A1.USER_ID = #{userId,jdbcType=VARCHAR}
+	    ]]>
+	</select>
 	
     <insert id="insertUser" parameterType="DocumentUser">
 		INSERT INTO DOCU_ERP_USER(
@@ -37,14 +52,12 @@
 			EN_NAME, 
 			CN_NAME, 
 			TEL_NUMBER,
-			PASSWORD,
 			IS_ACTIVE
 		) VALUES (
 		 	#{userId,jdbcType=VARCHAR},
 		 	#{englishName,jdbcType=VARCHAR},
 		 	#{chineseName,jdbcType=VARCHAR},
 		 	#{telphoneNumber,jdbcType=VARCHAR},
-		 	#{password,jdbcType=VARCHAR},
 		 	#{active,jdbcType=VARCHAR}
 		)
 	</insert>
@@ -91,11 +104,6 @@
 			    	AND TEL_NUMBER = #{entity.telphoneNumber,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.password != null">
-			    <![CDATA[
-			    	AND PASSWORD = #{entity.password,jdbcType=VARCHAR}
-				]]>
-			</if>
 			<if test="entity.active != null">
 			    <![CDATA[
 			    	AND IS_ACTIVE = #{entity.active,jdbcType=VARCHAR}
@@ -129,11 +137,6 @@
 			<if test="entity.telphoneNumber != null">
 			    <![CDATA[
 			    	AND TEL_NUMBER = #{entity.telphoneNumber,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.password != null">
-			    <![CDATA[
-			    	AND PASSWORD = #{entity.password,jdbcType=VARCHAR}
 				]]>
 			</if>
 			<if test="entity.active != null">

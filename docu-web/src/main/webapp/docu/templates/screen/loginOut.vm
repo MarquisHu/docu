@@ -1,5 +1,4 @@
 #set($title = "DOCU账务管理系统")
-logout success
 <form method="post" id="loginOut">
 	<input type="hidden" name="redirectUrl" value="$!redirectUrl" />
 	<input type="hidden" name="action" value="/LoginAction" />

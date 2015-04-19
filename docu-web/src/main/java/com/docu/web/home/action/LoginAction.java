@@ -10,9 +10,8 @@ import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
-import com.docu.components.log.Logger;
 import com.docu.components.util.StringUtils;
-import com.docu.user.dto.DocumentUser;
+import com.docu.user.dto.DocumentSystemUser;
 import com.docu.user.service.DocumentUserService;
 import com.docu.web.common.context.EnvUtils;
 
@@ -29,22 +28,19 @@ public class LoginAction {
 	public void doLogin(TurbineRunData rundata, Context context){
 		ParameterParser pars = rundata.getParameters();
 		String redirectUrl = pars.getString("redirectUrl");
-		String userId = pars.getString("userId");
+		String systemUserId = pars.getString("systemUserId");
 		String password = pars.getString("password");
 		String errmsg = null;
 		try {
-			Logger.svc(userId + "/" + password);
-			DocumentUser user = userService.queryUser(userId);
-			if (user == null || !password.equals(user.getPassword())) {
+			DocumentSystemUser systemUser = userService.querySystemUser(systemUserId);
+			if (systemUser == null || !password.equals(systemUser.getPassword())) {
 				errmsg="Please input right of UserId and Password!";
 				return;
 			}
 			HttpSession session = rundata.getRequest().getSession();
-			session.setAttribute("userId", user.getUserId());
-			session.setAttribute("chineseName", user.getChineseName());
-			session.setAttribute("englishName", user.getEnglishName());
-			session.setAttribute("telphoneNumber", user.getTelphoneNumber());
+			session.setAttribute("systemUserId", systemUserId);
 			session.setMaxInactiveInterval(15*60);//15 minutes
+			context.put("systemUserId", systemUserId);
 			
 			if (StringUtils.isEmpty(redirectUrl)) {
 				URIBroker loginPageURI = uriBrokerService.getURIBroker("loginLink"); 
@@ -59,7 +55,7 @@ public class LoginAction {
 			if(StringUtils.isNotEmpty(errmsg)){
 				rundata.setRedirectTarget("/index.vm");
 				context.put(REDIRECT_URL, redirectUrl);
-				context.put("userId", userId);
+				context.put("systemUserId", systemUserId);
 				context.put("errorMsg", errmsg); 
 			}
 		}
