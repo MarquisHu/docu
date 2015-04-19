@@ -1,5 +1,5 @@
 #set($title = "DOCU账务管理系统")
-#set($menu = "acct#balanceSearch")
+#set($menu = "acct#searchBalance")
 $!msg
 <style >
 	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
@@ -40,7 +40,7 @@ $!msg
 				                <th style="width: 5px;">用户姓名</th>
 				                <th style="width: 5px;">账户余额</th>
 								<th style="width: 5px;">更新时间</th>
-								<th style="width: 10px;">操作</th>
+								<th style="width: 25px;">操作</th>
 				            </tr>
 				        </thead>
 				        <tbody>
@@ -72,10 +72,11 @@ $!msg
 					                            $!account.updateTime
 					                        </span>
 					                    </td>
-										<td style="width: 10px;" class="center">
+										<td style="width: 25px;" class="center">
 				                            <p>
-												<a href="$!envUtil.getContextPath()/user/index.htm?userId=$!{user.userId}"><span style="color:red">充值</span></a>
-												<a href="$!envUtil.getContextPath()/user/index.htm?userId=$!{user.userId}"><span style="color:red">明细</span></a>
+												<a href="$!envUtil.getContextPath()/acct/chargeaccount.htm?userId=$!{user.userId}"><span style="color:red">充值</span></a>
+												<a href="$!envUtil.getContextPath()/acct/chargedetails.htm?userId=$!{user.userId}"><span style="color:red">充值查询</span></a>
+												<a href="$!envUtil.getContextPath()/acct/billdetails.htm?userId=$!{user.userId}"><span style="color:red">账单查询</span></a>
 											</p>
 				                        </td>
 					                </tr>

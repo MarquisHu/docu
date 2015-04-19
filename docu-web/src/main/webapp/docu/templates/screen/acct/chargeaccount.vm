@@ -1,5 +1,5 @@
 #set($title = "DOCU账务管理系统")
-#set($menu = "user#searchUser")
+#set($menu = "acct#chargeaccount")
 $!msg
 <style >
 	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
@@ -11,14 +11,13 @@ $!msg
 		<div class="widget-content tab-content">
 			<div id="tab1" class="tab-pane active">
 				<div class="widget-content nopadding">
-			        <form id="query_page_form" class="form-horizontal" method="post" action="$!envUtil.getContextPath()/user/index.htm">
+			        <form id="query_page_form" class="form-horizontal" method="post" action="$!envUtil.getContextPath()/acct/index.htm">
 						<input type="hidden" name="pageNum" value="1" />
 			            <div class="tablesearchcase">
 			                <div class="dataTables_length" id="">
 								<input class="span2" style="margin-left:10px;" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
 								<button class="btn btn-success" style="margin-left:10px;" type="submit">查询</button>
 								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
-								<a href="$!envUtil.getContextPath()/user/adduser.htm" class="btn btn-success" style="float:right;margin-right:30px;">新增</a>
 			                </div>
 			            </div>
 			        </form>
@@ -36,48 +35,48 @@ $!msg
 				    <table class="table table-bordered table-striped with-check">
 				    	<thead>
 				            <tr>
-				            	<th style="width: 10px;">用户账号</th>
-				                <th style="width: 15px;">英文姓名</th>
-				                <th style="width: 15px;">中文姓名</th>
-				                <th style="width: 15px;">手机号码</th>
-								<th style="width: 15px;">用户状态</th>
-				                <th style="width: 5px;">操作</th>
+								<th style="width: 5px;">账号编码</th>
+				            	<th style="width: 5px;">用户编码</th>
+				                <th style="width: 5px;">用户姓名</th>
+				                <th style="width: 5px;">账户余额</th>
+								<th style="width: 5px;">更新时间</th>
+								<th style="width: 10px;">操作</th>
 				            </tr>
 				        </thead>
 				        <tbody>
-				            #foreach($user in $!page.rows)
+				            #foreach($account in $!page.rows)
 				            	<td colspan="6" class="tablegroup nopadding">
-					        		<tr id="$!user.userId">
-					        			<td class="noborder center" style="width: 10px;">
+					        		<tr id="$!account.userId">
+										<td class="noborder center" style="width: 5px;">
 					                        <span class="">
-					                            $!user.userId
+					                            $!account.accountId
 					                        </span>
 					                    </td>
-					                    <td class="noborder center" style="width: 15px;">
+					        			<td class="noborder center" style="width: 5px;">
 					                        <span class="">
-					                            $!user.englishName
+					                            $!account.userId
 					                        </span>
 					                    </td>
-					                    <td class="noborder center" style="width: 15px;">
+					                    <td class="noborder center" style="width: 5px;">
 					                        <span class="">
-					                            $!user.chineseName
+					                            $!account.englishName
 					                        </span>
 					                    </td>
-					                    <td class="noborder center" style="width: 15px;">
+					                    <td class="noborder center" style="width: 5px;">
 					                        <span class="">
-					                            $!user.telphoneNumber
+					                            $!account.balance
 					                        </span>
 					                    </td>
-										<td class="noborder center" style="width: 15px;">
-					                        #if($!$!user.active=='0')
-												<span class="">离职状态</span>
-											#end
-											#if($!$!user.active=='1')
-												<span class="">在职状态</span>
-											#end
+										<td class="noborder center" style="width: 5px;">
+					                        <span class="">
+					                            $!account.updateTime
+					                        </span>
 					                    </td>
-					                    <td style="width: 5px;" class="center">
-				                            <p><a href="$!envUtil.getContextPath()/user/updateuser.htm?userId=$!{user.userId}"><span style="color:red">修改</span></a></p>
+										<td style="width: 10px;" class="center">
+				                            <p>
+												<a href="$!envUtil.getContextPath()/user/index.htm?userId=$!{user.userId}"><span style="color:red">充值</span></a>
+												<a href="$!envUtil.getContextPath()/user/index.htm?userId=$!{user.userId}"><span style="color:red">明细</span></a>
+											</p>
 				                        </td>
 					                </tr>
 				                </td>

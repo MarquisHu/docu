@@ -9,31 +9,16 @@
 		  <i class="icon icon-updown icon-chevron-up"></i>
         </a>
         <ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'balanceSearch'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;余额查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'searchBalance'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;余额查询</a></li>
 	    </ul>
 	    <ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'chargeSearch'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;充值查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargeaccount'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeaccount.htm">&emsp;&emsp;&emsp;账户充值</a></li>
 	    </ul>
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'billSearch'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;消费查询</a></li>
-	    </ul>
-    </li>
-	
-    <li class="submenu open">
-		<a href="#">
-          <i class="icon icon-th-list"></i>
-          <span>用户管理</span>
-          <i class="icon icon-updown icon-chevron-down"></i>
-		  <i class="icon icon-updown icon-chevron-up"></i>
-        </a>
-		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'userSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;用户查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargedetails'))active#end"><a href="$!envUtil.getContextPath()/acct/chargedetails.htm">&emsp;&emsp;&emsp;充值查询</a></li>
 	    </ul>
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'userAdd'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;新增用户</a></li>
-	    </ul>
-		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'userUpdate'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;修改用户</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'billdetails'))active#end"><a href="$!envUtil.getContextPath()/acct/billdetails.htm">&emsp;&emsp;&emsp;账单查询</a></li>
 	    </ul>
     </li>
 	
@@ -45,10 +30,28 @@
 		  <i class="icon icon-updown icon-chevron-up"></i>
         </a>
         <ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'balanceaSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;活动查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'searchActivity'))active#end"><a href="$!envUtil.getContextPath()/activity/index.htm">&emsp;&emsp;&emsp;活动查询</a></li>
 	    </ul>
 	    <ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'chargeSearch'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;新增活动</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'addActivity'))active#end"><a href="$!envUtil.getContextPath()/activity/addactivity.htm">&emsp;&emsp;&emsp;新增活动</a></li>
+	    </ul>
+    </li>
+	
+    <li class="submenu open">
+		<a href="#">
+          <i class="icon icon-th-list"></i>
+          <span>用户管理</span>
+          <i class="icon icon-updown icon-chevron-down"></i>
+		  <i class="icon icon-updown icon-chevron-up"></i>
+        </a>
+		<ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'searchUser'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;用户查询</a></li>
+	    </ul>
+		<ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'addUser'))active#end"><a href="$!envUtil.getContextPath()/user/adduser.htm">&emsp;&emsp;&emsp;新增用户</a></li>
+	    </ul>
+		<ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'updateUser'))active#end"><a href="$!envUtil.getContextPath()/user/updateuser.htm">&emsp;&emsp;&emsp;修改用户</a></li>
 	    </ul>
     </li>
 	
