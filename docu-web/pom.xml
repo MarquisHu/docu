@@ -24,6 +24,10 @@
 			<groupId>com.docu</groupId>
 			<artifactId>docu-user</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.docu</groupId>
+			<artifactId>docu-account</artifactId>
+		</dependency>
 		
         <dependency>
             <groupId>com.alibaba.citrus</groupId>

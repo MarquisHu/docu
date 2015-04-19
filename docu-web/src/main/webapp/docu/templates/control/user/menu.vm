@@ -1,7 +1,7 @@
 <!--sidebar-menu-->
 <div id="sidebar">
   <ul stype='display:block;'>
-	<li class="submenu open">
+	<li class="submenu closed">
 		<a href="#">
           <i class="icon icon-th-list"></i>
           <span>账务管理</span>

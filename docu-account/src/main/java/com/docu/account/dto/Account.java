@@ -1,96 +1,56 @@
 package com.docu.account.dto;
 
+import java.util.Date;
+
 public class Account {
 	String accountId;
 	String userId;
-	String balanceAmount;
-	String privateAmount;
-	String commonAmount;
+	Float balanceAmount;
+	Float privateAmount;
+	Float commonAmount;
 	String updateBy;
-	String updateTime;
+	Date updateTime;
 	
-	/**
-	 * @return the accountId
-	 */
 	public String getAccountId() {
 		return accountId;
 	}
-	/**
-	 * @param accountId the accountId to set
-	 */
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
-	/**
-	 * @return the userId
-	 */
 	public String getUserId() {
 		return userId;
 	}
-	/**
-	 * @param userId the userId to set
-	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	/**
-	 * @return the balanceAmount
-	 */
-	public String getBalanceAmount() {
+	public Float getBalanceAmount() {
 		return balanceAmount;
 	}
-	/**
-	 * @param balanceAmount the balanceAmount to set
-	 */
-	public void setBalanceAmount(String balanceAmount) {
+	public void setBalanceAmount(Float balanceAmount) {
 		this.balanceAmount = balanceAmount;
 	}
-	/**
-	 * @return the privateAmount
-	 */
-	public String getPrivateAmount() {
+	public Float getPrivateAmount() {
 		return privateAmount;
 	}
-	/**
-	 * @param privateAmount the privateAmount to set
-	 */
-	public void setPrivateAmount(String privateAmount) {
+	public void setPrivateAmount(Float privateAmount) {
 		this.privateAmount = privateAmount;
 	}
-	/**
-	 * @return the commonAmount
-	 */
-	public String getCommonAmount() {
+	public Float getCommonAmount() {
 		return commonAmount;
 	}
-	/**
-	 * @param commonAmount the commonAmount to set
-	 */
-	public void setCommonAmount(String commonAmount) {
+	public void setCommonAmount(Float commonAmount) {
 		this.commonAmount = commonAmount;
 	}
-	/**
-	 * @return the updateBy
-	 */
 	public String getUpdateBy() {
 		return updateBy;
 	}
-	/**
-	 * @param updateBy the updateBy to set
-	 */
 	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
-	/**
-	 * @return the updateTime
-	 */
-	public String getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
-	/**
-	 * @param updateTime the updateTime to set
-	 */
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 }

@@ -26,7 +26,7 @@
 </head>
 <body>
 $control.setTemplate("/common/header.vm")
-$control.setTemplate("/common/menu.vm")
+$control.setTemplate("/acct/menu.vm")
 ##main-container-part start
 <div id="content">
 $screen_placeholder
