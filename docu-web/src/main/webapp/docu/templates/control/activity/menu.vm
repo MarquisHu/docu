@@ -12,13 +12,13 @@
 	      <li class="#if($!vmUtil.menuEq($menu,'searchBalance'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;余额查询</a></li>
 	    </ul>
 	    <ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'chargeaccount'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeAccount.htm">&emsp;&emsp;&emsp;账户充值</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargeAccount'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeAccount.htm">&emsp;&emsp;&emsp;账户充值</a></li>
 	    </ul>
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'chargedetails'))active#end"><a href="$!envUtil.getContextPath()/acct/chargedetails.htm">&emsp;&emsp;&emsp;充值查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargeDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeDetails.htm">&emsp;&emsp;&emsp;充值查询</a></li>
 	    </ul>
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'billdetails'))active#end"><a href="$!envUtil.getContextPath()/acct/billdetails.htm">&emsp;&emsp;&emsp;账单查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'billDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/billDetails.htm">&emsp;&emsp;&emsp;账单查询</a></li>
 	    </ul>
     </li>
 	

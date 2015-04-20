@@ -1,6 +1,6 @@
 package com.docu.account.dto;
 
-public class BillDetails {
+public class BillDetail {
 	String billId;
 	String accountId;
 	String userId;

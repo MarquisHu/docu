@@ -8,6 +8,9 @@ $!msg
 <!--End-breadcrumbs-->
 <div class="container-fluid">
 	<div class="widget-box">
+		<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+			<h5>用户查询</h5>
+		</div>
 		<div class="widget-content tab-content">
 			<div id="tab1" class="tab-pane active">
 				<div class="widget-content nopadding">
@@ -15,10 +18,11 @@ $!msg
 						<input type="hidden" name="pageNum" value="1" />
 			            <div class="tablesearchcase">
 			                <div class="dataTables_length" id="">
-								<input class="span2" style="margin-left:10px;" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
+								<label>用户账号：</label>
+								<input class="span2" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
 								<button class="btn btn-success" style="margin-left:10px;" type="submit">查询</button>
 								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
-								<a href="$!envUtil.getContextPath()/user/adduser.htm" class="btn btn-success" style="float:right;margin-right:30px;">新增</a>
+								<a href="$!envUtil.getContextPath()/user/adduser.htm" class="btn btn-success" style="float:right;margin-right:40px;">新增</a>
 			                </div>
 			            </div>
 			        </form>

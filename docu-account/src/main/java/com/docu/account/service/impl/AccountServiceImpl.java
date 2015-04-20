@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import com.docu.account.dao.AccountDao;
 import com.docu.account.dto.Account;
-import com.docu.account.dto.ChargeAccountDetail;
 import com.docu.account.service.AccountService;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
@@ -28,11 +27,6 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Account queryAccount(String userId) {
 		return accountDao.findAccount(userId);
-	}
-	
-	@Override
-	public ChargeAccountDetail findChargeAccountDetail(String userId) {
-		return accountDao.findChargeAccountDetail(userId);
 	}
 
 	@Override

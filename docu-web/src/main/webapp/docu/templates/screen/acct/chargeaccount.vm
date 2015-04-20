@@ -1,5 +1,5 @@
 #set($title = "DOCU账务管理系统")
-#set($menu = "acct#chargeaccount")
+#set($menu = "acct#chargeAccount")
 $!msg
 <style >
 	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
@@ -16,7 +16,7 @@ $!msg
 					<div class="widget-content nopadding">
 						<div class="widget-content "> 
 						<div class="control-group">
-							<label class="control-label">用户编码：</label>
+							<label class="control-label">用户账号：</label>
 							<div class="controls">
 								<input type="text" name="userId" id="userId" value="$!account.userId" style="width:120px" readonly="readonly" autocomplete="off" />
 								<label style="margin-left:10px">用户姓名：</label>
@@ -24,7 +24,7 @@ $!msg
                 			</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">账户编码：</label>
+							<label class="control-label">账户编号：</label>
 							<div class="controls">
 								<input type="text" name="accountId" id="accountId" value="$!account.accountId" style="width:120px" readonly="readonly" autocomplete="off" />
                 			</div>

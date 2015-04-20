@@ -15,11 +15,12 @@
 	<typeAliases>
         <typeAlias type="com.docu.user.dto.DocumentUser" alias="DocumentUser" />
         <typeAlias type="com.docu.user.dto.DocumentSystemUser" alias="DocumentSystemUser" />
+        
         <typeAlias type="com.docu.account.dto.Account" alias="Account" />
         <typeAlias type="com.docu.account.dto.AccountBalance" alias="AccountBalance" />
         <typeAlias type="com.docu.account.dto.ChargeAccountDetail" alias="ChargeAccountDetail" />
-        <typeAlias type="com.docu.account.dto.ChargeDetails" alias="ChargeDetails" />
-        <typeAlias type="com.docu.account.dto.BillDetails" alias="BillDetails" />
+        <typeAlias type="com.docu.account.dto.ChargeDetail" alias="ChargeDetail" />
+        <typeAlias type="com.docu.account.dto.BillDetail" alias="BillDetail" />
     </typeAliases>
 
 	<mappers>
@@ -29,5 +30,6 @@
 		<!-- 账户模块 sql start -->
 		<mapper resource="sql/sqlmap_account.xml" />
 		<mapper resource="sql/sqlmap_accountbalance.xml" />
+		<mapper resource="sql/sqlmap_charge.xml" />
 	</mappers>
 </configuration>

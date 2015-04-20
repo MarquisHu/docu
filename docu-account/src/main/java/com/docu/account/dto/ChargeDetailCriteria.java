@@ -1,12 +1,12 @@
 package com.docu.account.dto;
 
-public class ChargeDetails {
+
+public class ChargeDetailCriteria {
 	String chargeId;
 	String userId;
 	String accountId;
-	Float recvAmount;
-	String recvTime;
-	String percent;
+	String startDate;
+	String endDate;
 	
 	public String getChargeId() {
 		return chargeId;
@@ -26,22 +26,16 @@ public class ChargeDetails {
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
-	public Float getRecvAmount() {
-		return recvAmount;
+	public String getStartDate() {
+		return startDate;
 	}
-	public void setRecvAmount(Float recvAmount) {
-		this.recvAmount = recvAmount;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
-	public String getRecvTime() {
-		return recvTime;
+	public String getEndDate() {
+		return endDate;
 	}
-	public void setRecvTime(String recvTime) {
-		this.recvTime = recvTime;
-	}
-	public String getPercent() {
-		return percent;
-	}
-	public void setPercent(String percent) {
-		this.percent = percent;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 }

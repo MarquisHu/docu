@@ -10,4 +10,5 @@
 	<!-- 账户模块dao start -->
 	<bean id="accountDao" class="com.docu.account.dao.impl.IbatisAccountDao" />
 	<bean id="balanceDao" class="com.docu.account.dao.impl.IbatisAccountBalanceDao" />
+	<bean id="chargeDao" class="com.docu.account.dao.impl.IbatisChargeDao" />
 </beans>
