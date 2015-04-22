@@ -1,6 +1,5 @@
 package com.docu.account.dto;
 
-import java.util.Date;
 
 public class Account {
 	String accountId;
@@ -9,7 +8,7 @@ public class Account {
 	Float privateAmount;
 	Float commonAmount;
 	String updateBy;
-	Date updateTime;
+	String updateTime;
 	
 	public String getAccountId() {
 		return accountId;
@@ -47,10 +46,10 @@ public class Account {
 	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
-	public Date getUpdateTime() {
+	public String getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
 }

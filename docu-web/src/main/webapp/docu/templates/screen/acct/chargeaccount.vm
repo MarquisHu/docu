@@ -20,7 +20,7 @@ $!msg
 							<div class="controls">
 								<input type="text" name="userId" id="userId" value="$!account.userId" style="width:120px" readonly="readonly" autocomplete="off" />
 								<label style="margin-left:10px">用户姓名：</label>
-								<input type="text" name="englishName" id="englishName" value="$!account.englishName" style="width:150px" readonly="readonly" autocomplete="off" />
+								<input type="text" style="margin-left:15px" name="englishName" id="englishName" value="$!account.englishName" style="width:150px" readonly="readonly" autocomplete="off" />
                 			</div>
 						</div>
 						<div class="control-group">

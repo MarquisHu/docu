@@ -25,10 +25,10 @@
 	    A1.USER_ID 			userId, 
 	    A1.ACCOUNT_ID		accountId,
 		A1.RECV_AMOUNT 		recvAmount, 
-		A1.RECV_TIME 		recvTime, 
+		date_format(A1.RECV_TIME, '%Y-%m-%d %h:%i:%s') recvTime,
 		A1.PERCENT 			percent,
 		A1.UPDATE_BY 		updateBy,
-		A1.UPDATE_TIME 		updateTime
+		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
 	
 	<sql id="ACCOUNT_BALANCE_DO_QUERY_COLUMNS">
@@ -44,10 +44,8 @@
 		    <if test="userId != null">AND USER_ID = #{userId,jdbcType=VARCHAR}</if>
 		    <if test="accountId != null">ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}</if>
 			<if test="recvAmount != null">AND RECV_AMOUNT = #{recvAmount,jdbcType=FLOAT}</if>
-			<if test="recvTime != null">AND RECV_TIME = #{recvTime,jdbcType=TIMESTAMP}</if>
 			<if test="percent != null">AND PERCENT = #{percent,jdbcType=INTEGER}</if>
 			<if test="updateBy != null">AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}</if>
-			<if test="updateTime != null">AND UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}</if>
 		</where>
 	</sql>
 	
@@ -64,10 +62,10 @@
 			#{userId,jdbcType=VARCHAR},
 		 	#{accountId,jdbcType=VARCHAR},
 		 	#{recvAmount,jdbcType=FLOAT},
-		 	#{recvTime,jdbcType=TIMESTAMP},
+		 	#{recvTime,jdbcType=VARCHAR},
 		 	#{percent,jdbcType=INTEGER},
 		 	#{updateBy,jdbcType=VARCHAR},
-		 	#{updateTime,jdbcType=TIMESTAMP}
+		 	#{updateTime,jdbcType=VARCHAR}
 		)
 	</insert>
 	

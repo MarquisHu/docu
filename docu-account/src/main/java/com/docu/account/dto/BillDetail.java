@@ -1,28 +1,22 @@
 package com.docu.account.dto;
 
+
 public class BillDetail {
-	String billId;
-	String accountId;
+	long billId;
 	String userId;
-	String cycleId;
+	String accountId;
 	Float originAmount;
 	Float expenseAmount;
 	Float balance;
-	String activityId;
+	long activityId;
 	String updateBy;
 	String updateTime;
 	
-	public String getBillId() {
+	public long getBillId() {
 		return billId;
 	}
-	public void setBillId(String billId) {
+	public void setBillId(long billId) {
 		this.billId = billId;
-	}
-	public String getAccountId() {
-		return accountId;
-	}
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
 	}
 	public String getUserId() {
 		return userId;
@@ -30,11 +24,11 @@ public class BillDetail {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getCycleId() {
-		return cycleId;
+	public String getAccountId() {
+		return accountId;
 	}
-	public void setCycleId(String cycleId) {
-		this.cycleId = cycleId;
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
 	}
 	public Float getOriginAmount() {
 		return originAmount;
@@ -54,10 +48,10 @@ public class BillDetail {
 	public void setBalance(Float balance) {
 		this.balance = balance;
 	}
-	public String getActivityId() {
+	public long getActivityId() {
 		return activityId;
 	}
-	public void setActivityId(String activityId) {
+	public void setActivityId(long activityId) {
 		this.activityId = activityId;
 	}
 	public String getUpdateBy() {

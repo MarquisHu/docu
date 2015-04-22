@@ -11,4 +11,5 @@
 	<bean id="accountDao" class="com.docu.account.dao.impl.IbatisAccountDao" />
 	<bean id="balanceDao" class="com.docu.account.dao.impl.IbatisAccountBalanceDao" />
 	<bean id="chargeDao" class="com.docu.account.dao.impl.IbatisChargeDao" />
+	<bean id="billDao" class="com.docu.account.dao.impl.IbatisBillDao" />
 </beans>

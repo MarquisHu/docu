@@ -19,7 +19,7 @@
 		A1.PRIVATE_AMOUNT 	privateAmount, 
 		A1.COMMON_AMOUNT 	commonAmount,
 		A1.UPDATE_BY 		updateBy,
-		A1.UPDATE_TIME 		updateTime
+		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
 
 	<sql id="ACCOUNT_DO_QUERY_PARAMS">
@@ -30,7 +30,6 @@
 			<if test="privateAmount != null">AND PRIVATE_AMOUNT = #{privateAmount,jdbcType=FLOAT}</if>
 			<if test="commonAmount != null">AND COMMON_AMOUNT = #{commonAmount,jdbcType=FLOAT}</if>
 			<if test="updateBy != null">AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}</if>
-			<if test="updateTime != null">AND UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}</if>
 		</where>
 	</sql>
 	
@@ -50,7 +49,7 @@
 		 	#{privateAmount,jdbcType=FLOAT},
 		 	#{commonAmount,jdbcType=FLOAT},
 		 	#{updateBy,jdbcType=VARCHAR},
-		 	#{updateTime,jdbcType=TIMESTAMP}
+		 	#{updateTime,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -81,7 +80,7 @@
 			</if>
 			<if test="updateTime != null">
 			    <![CDATA[
-			    	UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+			    	UPDATE_TIME = #{updateTime,jdbcType=VARCHAR}
 				]]>
 			</if>
 		</set>
@@ -140,11 +139,6 @@
 			    	AND UPDATE_BY = #{entity.updateBy,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.updateTime != null">
-			    <![CDATA[
-			    	AND UPDATE_TIME = #{entity.updateTime,jdbcType=TIMESTAMP}
-				]]>
-			</if>
 		</where>
 	</select>
 	
@@ -183,11 +177,6 @@
 			<if test="entity.updateBy != null">
 			    <![CDATA[
 			    	AND UPDATE_BY = #{entity.updateBy,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.updateTime != null">
-			    <![CDATA[
-			    	AND UPDATE_TIME = #{entity.updateTime,jdbcType=TIMESTAMP}
 				]]>
 			</if>
 		</where>

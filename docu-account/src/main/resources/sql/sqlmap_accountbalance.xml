@@ -15,7 +15,7 @@
 	    A2.ACCOUNT_ID				accountId,
 		A1.EN_NAME		 			englishName, 
 		A2.BALANCE_AMOUNT 			balance,
-		date_format(A2.UPDATE_TIME, '%Y-%m-%d') updateTime
+		date_format(A2.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
 	
 	<select id="queryAccountBalanceTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
@@ -46,11 +46,6 @@
 			<if test="entity.balance != null">
 			    <![CDATA[
 			    	AND A2.BALANCE_AMOUNT = #{entity.balance,jdbcType=FLOAT}
-				]]>
-			</if>
-			<if test="entity.updateTime != null">
-			    <![CDATA[
-			    	AND A2.UPDATE_TIME = #{entity.updateTime,jdbcType=TIMESTAMP}
 				]]>
 			</if>
 		</where>
@@ -84,11 +79,6 @@
 			<if test="entity.balance != null">
 			    <![CDATA[
 			    	AND A2.BALANCE_AMOUNT = #{entity.balance,jdbcType=FLOAT}
-				]]>
-			</if>
-			<if test="entity.updateTime != null">
-			    <![CDATA[
-			    	AND A2.UPDATE_TIME = #{entity.updateTime,jdbcType=TIMESTAMP}
 				]]>
 			</if>
 		</where>

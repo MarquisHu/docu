@@ -31,5 +31,6 @@
 		<mapper resource="sql/sqlmap_account.xml" />
 		<mapper resource="sql/sqlmap_accountbalance.xml" />
 		<mapper resource="sql/sqlmap_charge.xml" />
+		<mapper resource="sql/sqlmap_bill.xml" />
 	</mappers>
 </configuration>

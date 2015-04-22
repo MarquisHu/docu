@@ -11,4 +11,5 @@
 	<bean id="accountService" class="com.docu.account.service.impl.AccountServiceImpl"></bean>
 	<bean id="balanceService" class="com.docu.account.service.impl.AccountBalanceServiceImpl"></bean>
 	<bean id="chargeService" class="com.docu.account.service.impl.ChargeServiceImpl"></bean>
+	<bean id="billService" class="com.docu.account.service.impl.BillServiceImpl"></bean>
 </beans>

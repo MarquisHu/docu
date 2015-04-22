@@ -13,6 +13,7 @@ import com.docu.account.dto.Account;
 import com.docu.account.dto.ChargeDetail;
 import com.docu.account.service.AccountService;
 import com.docu.account.service.ChargeService;
+import com.docu.components.util.DateUtils;
 import com.docu.web.common.context.EnvUtils;
 
 public class AccountAction {
@@ -42,7 +43,7 @@ public class AccountAction {
 		if (account != null) {
 			Float privateAmount = (recvAmount * percent) / 100;
 			Float commontAmount = recvAmount - privateAmount;
-			Date date = new Date();
+			String date = DateUtils.formatDate(new Date());
 			
 			account.setUserId(userId);
 			account.setAccountId(accountId);

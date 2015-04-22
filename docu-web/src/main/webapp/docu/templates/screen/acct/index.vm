@@ -19,7 +19,7 @@ $!msg
 			            <div class="tablesearchcase">
 			                <div class="dataTables_length" id="">
 								<label>用户账号：</label>
-								<input class="span2" style="margin-left:10px;" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
+								<input class="span2" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
 								<button class="btn btn-success" style="margin-left:10px;" type="submit">查询</button>
 								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
 			                </div>
@@ -39,7 +39,7 @@ $!msg
 				    <table class="table table-bordered table-striped with-check">
 				    	<thead>
 				            <tr>
-								<th style="width: 5px;">账号编号</th>
+								<th style="width: 5px;">账户编号</th>
 				            	<th style="width: 5px;">用户账号</th>
 				                <th style="width: 5px;">用户姓名</th>
 				                <th style="width: 5px;">账户余额</th>

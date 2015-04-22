@@ -1,16 +1,15 @@
 package com.docu.account.dto;
 
-import java.util.Date;
 
 public class ChargeDetail {
 	long chargeId;
 	String userId;
 	String accountId;
 	Float recvAmount;
-	Date recvTime;
+	String recvTime;
 	Integer percent;
 	String updateBy;
-	Date updateTime;
+	String updateTime;
 	
 	public long getChargeId() {
 		return chargeId;
@@ -36,10 +35,10 @@ public class ChargeDetail {
 	public void setRecvAmount(Float recvAmount) {
 		this.recvAmount = recvAmount;
 	}
-	public Date getRecvTime() {
+	public String getRecvTime() {
 		return recvTime;
 	}
-	public void setRecvTime(Date recvTime) {
+	public void setRecvTime(String recvTime) {
 		this.recvTime = recvTime;
 	}
 	public Integer getPercent() {
@@ -54,10 +53,10 @@ public class ChargeDetail {
 	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
-	public Date getUpdateTime() {
+	public String getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
 }

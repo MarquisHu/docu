@@ -19,7 +19,7 @@ $!msg
 			            <div class="tablesearchcase">
 							<div class="dataTables_length" id="">
 								<label>用户账号：</label>
-								<input class="span2" style="margin-left:10px;" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
+								<input class="span2" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
 								<label style="margin-left:50px;" >交易时间：</label>
 								<div class="input-append date" id="start_datetimepicker" data-date-format="yyyy-mm-dd">
 			                        <input class="span2" size="16" type="text" name="startDate" id="startDate" value="$!startDate" >
@@ -32,7 +32,7 @@ $!msg
 			                        <span class="add-on"><i class="icon-remove"></i></span>
 			                        <span class="add-on"><i class="icon-th"></i></span>
 			                    </div>
-								<button class="btn btn-success" style="margin-left:70px;" type="submit">查询</button>
+								<button class="btn btn-success" style="margin-left:80px;" type="submit">查询</button>
 								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
 			                </div>
 			            </div>
@@ -52,8 +52,8 @@ $!msg
 				    	<thead>
 				            <tr>
 								<th style="width: 10px;">交易流水</th>
-				            	<th style="width: 10px;">用户编码</th>
-				                <th style="width: 10px;">账号编码</th>
+				            	<th style="width: 10px;">用户账号</th>
+				                <th style="width: 10px;">账户编号</th>
 				                <th style="width: 5px;">充值金额</th>
 								<th style="width: 10px;">交易时间</th>
 				            </tr>
@@ -121,6 +121,8 @@ $!msg
 <script>
 	function clearQuery(){
 		$("#userId").val("");
+		$("#stratDate").val("");
+		$("#endDate").val("");
 		$(".select2-choice span").html("所有");
 	}
     $(document).ready(function () {
