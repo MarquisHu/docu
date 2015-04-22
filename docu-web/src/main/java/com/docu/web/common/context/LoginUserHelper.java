@@ -1,17 +1,17 @@
 package com.docu.web.common.context;
 
-import com.docu.user.dto.DocumentUser;
+import com.docu.user.dto.User;
 
 
 public class LoginUserHelper {
 
-	private final static ThreadLocal<DocumentUser> holder = new ThreadLocal<DocumentUser>();
+	private final static ThreadLocal<User> holder = new ThreadLocal<User>();
 
-	public static void saveUserInfo(DocumentUser user) {
+	public static void saveUserInfo(User user) {
 		holder.set(user);
 	}
 
-	public static DocumentUser getLoginUserInfo() {
+	public static User getLoginUserInfo() {
 		return holder.get();
 	}
 

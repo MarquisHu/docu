@@ -1,11 +1,13 @@
 package com.docu.user.dto;
 
-public class DocumentUser {
+public class User {
 	private String userId;
 	private String englishName;
 	private String chineseName;
 	private String telphoneNumber;
 	private String active;
+	private String admin;
+	private String password;
 	
 	public String getUserId() {
 		return userId;
@@ -36,5 +38,17 @@ public class DocumentUser {
 	}
 	public void setActive(String active) {
 		this.active = active;
+	}
+	public String getAdmin() {
+		return admin;
+	}
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

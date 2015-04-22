@@ -10,7 +10,7 @@ public class Index {
 	
 	public void execute(TurbineRunData rundata, Context context) throws WebxException {
 		HttpSession session = rundata.getRequest().getSession();
-		String systemUserId = (String) session.getAttribute("systemUserId");
-		context.put("systemUserId", systemUserId);
+		String loginUserId = (String) session.getAttribute("loginUserId");
+		context.put("loginUserId", loginUserId);
 	}
 }

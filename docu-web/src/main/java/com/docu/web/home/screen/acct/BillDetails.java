@@ -20,8 +20,8 @@ public class BillDetails {
 	
 	public void execute(TurbineRunData rundata, Context context) throws WebxException {
 		HttpSession session = rundata.getRequest().getSession();
-		String systemUserId = (String) session.getAttribute("systemUserId");
-		if (systemUserId == null || systemUserId.length() == 0) {
+		String loginUserId = (String) session.getAttribute("loginUserId");
+		if (loginUserId == null || loginUserId.length() == 0) {
 			rundata.setRedirectLocation(EnvUtils.getContextPath() + "/index.htm");
 			return;
 		}
@@ -42,6 +42,6 @@ public class BillDetails {
 		
 		context.put("page", page);
 		context.put("userId", userId);
-		context.put("systemUserId", systemUserId);
+		context.put("loginUserId", loginUserId);
 	}
 }

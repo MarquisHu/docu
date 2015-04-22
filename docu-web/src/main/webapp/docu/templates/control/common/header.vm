@@ -9,7 +9,7 @@
     <li  class="dropdown" id="profile-messages" >
 		<a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle">
 			<img src="${docuCdnServer}/images/atr/default_avatar.png" alt="" class="atr" />
-			<span class="text">您好  $!systemUserId</span><b class="caret"></b>
+			<span class="text">您好  $!loginUserId</span><b class="caret"></b>
 		</a>
 		<ul class="dropdown-menu">
 			<li class="divider"></li>

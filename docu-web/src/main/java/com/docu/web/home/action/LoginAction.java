@@ -11,8 +11,8 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.docu.components.util.StringUtils;
-import com.docu.user.dto.DocumentSystemUser;
-import com.docu.user.service.DocumentUserService;
+import com.docu.user.dto.User;
+import com.docu.user.service.UserService;
 import com.docu.web.common.context.EnvUtils;
 
 public class LoginAction {
@@ -23,24 +23,24 @@ public class LoginAction {
 	private URIBrokerService uriBrokerService;
 	
 	@Autowired
-	private DocumentUserService userService;
+	private UserService userService;
 	
 	public void doLogin(TurbineRunData rundata, Context context){
 		ParameterParser pars = rundata.getParameters();
 		String redirectUrl = pars.getString("redirectUrl");
-		String systemUserId = pars.getString("systemUserId");
+		String loginUserId = pars.getString("loginUserId");
 		String password = pars.getString("password");
 		String errmsg = null;
 		try {
-			DocumentSystemUser systemUser = userService.querySystemUser(systemUserId);
-			if (systemUser == null || !password.equals(systemUser.getPassword())) {
+			User user = userService.queryUser(loginUserId);
+			if (user == null || !password.equals(user.getPassword())) {
 				errmsg="Please input right of UserId and Password!";
 				return;
 			}
 			HttpSession session = rundata.getRequest().getSession();
-			session.setAttribute("systemUserId", systemUserId);
+			session.setAttribute("loginUserId", loginUserId);
 			session.setMaxInactiveInterval(15*60);//15 minutes
-			context.put("systemUserId", systemUserId);
+			context.put("loginUserId", loginUserId);
 			
 			if (StringUtils.isEmpty(redirectUrl)) {
 				URIBroker loginPageURI = uriBrokerService.getURIBroker("loginLink"); 
@@ -55,7 +55,7 @@ public class LoginAction {
 			if(StringUtils.isNotEmpty(errmsg)){
 				rundata.setRedirectTarget("/index.vm");
 				context.put(REDIRECT_URL, redirectUrl);
-				context.put("systemUserId", systemUserId);
+				context.put("loginUserId", loginUserId);
 				context.put("errorMsg", errmsg); 
 			}
 		}

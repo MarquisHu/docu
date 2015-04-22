@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.docu.user.dao.DocumentUserDao">
+<mapper namespace="com.docu.user.dao.UserDao">
     
-    <resultMap id="SYSTEM_USER_RESULT_MAP" type="DocumentSystemUser">
-		<result property="userId" column="USER_ID" />
-		<result property="password" column="PASSWORD" />
-	</resultMap>
-	
-    <resultMap id="USER_RESULT_MAP" type="DocumentUser">
+    <resultMap id="USER_RESULT_MAP" type="User">
 		<result property="userId" column="USER_ID" />
 		<result property="englishName" column="EN_NAME" />
 		<result property="chineseName" column="CN_NAME" />
 		<result property="telphoneNumber" column="TEL_NUMBER" />
 		<result property="active" column="IS_ACTIVE" />
+		<result property="admin" column="IS_ADMIN" />
+		<result property="password" column="PASSWORD" />
 	</resultMap>
 	
-    <sql id="SYSTEM_USER_DO_QUERY_COLUMNS">
-		A1.USER_ID 		userId, 
-		A1.PASSWORD 	password
-	</sql>
-
 	<sql id="USER_DO_QUERY_COLUMNS">
 		A1.USER_ID 		userId, 
 		A1.EN_NAME 		englishName, 
 		A1.CN_NAME 		chineseName, 
 		A1.TEL_NUMBER 	telphoneNumber,
-		A1.IS_ACTIVE 	active
+		A1.IS_ACTIVE 	active,
+		A1.IS_ADMIN 	admin,
+		A1.PASSWORD 	password
 	</sql>
 
 	<sql id="USER_DO_QUERY_PARAMS">
@@ -35,30 +29,25 @@
 			<if test="chineseName != null">AND CN_NAME = #{chineseName,jdbcType=VARCHAR}</if>
 			<if test="telphoneNumber != null">AND TEL_NUMBER = #{telphoneNumber,jdbcType=VARCHAR}</if>
 			<if test="active != null">AND IS_ACTIVE = #{active,jdbcType=VARCHAR}</if>
+			<if test="admin != null">AND IS_ADMIN = #{admin,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
 	
-	<select id="findSystemUser" parameterType="String" resultMap="SYSTEM_USER_RESULT_MAP">
-		SELECT
-		<include refid="SYSTEM_USER_DO_QUERY_COLUMNS" />
-	    <![CDATA[  
-	     FROM DOCU_ERP_SYSTEM_USER A1 WHERE A1.USER_ID = #{userId,jdbcType=VARCHAR}
-	    ]]>
-	</select>
-	
-    <insert id="insertUser" parameterType="DocumentUser">
+    <insert id="insertUser" parameterType="User">
 		INSERT INTO DOCU_ERP_USER(
 			USER_ID, 
 			EN_NAME, 
 			CN_NAME, 
 			TEL_NUMBER,
-			IS_ACTIVE
+			IS_ACTIVE,
+			IS_ADMIN
 		) VALUES (
 		 	#{userId,jdbcType=VARCHAR},
 		 	#{englishName,jdbcType=VARCHAR},
 		 	#{chineseName,jdbcType=VARCHAR},
 		 	#{telphoneNumber,jdbcType=VARCHAR},
-		 	#{active,jdbcType=VARCHAR}
+		 	#{active,jdbcType=VARCHAR},
+		 	#{admin,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -70,14 +59,14 @@
 	    ]]>
 	</select>
 	
-	<select id="findUsers" parameterType="DocumentUser" resultMap="USER_RESULT_MAP">
+	<select id="findUsers" parameterType="User" resultMap="USER_RESULT_MAP">
 		SELECT
 		<include refid="USER_DO_QUERY_COLUMNS" />
 		FROM DOCU_ERP_USER A1
 		<include refid="USER_DO_QUERY_PARAMS" />
 	</select>
 	
-	<select id="queryDocumentUserTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
+	<select id="queryUserTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
 	    SELECT
 		COUNT(*)
 		<![CDATA[  
@@ -109,10 +98,15 @@
 			    	AND IS_ACTIVE = #{entity.active,jdbcType=VARCHAR}
 				]]>
 			</if>
+			<if test="entity.admin != null">
+			    <![CDATA[
+			    	AND IS_ADMIN = #{entity.admin,jdbcType=VARCHAR}
+				]]>
+			</if>
 		</where>
 	</select>
 	
-	<select id="queryDocumentUser" parameterType="com.docu.components.common.QueryBase" resultMap="USER_RESULT_MAP">
+	<select id="queryUser" parameterType="com.docu.components.common.QueryBase" resultMap="USER_RESULT_MAP">
 	    SELECT
 		<include refid="USER_DO_QUERY_COLUMNS" />
 		<![CDATA[  
@@ -142,6 +136,11 @@
 			<if test="entity.active != null">
 			    <![CDATA[
 			    	AND IS_ACTIVE = #{entity.active,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.admin != null">
+			    <![CDATA[
+			    	AND IS_ADMIN = #{entity.admin,jdbcType=VARCHAR}
 				]]>
 			</if>
 		</where>

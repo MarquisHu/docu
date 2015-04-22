@@ -13,8 +13,7 @@
 	</settings>
 	
 	<typeAliases>
-        <typeAlias type="com.docu.user.dto.DocumentUser" alias="DocumentUser" />
-        <typeAlias type="com.docu.user.dto.DocumentSystemUser" alias="DocumentSystemUser" />
+        <typeAlias type="com.docu.user.dto.User" alias="User" />
         
         <typeAlias type="com.docu.account.dto.Account" alias="Account" />
         <typeAlias type="com.docu.account.dto.AccountBalance" alias="AccountBalance" />

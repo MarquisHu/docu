@@ -5,7 +5,7 @@
 	default-autowire="byName">
 
     <!-- 用户模块service start -->
-	<bean id="userService" class="com.docu.user.service.impl.DocumentUserServiceImpl"></bean>
+	<bean id="userService" class="com.docu.user.service.impl.UserServiceImpl"></bean>
 	
 	<!-- 账户模块service start -->
 	<bean id="accountService" class="com.docu.account.service.impl.AccountServiceImpl"></bean>

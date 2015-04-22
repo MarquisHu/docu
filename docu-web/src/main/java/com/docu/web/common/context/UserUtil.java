@@ -1,6 +1,6 @@
 package com.docu.web.common.context;
 
-import com.docu.user.dto.DocumentUser;
+import com.docu.user.dto.User;
 
 public final class UserUtil {
 
@@ -8,12 +8,12 @@ public final class UserUtil {
 		return LoginUserHelper.getLoginUserInfo() != null;
 	}
 
-	public static DocumentUser getLoginUser() {
+	public static User getLoginUser() {
 		return LoginUserHelper.getLoginUserInfo();
 	}
 
 	
-	public static DocumentUser getLoginUserInfo(){
+	public static User getLoginUserInfo(){
 		return LoginUserHelper.getLoginUserInfo();
 	}
 }

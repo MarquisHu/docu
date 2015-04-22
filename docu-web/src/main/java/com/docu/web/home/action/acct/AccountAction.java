@@ -29,8 +29,8 @@ public class AccountAction {
 	
 	public void doSaveCharge(TurbineRunData rundata, Context context){
 		HttpSession session = rundata.getRequest().getSession();
-		String systemUserId = (String) session.getAttribute("systemUserId");
-		if (systemUserId == null) {
+		String loginUserId = (String) session.getAttribute("loginUserId");
+		if (loginUserId == null) {
 			rundata.setRedirectLocation(EnvUtils.getContextPath() + "/index.htm");
 			return;
 		}
@@ -50,7 +50,7 @@ public class AccountAction {
 			account.setBalanceAmount(account.getBalanceAmount() + recvAmount);
 			account.setPrivateAmount(account.getPrivateAmount() + privateAmount);
 			account.setCommonAmount(account.getCommonAmount() + commontAmount);
-			account.setUpdateBy(systemUserId);
+			account.setUpdateBy(loginUserId);
 			account.setUpdateTime(date);
 			
 			int result = accountService.updateAccount(account);

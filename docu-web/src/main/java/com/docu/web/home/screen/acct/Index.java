@@ -18,8 +18,8 @@ public class Index {
 	
 	public void execute(TurbineRunData rundata, Context context) throws WebxException {
 		HttpSession session = rundata.getRequest().getSession();
-		String systemUserId = (String) session.getAttribute("systemUserId");
-		if(systemUserId != null && systemUserId.length() != 0){
+		String loginUserId = (String) session.getAttribute("loginUserId");
+		if(loginUserId != null && loginUserId.length() != 0){
 			AccountBalance entity = new AccountBalance();
 			int pageNum = rundata.getParameters().getInt("pageNum");
 			String criteria = rundata.getParameters().getString("userId");
@@ -30,7 +30,7 @@ public class Index {
 			
 			context.put("page", page);
 			context.put("userId", criteria);
-			context.put("systemUserId", systemUserId);
+			context.put("loginUserId", loginUserId);
 		}
 	}
 }

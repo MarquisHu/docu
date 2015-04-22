@@ -5,7 +5,7 @@
 	default-autowire="byName">
        
 	<!-- 用户模块dao start -->
-	<bean id="userDao" class="com.docu.user.dao.impl.IbatisDocumentUserDao" />
+	<bean id="userDao" class="com.docu.user.dao.impl.IbatisUserDao" />
 	
 	<!-- 账户模块dao start -->
 	<bean id="accountDao" class="com.docu.account.dao.impl.IbatisAccountDao" />

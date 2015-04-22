@@ -18,17 +18,17 @@ public class ChargeAccount {
 	
 	public void execute(TurbineRunData rundata, Context context) throws WebxException {
 		HttpSession session = rundata.getRequest().getSession();
-		String systemUserId = (String) session.getAttribute("systemUserId");
-		if (systemUserId == null) {
+		String loginUserId = (String) session.getAttribute("loginUserId");
+		if (loginUserId == null) {
 			rundata.setRedirectLocation(EnvUtils.getContextPath() + "/index.htm");
 			return;
 		}
 		String userId = rundata.getParameters().getString("userId");
 		if (userId == null) {
-			userId = systemUserId;
+			userId = loginUserId;
 		}
 		ChargeAccountDetail account = chargeService.findChargeAccountDetail(userId);
 		context.put("account", account);
-		context.put("systemUserId", systemUserId);
+		context.put("loginUserId", loginUserId);
 	}
 }

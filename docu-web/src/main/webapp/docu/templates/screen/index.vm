@@ -10,7 +10,7 @@
 			<input type="hidden" name="action" value="/LoginAction" />
 			<input type="hidden" name="event_submit_do_login" value="1" />
 			
-			<input type="text" id="systemUserId" name="systemUserId" value="$!systemUserId" placeholder="用户账号" />
+			<input type="text" id="loginUserId" name="loginUserId" value="$!loginUserId" placeholder="用户账号" />
 			<input type="password" id="password" name="password" placeholder="用户密码" />
 			<input type="submit" value="登录" onclick="return loginCheck();"/>
 		</form>
@@ -23,10 +23,10 @@
 <!-- main End -->
 <script type="text/javascript">
  function loginCheck(){
- 	var systemUserId = $("#systemUserId");
+ 	var loginUserId = $("#loginUserId");
 	var password = $("#password");
 	
-	if($.trim(systemUserId.val()).length == 0) {
+	if($.trim(loginUserId.val()).length == 0) {
 		$('.error-tip').html("<label>用户账号不能为空</label>");
         return false;
     }
@@ -46,19 +46,19 @@
              element.attachEvent("on" + e, fn);      
           }
    }
-   var mysystemUserId = document.getElementById("systemUserId");  
+   var myloginUserId = document.getElementById("loginUserId");  
    var mypassword = document.getElementById("password");  
    
-   addListener(mysystemUserId,"click",function(){  
-    mysystemUserId.placeholder = "";  
+   addListener(myloginUserId,"click",function(){  
+    myloginUserId.placeholder = "";  
    })
    
-   addListener(mysystemUserId,"focus",function(){  
-    mysystemUserId.placeholder = "";  
+   addListener(myloginUserId,"focus",function(){  
+    myloginUserId.placeholder = "";  
    }) 
    
-   addListener(mysystemUserId,"blur",function(){  
-    mysystemUserId.placeholder = "请输入用户账号";  
+   addListener(myloginUserId,"blur",function(){  
+    myloginUserId.placeholder = "请输入用户账号";  
    })
    
    addListener(mypassword,"click",function(){  
