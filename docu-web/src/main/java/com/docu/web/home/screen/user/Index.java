@@ -11,6 +11,7 @@ import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
 import com.docu.user.dto.User;
 import com.docu.user.service.UserService;
+import com.docu.web.common.context.EnvUtils;
 
 public class Index {
 	@Autowired
@@ -18,19 +19,23 @@ public class Index {
 	
 	public void execute(TurbineRunData rundata, Context context) throws WebxException {
 		HttpSession session = rundata.getRequest().getSession();
+		String admin = (String) session.getAttribute("admin");
 		String loginUserId = (String) session.getAttribute("loginUserId");
-		if(loginUserId != null && loginUserId.length() != 0){
-			User entity = new User();
-			int pageNum = rundata.getParameters().getInt("pageNum");
-			String userId = rundata.getParameters().getString("userId");
-			entity.setUserId(userId);
-			
-			QueryBase query = new QueryBase(pageNum, entity);
-			PageDO<User> page = userService.queryUser(query);
-			
-			context.put("page", page);
-			context.put("userId", userId);
-			context.put("loginUserId", loginUserId);
+		if (loginUserId == null || loginUserId.length() == 0) {
+			rundata.setRedirectLocation(EnvUtils.getContextPath() + "/index.htm");
+			return;
 		}
+		User entity = new User();
+		int pageNum = rundata.getParameters().getInt("pageNum");
+		String userId = rundata.getParameters().getString("userId");
+		entity.setUserId(userId);
+		
+		QueryBase query = new QueryBase(pageNum, entity);
+		PageDO<User> page = userService.queryUser(query);
+		
+		context.put("page", page);
+		context.put("admin", admin);
+		context.put("userId", userId);
+		context.put("loginUserId", loginUserId);
 	}
 }

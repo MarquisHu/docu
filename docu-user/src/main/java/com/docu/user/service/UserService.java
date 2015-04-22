@@ -6,7 +6,9 @@ import com.docu.user.dto.User;
 
 
 public interface UserService {
-	Long saveUser(User user);
+	int saveUser(User user);
+	
+	int updateUser(User user);
 	
 	User queryUser(String userId);
 	

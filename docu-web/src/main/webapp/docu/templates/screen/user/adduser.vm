@@ -5,126 +5,162 @@ $!msg
 	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
 	.line{height:auto;}
 </style>
-<!--End-breadcrumbs-->
 <div class="container-fluid">
-	<div class="widget-box">
-		<div class="widget-content tab-content">
-			<div id="tab1" class="tab-pane active">
-				<div class="widget-content nopadding">
-			        <form id="query_page_form" class="form-horizontal" method="post" action="$!envUtil.getContextPath()/user/index.htm">
-						<input type="hidden" name="pageNum" value="1" />
-			            <div class="tablesearchcase">
-			                <div class="dataTables_length" id="">
-								<input class="span2" style="margin-left:10px;" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
-								<button class="btn btn-success" style="margin-left:10px;" type="submit">查询</button>
-								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
-								<a href="$!envUtil.getContextPath()/user/index.htm" class="btn btn-success" style="float:right;margin-right:30px;">新增</a>
-			                </div>
-			            </div>
-			        </form>
-			        <br />
-			    </div>
-			</div>			    	
-		    <div class="container-fluid"> 
-				<!-- InstanceBeginEditable name="content" -->
-		    	<br />
-		    	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
-		    	<div class="widget-box">
-		    		<form id="query_page_form" class="form-horizontal" method="post" action="">
-		    			<input type="hidden" name="pageNum" value="1" />
-		    		</form>
-				    <table class="table table-bordered table-striped with-check">
-				    	<thead>
-				            <tr>
-				            	<th style="width: 10px;">用户账号</th>
-				                <th style="width: 15px;">英文姓名</th>
-				                <th style="width: 15px;">中文姓名</th>
-				                <th style="width: 15px;">手机号码</th>
-								<th style="width: 15px;">用户状态</th>
-				                <th style="width: 5px;">操作</th>
-				            </tr>
-				        </thead>
-				        <tbody>
-				            #foreach($user in $!page.rows)
-				            	<td colspan="6" class="tablegroup nopadding">
-					        		<tr id="$!user.userId">
-					        			<td class="noborder center" style="width: 10px;">
-					                        <span class="">
-					                            $!user.userId
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 15px;">
-					                        <span class="">
-					                            $!user.englishName
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 15px;">
-					                        <span class="">
-					                            $!user.chineseName
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 15px;">
-					                        <span class="">
-					                            $!user.telphoneNumber
-					                        </span>
-					                    </td>
-										<td class="noborder center" style="width: 15px;">
-					                        #if($!$!user.active=='0')
-												<span class="">离职状态</span>
-											#end
-											#if($!$!user.active=='1')
-												<span class="">在职状态</span>
-											#end
-					                    </td>
-					                    <td style="width: 5px;" class="center">
-				                            <p><a href="$!envUtil.getContextPath()/user/index.htm?userId=$!{user.userId}"><span style="color:red">修改</span></a></p>
-				                        </td>
-					                </tr>
-				                </td>
-				             #end
-				        </tbody>
-				    </table>
+	<div class="row-fluid">
+		<div id="chargeaccount" class="span12">
+			<form class="form-horizontal" method="post" action="" name="basic_validate" id="basic_validate" novalidate>
+				<div class="widget-box">
+					<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+						<h5>新增用户</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<div class="widget-content "> 
+						<div class="control-group">
+							<label class="control-label">用户账号：</label>
+							<div class="controls">
+								<input type="text" name="userId" id="userId" value="$!userId" style="width:120px" placeholder="用户账号" />
+								<div class="s_userId" style="color:red;display:none;"></div>
+                			</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">用户姓名：</label>
+							<div class="controls">
+								<input type="text" name="userName" id="userName" value="$!userName" style="width:120px" placeholder="用户姓名"  />
+								<div class="s_userName" style="color:red;display:none;"></div>
+                			</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">电话号码：</label>
+							<div class="controls">
+								<input type="text" name="telphoneNumber" id="telphoneNumber" value="$!telphoneNumber" style="width:120px" placeholder="电话号码"  />
+								<div class="s_telphoneNumber" style="color:red;display:none;"></div>
+                			</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">登录密码：</label>
+							<div class="controls">
+								<input type="password" id="password" name="password" style="width:120px" placeholder="登录密码" />
+                			</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">用户状态：</label>
+							<div class="controls">
+								<select style="width:100px" name="active">
+                                    <option value="1">在职</option>
+                                    <option value="0">离职</option>
+                               </select>
+                			</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">用户类型：</label>
+							<div class="controls">
+								<select style="width:100px" name="admin">
+									<option value="0">普通用户</option>
+                                    <option value="1">管理员</option>
+                               </select>
+                			</div>
+						</div>
+						
+						<div class="form-actions">
+							<input type="hidden" name="action" value="/user/UserAction" />
+							<input type="hidden" name="event_submit_do_add_user" value="1" />
+							<div class="controls">
+								<input type="submit" value="提交" class="btn btn-success" onclick="return onSubmit();" />
+								&emsp;&emsp;
+								<span style="color:red">$!msg</span>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
-	             	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
-	          	</div>
-			</div>
-		</div>
-	</div>
+            </form>
+        </div>
+    </div>
 </div>
-<script src="${docuCdnServer}/js/docu/select.min.js"></script>
-<script src="${docuCdnServer}/js/docu/jquery.gritter.min.js"></script>
-<script src="${docuCdnServer}/js/docu/jquery.uniform.js"></script>
-<script>
-	function clearQuery(){
-		$("#userId").val("");
-		$(".select2-choice span").html("所有");
+<script type="text/javascript">
+	function onSubmit() {
+		var result = true;
+		var userId = $("#userId");
+		var userName = $("#userName");
+		var telphoneNumber = $("#telphoneNumber");
+	
+		if($.trim(userId.val()).length == 0){
+			$('.s_userId').html("<label/>用户账号不能为空</label>");
+			$('.s_userId').css('display','block');
+        	result = false;
+		}
+		
+		if($.trim(userName.val()).length == 0){
+			$('.s_userName').html("<label/>用户姓名不能为空</label>");
+			$('.s_userName').css('display','block');
+        	result = false;
+		}
+		
+		if($.trim(telphoneNumber.val()).length == 0){
+			$('.s_telphoneNumber').html("<label/>电话号码不能为空</label>");
+			$('.s_telphoneNumber').css('display','block');
+        	result = false;
+		} else if($.trim(telphoneNumber.val()).length < 11){
+			$('.s_telphoneNumber').html("<label/>电话号码格式不对</label>");
+			$('.s_telphoneNumber').css('display','block');
+        	result = false;
+		}
+		return result;
+ 	}
+ </script>
+ <script type="text/javascript">
+ 	function addListener(element, e, fn) {
+		if (element.addEventListener) {
+			element.addEventListener(e, fn, false);
+		} else {
+			element.attachEvent("on" + e, fn);
+		}
 	}
-    $(document).ready(function () {
-        $('select').select2({minimumResultsForSearch: 1});
-        $('.logotip').delay(500).animate({opacity: 1, left: 130});
-        //单选，勾选美化调用
-        $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
-        //勾选全部选中
-        $("span.icon input:checkbox, th input:checkbox").click(function () {
-            var checkedStatus = this.checked;
-            var checkbox;
-            if (this.id == 'tab1chka') {
-                checkbox = $("#tab1 input[type=checkbox] ");
-            }
-            else {
-                checkbox = $("#tab2 input[type=checkbox] ");
-            }
-            //var checkbox = $(this).parents('.widget-box').find('tr td:first-child input:checkbox');
-            checkbox.each(function () {
-                this.checked = checkedStatus;
-                if (checkedStatus == this.checked) {
-                    $(this).closest('.checker > span').removeClass('checked');
-                }
-                if (this.checked) {
-                    $(this).closest('.checker > span').addClass('checked');
-                }
-            });
-        });
-    });
+	
+	var myUserId = document.getElementById("userId");
+	var myUserName = document.getElementById("userName");
+   	var myTelphoneNumber = document.getElementById("telphoneNumber");
+   
+	addListener(myUserId,"click",function(){  
+    	myUserId.placeholder = ""; 
+		$('.s_userId').css('display','none');
+   	})
+	addListener(myUserName,"click",function(){  
+    	myUserName.placeholder = ""; 
+		$('.s_userName').css('display','none');
+   	})
+   	addListener(myTelphoneNumber,"click",function(){  
+    	myTelphoneNumber.placeholder = ""; 
+		$('.s_telphoneNumber').css('display','none');
+   	})
+   
+	addListener(myUserId,"focus",function(){  
+    	myUserId.placeholder = "";  
+		$('.s_userId').css('display','none');
+   	})
+	addListener(myUserName,"focus",function(){  
+    	myUserName.placeholder = "";  
+		$('.s_userName').css('display','none');
+   	})
+   	addListener(myTelphoneNumber,"focus",function(){  
+    	myTelphoneNumber.placeholder = "";  
+		$('.s_telphoneNumber').css('display','none');
+   	})
+	
+   addListener(myUserId,"blur",function(){  
+    	myUserId.placeholder = "请输入用户账号"; 
+		$('.s_userId').css('display','none');
+   	})
+	addListener(myUserName,"blur",function(){  
+    	myUserName.placeholder = "请输入用户姓名"; 
+		$('.s_userName').css('display','none');
+   	})
+   	addListener(myTelphoneNumber,"blur",function(){  
+    	myTelphoneNumber.placeholder = "请输入充值金额"; 
+		$('.s_telphoneNumber').css('display','none');
+   	})
 </script>

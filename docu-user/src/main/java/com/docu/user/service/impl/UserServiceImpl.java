@@ -15,8 +15,13 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	
 	@Override
-	public Long saveUser(User user) {
+	public int saveUser(User user) {
 		return userDao.insertUser(user);
+	}
+	
+	@Override
+	public int updateUser(User user) {
+		return userDao.updateUser(user);
 	}
 
 	@Override

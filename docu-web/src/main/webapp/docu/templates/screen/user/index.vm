@@ -22,7 +22,9 @@ $!msg
 								<input class="span2" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
 								<button class="btn btn-success" style="margin-left:10px;" type="submit">查询</button>
 								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
+								#if($!admin == '1')
 								<a href="$!envUtil.getContextPath()/user/adduser.htm" class="btn btn-success" style="float:right;margin-right:40px;">新增</a>
+								#end
 			                </div>
 			            </div>
 			        </form>
@@ -41,11 +43,12 @@ $!msg
 				    	<thead>
 				            <tr>
 				            	<th style="width: 10px;">用户账号</th>
-				                <th style="width: 15px;">英文姓名</th>
-				                <th style="width: 15px;">中文姓名</th>
+				                <th style="width: 15px;">用户姓名</th>
 				                <th style="width: 15px;">手机号码</th>
 								<th style="width: 15px;">用户状态</th>
+								#if($!admin == '1')
 				                <th style="width: 5px;">操作</th>
+								#end
 				            </tr>
 				        </thead>
 				        <tbody>
@@ -59,12 +62,7 @@ $!msg
 					                    </td>
 					                    <td class="noborder center" style="width: 15px;">
 					                        <span class="">
-					                            $!user.englishName
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 15px;">
-					                        <span class="">
-					                            $!user.chineseName
+					                            $!user.userName
 					                        </span>
 					                    </td>
 					                    <td class="noborder center" style="width: 15px;">
@@ -80,9 +78,11 @@ $!msg
 												<span class="">在职状态</span>
 											#end
 					                    </td>
+										#if($!admin == '1')
 					                    <td style="width: 5px;" class="center">
-				                            <p><a href="$!envUtil.getContextPath()/user/updateuser.htm?userId=$!{user.userId}"><span style="color:red">修改</span></a></p>
+				                            <p><a href="$!envUtil.getContextPath()/user/updateUser.htm?userId=$!{user.userId}"><span style="color:red">修改</span></a></p>
 				                        </td>
+										#end
 					                </tr>
 				                </td>
 				             #end

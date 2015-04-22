@@ -10,5 +10,9 @@ public class Constants {
 	public static String  RESULT_LASTEST_VERSION               = "100:the current version is the latest version";
 	public static String  RESULT_ILLEGAL_ARGUMENT_FORMAT       = "101:[{key}]parameter type is wrong";
 	public static String  RESULT_ILLEGAL_ARGUMENT_LEN          = "102:[{key}]parameter length is wrong";
+	
+	public static String DEFAULT_PASSWORD = "123456";
+	public static String DEFAULT_ACTIVE_STATUS = "1";
+	public static String DEFAULT_ADMIN_STATUS = "0";
 
 }

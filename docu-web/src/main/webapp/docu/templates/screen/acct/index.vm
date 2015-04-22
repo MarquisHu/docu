@@ -63,7 +63,7 @@ $!msg
 					                    </td>
 					                    <td class="noborder center" style="width: 5px;">
 					                        <span class="">
-					                            $!account.englishName
+					                            $!account.userName
 					                        </span>
 					                    </td>
 					                    <td class="noborder center" style="width: 5px;">
@@ -78,7 +78,9 @@ $!msg
 					                    </td>
 										<td style="width: 25px;" class="center">
 				                            <p>
+												#if($!admin == '1')
 												<a href="$!envUtil.getContextPath()/acct/chargeAccount.htm?userId=$!{account.userId}"><span style="color:red">充值</span></a>
+												#end
 												<a href="$!envUtil.getContextPath()/acct/chargeDetails.htm?userId=$!{account.userId}"><span style="color:red">充值查询</span></a>
 												<a href="$!envUtil.getContextPath()/acct/billDetails.htm?userId=$!{account.userId}"><span style="color:red">账单查询</span></a>
 											</p>

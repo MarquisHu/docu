@@ -4,52 +4,95 @@
     
     <resultMap id="USER_RESULT_MAP" type="User">
 		<result property="userId" column="USER_ID" />
-		<result property="englishName" column="EN_NAME" />
-		<result property="chineseName" column="CN_NAME" />
+		<result property="userName" column="USER_NAME" />
 		<result property="telphoneNumber" column="TEL_NUMBER" />
 		<result property="active" column="IS_ACTIVE" />
 		<result property="admin" column="IS_ADMIN" />
 		<result property="password" column="PASSWORD" />
+		<result property="updateBy" column="UPDATE_BY" />
+		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
 	
 	<sql id="USER_DO_QUERY_COLUMNS">
 		A1.USER_ID 		userId, 
-		A1.EN_NAME 		englishName, 
-		A1.CN_NAME 		chineseName, 
+		A1.USER_NAME 	userName, 
 		A1.TEL_NUMBER 	telphoneNumber,
 		A1.IS_ACTIVE 	active,
 		A1.IS_ADMIN 	admin,
-		A1.PASSWORD 	password
+		A1.PASSWORD 	password,
+		A1.UPDATE_BY 	updateBy,
+		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
 
 	<sql id="USER_DO_QUERY_PARAMS">
 		<where>
 			<if test="userId != null">USER_ID = #{userId,jdbcType=VARCHAR}</if>
-			<if test="englishName != null">AND EN_NAME = #{englishName,jdbcType=VARCHAR}</if>
-			<if test="chineseName != null">AND CN_NAME = #{chineseName,jdbcType=VARCHAR}</if>
+			<if test="userName != null">AND USER_NAME = #{userName,jdbcType=VARCHAR}</if>
 			<if test="telphoneNumber != null">AND TEL_NUMBER = #{telphoneNumber,jdbcType=VARCHAR}</if>
 			<if test="active != null">AND IS_ACTIVE = #{active,jdbcType=VARCHAR}</if>
 			<if test="admin != null">AND IS_ADMIN = #{admin,jdbcType=VARCHAR}</if>
+			<if test="updateBy != null">AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
 	
     <insert id="insertUser" parameterType="User">
 		INSERT INTO DOCU_ERP_USER(
 			USER_ID, 
-			EN_NAME, 
-			CN_NAME, 
+			USER_NAME, 
 			TEL_NUMBER,
 			IS_ACTIVE,
-			IS_ADMIN
+			IS_ADMIN,
+			UPDATE_BY,
+			UPDATE_TIME
 		) VALUES (
 		 	#{userId,jdbcType=VARCHAR},
-		 	#{englishName,jdbcType=VARCHAR},
-		 	#{chineseName,jdbcType=VARCHAR},
+		 	#{userName,jdbcType=VARCHAR},
 		 	#{telphoneNumber,jdbcType=VARCHAR},
 		 	#{active,jdbcType=VARCHAR},
-		 	#{admin,jdbcType=VARCHAR}
+		 	#{admin,jdbcType=VARCHAR},
+		 	#{updateBy,jdbcType=VARCHAR},
+		 	#{updateTime,jdbcType=VARCHAR}
 		)
 	</insert>
+	
+    <update id="updateUser" parameterType="User">
+	    <![CDATA[
+			UPDATE DOCU_ERP_USER
+		]]>
+		<set>
+			<if test="userName != null">
+			    <![CDATA[
+			    	USER_NAME = #{userName,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="telphoneNumber != null">
+			    <![CDATA[
+			    	TEL_NUMBER = #{telphoneNumber,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="active != null">
+			    <![CDATA[
+			    	IS_ACTIVE = #{active,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="admin != null">
+			    <![CDATA[
+			    	IS_ADMIN = #{admin,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="updateBy != null">
+			    <![CDATA[
+			    	UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="updateTime != null">
+			    <![CDATA[
+			    	UPDATE_TIME = #{updateTime,jdbcType=VARCHAR}
+				]]>
+			</if>
+		</set>
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+	</update>
 	
 	<select id="findUser" parameterType="String" resultMap="USER_RESULT_MAP">
 		SELECT
@@ -78,14 +121,9 @@
 			    	AND USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.englishName != null">
+			<if test="entity.userName != null">
 			    <![CDATA[
-			    	AND EN_NAME = #{entity.englishName,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.chineseName != null">
-			    <![CDATA[
-			    	AND CN_NAME = #{entity.chineseName,jdbcType=VARCHAR}
+			    	AND USER_NAME = #{entity.userName,jdbcType=VARCHAR}
 				]]>
 			</if>
 			<if test="entity.telphoneNumber != null">
@@ -118,14 +156,9 @@
 			    	AND USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.englishName != null">
+			<if test="entity.userName != null">
 			    <![CDATA[
-			    	AND EN_NAME = #{entity.englishName,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.chineseName != null">
-			    <![CDATA[
-			    	AND CN_NAME = #{entity.chineseName,jdbcType=VARCHAR}
+			    	AND USER_NAME = #{entity.userName,jdbcType=VARCHAR}
 				]]>
 			</if>
 			<if test="entity.telphoneNumber != null">
@@ -144,6 +177,7 @@
 				]]>
 			</if>
 		</where>
+		ORDER BY A1.USER_ID 
 		LIMIT #{preEndNum}, #{pageSize}
 	</select>
 </mapper>

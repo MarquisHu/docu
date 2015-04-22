@@ -4,7 +4,7 @@ package com.docu.account.dto;
 public class AccountBalance {
 	String userId;
 	String accountId;
-	String englishName;
+	String userName;
 	String balance;
 	String updateTime;
 	
@@ -20,11 +20,11 @@ public class AccountBalance {
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
-	public String getEnglishName() {
-		return englishName;
+	public String getUserName() {
+		return userName;
 	}
-	public void setEnglishName(String englishName) {
-		this.englishName = englishName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getBalance() {
 		return balance;

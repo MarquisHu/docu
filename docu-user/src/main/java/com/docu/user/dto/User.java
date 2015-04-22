@@ -2,12 +2,13 @@ package com.docu.user.dto;
 
 public class User {
 	private String userId;
-	private String englishName;
-	private String chineseName;
+	private String userName;
 	private String telphoneNumber;
 	private String active;
 	private String admin;
 	private String password;
+	String updateBy;
+	String updateTime;
 	
 	public String getUserId() {
 		return userId;
@@ -15,17 +16,11 @@ public class User {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getEnglishName() {
-		return englishName;
+	public String getUserName() {
+		return userName;
 	}
-	public void setEnglishName(String englishName) {
-		this.englishName = englishName;
-	}
-	public String getChineseName() {
-		return chineseName;
-	}
-	public void setChineseName(String chineseName) {
-		this.chineseName = chineseName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getTelphoneNumber() {
 		return telphoneNumber;
@@ -50,5 +45,17 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getUpdateBy() {
+		return updateBy;
+	}
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 }

@@ -11,9 +11,11 @@
         <ul stype='display:block;'>
 	      <li class="#if($!vmUtil.menuEq($menu,'searchBalance'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;余额查询</a></li>
 	    </ul>
+		#if($!admin == '1')
 	    <ul stype='display:block;'>
 	      <li class="#if($!vmUtil.menuEq($menu,'chargeAccount'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeAccount.htm">&emsp;&emsp;&emsp;账户充值</a></li>
 	    </ul>
+		#end
 		<ul stype='display:block;'>
 	      <li class="#if($!vmUtil.menuEq($menu,'chargeDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeDetails.htm">&emsp;&emsp;&emsp;充值查询</a></li>
 	    </ul>
@@ -32,9 +34,11 @@
         <ul stype='display:block;'>
 	      <li class="#if($!vmUtil.menuEq($menu,'searchActivity'))active#end"><a href="$!envUtil.getContextPath()/activity/index.htm">&emsp;&emsp;&emsp;活动查询</a></li>
 	    </ul>
-	    <ul stype='display:block;'>
+	    #if($!admin == '1')
+		<ul stype='display:block;'>
 	      <li class="#if($!vmUtil.menuEq($menu,'addActivity'))active#end"><a href="$!envUtil.getContextPath()/activity/addactivity.htm">&emsp;&emsp;&emsp;新增活动</a></li>
-	    </ul>
+	    </ul>	
+		#end
     </li>
 	
     <li class="submenu open">
@@ -47,19 +51,17 @@
 		<ul stype='display:block;'>
 	      <li class="#if($!vmUtil.menuEq($menu,'searchUser'))active#end"><a href="$!envUtil.getContextPath()/user/index.htm">&emsp;&emsp;&emsp;用户查询</a></li>
 	    </ul>
+		#if($!admin == '1')
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'addUser'))active#end"><a href="$!envUtil.getContextPath()/user/adduser.htm">&emsp;&emsp;&emsp;新增用户</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'addUser'))active#end"><a href="$!envUtil.getContextPath()/user/addUser.htm">&emsp;&emsp;&emsp;新增用户</a></li>
+	    </ul>
+		#end
+		<ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'updateUser'))active#end"><a href="$!envUtil.getContextPath()/user/updateUser.htm">&emsp;&emsp;&emsp;修改用户</a></li>
 	    </ul>
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'updateUser'))active#end"><a href="$!envUtil.getContextPath()/user/updateuser.htm">&emsp;&emsp;&emsp;修改用户</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'password'))active#end"><a href="$!envUtil.getContextPath()/user/password.htm">&emsp;&emsp;&emsp;修改密码</a></li>
 	    </ul>
-    </li>
-	
-	<li>
-	  <a href="$!envUtil.getContextPath()/user/index.htm">
-		<i class="icon icon-th-list"></i>
-		<span>修改密码</span>
-	  </a>
     </li>
     
     <li> 

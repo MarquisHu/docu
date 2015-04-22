@@ -11,8 +11,13 @@ public class IbatisUserDao extends BaseDao implements UserDao {
 	private static final String NAMESPACE = "com.docu.user.dao.UserDao.";
 	
 	@Override
-	public Long insertUser(User user) {
-		return (long) getSqlSessionTemplate().insert(NAMESPACE + "insertUser", user);
+	public Integer insertUser(User user) {
+		return getSqlSessionTemplate().insert(NAMESPACE + "insertUser", user);
+	}
+	
+	@Override
+	public Integer updateUser(User user) {
+		return getSqlSessionTemplate().update(NAMESPACE + "updateUser", user);
 	}
 
 	@Override

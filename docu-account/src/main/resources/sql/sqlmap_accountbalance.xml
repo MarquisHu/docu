@@ -5,7 +5,7 @@
     <resultMap id="BALANCE_RESULT_MAP" type="AccountBalance">
         <result property="userId" column="USER_ID" />
         <result property="accountId" column="ACCOUNT_ID" />
-        <result property="englishName" column="EN_NAME" />
+        <result property="userName" column="USER_NAME" />
 		<result property="balance" column="BALANCE_AMOUNT" />
 		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
@@ -13,7 +13,7 @@
 	<sql id="BALANCE_DO_QUERY_COLUMNS">
 	    A1.USER_ID 					userId, 
 	    A2.ACCOUNT_ID				accountId,
-		A1.EN_NAME		 			englishName, 
+		A1.USER_NAME		 			userName, 
 		A2.BALANCE_AMOUNT 			balance,
 		date_format(A2.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
@@ -38,9 +38,9 @@
 			    	AND A2.ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.englishName != null">
+			<if test="entity.userName != null">
 			    <![CDATA[
-			    	AND A1.EN_NAME = #{entity.englishName,jdbcType=VARCHAR}
+			    	AND A1.USER_NAME = #{entity.userName,jdbcType=VARCHAR}
 				]]>
 			</if>
 			<if test="entity.balance != null">
@@ -71,9 +71,9 @@
 			    	AND A2.ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.englishName != null">
+			<if test="entity.userName != null">
 			    <![CDATA[
-			    	AND A1.EN_NAME = #{entity.englishName,jdbcType=VARCHAR}
+			    	AND A1.USER_NAME = #{entity.userName,jdbcType=VARCHAR}
 				]]>
 			</if>
 			<if test="entity.balance != null">

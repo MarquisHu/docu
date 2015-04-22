@@ -38,6 +38,7 @@ public class LoginAction {
 				return;
 			}
 			HttpSession session = rundata.getRequest().getSession();
+			session.setAttribute("admin", user.getAdmin());
 			session.setAttribute("loginUserId", loginUserId);
 			session.setMaxInactiveInterval(15*60);//15 minutes
 			context.put("loginUserId", loginUserId);

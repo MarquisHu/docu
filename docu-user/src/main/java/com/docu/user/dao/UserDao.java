@@ -6,7 +6,9 @@ import com.docu.components.common.QueryBase;
 import com.docu.user.dto.User;
 
 public interface UserDao {
-	Long insertUser(User user);
+	Integer insertUser(User user);
+	
+	Integer updateUser(User user);
 	
 	User findUser(String userId);
 	

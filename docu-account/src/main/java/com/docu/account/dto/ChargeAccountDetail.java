@@ -2,7 +2,7 @@ package com.docu.account.dto;
 
 public class ChargeAccountDetail {
 	String userId;
-	String englishName;
+	String userName;
 	String accountId;
 	String balance;
 	public String getUserId() {
@@ -14,11 +14,11 @@ public class ChargeAccountDetail {
 	public String getAccountId() {
 		return accountId;
 	}
-	public String getEnglishName() {
-		return englishName;
+	public String getUserName() {
+		return userName;
 	}
-	public void setEnglishName(String englishName) {
-		this.englishName = englishName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
