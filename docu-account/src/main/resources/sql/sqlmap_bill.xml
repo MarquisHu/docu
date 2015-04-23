@@ -28,13 +28,13 @@
 	
 	<sql id="BILL_DETAILS_DO_QUERY_PARAMS">
 		<where>
-		    <if test="billId != null">AND CHARGE_ID = #{billId,jdbcType=BIGINT}</if>
+		    <if test="billId != null &amp;&amp; billId != 0">AND CHARGE_ID = #{billId,jdbcType=BIGINT}</if>
 		    <if test="userId != null">AND USER_ID = #{userId,jdbcType=VARCHAR}</if>
-		    <if test="accountId != null">ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}</if>
+		    <if test="accountId != null &amp;&amp; accountId != 0">ACCOUNT_ID = #{accountId,jdbcType=BIGINT}</if>
 			<if test="originAmount != null">AND ORIGIN_AMOUNT = #{originAmount,jdbcType=FLOAT}</if>
 			<if test="expenseAmount != null">AND EXPENSE_AMOUNT = #{expenseAmount,jdbcType=FLOAT}</if>
 			<if test="balance != null">AND BALANCE = #{balance,jdbcType=FLOAT}</if>
-			<if test="activityId != null">AND ACTIVITY_ID = #{activityId,jdbcType=BIGINT}</if>
+			<if test="activityId != null &amp;&amp; activityId != 0">AND ACTIVITY_ID = #{activityId,jdbcType=BIGINT}</if>
 			<if test="updateBy != null">AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
@@ -51,7 +51,7 @@
 			UPDATE_TIME
 		) VALUES (
 			#{userId,jdbcType=VARCHAR},
-		 	#{accountId,jdbcType=VARCHAR},
+		 	#{accountId,jdbcType=BIGINT},
 		 	#{originAmount,jdbcType=FLOAT},
 		 	#{expenseAmount,jdbcType=FLOAT},
 		 	#{balance,jdbcType=FLOAT},
@@ -73,9 +73,9 @@
 			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.activityId != null">
+			<if test="entity.activityId != null &amp;&amp; entity.activityId != 0">
 			    <![CDATA[
-			    	AND A1.ACTIVITY_ID = #{entity.activityId,jdbcType=VARCHAR}
+			    	AND A1.ACTIVITY_ID = #{entity.activityId,jdbcType=BIGINT}
 				]]>
 			</if>
 			<choose>
@@ -113,9 +113,9 @@
 			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.activityId != null">
+			<if test="entity.activityId != null &amp;&amp; entity.activityId != 0">
 			    <![CDATA[
-			    	AND A1.ACTIVITY_ID = #{entity.activityId,jdbcType=VARCHAR}
+			    	AND A1.ACTIVITY_ID = #{entity.activityId,jdbcType=BIGINT}
 				]]>
 			</if>
 			<choose>

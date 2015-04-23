@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
+import com.docu.account.dto.Account;
+import com.docu.account.service.AccountService;
 import com.docu.components.constants.app.Constants;
 import com.docu.components.util.DateUtils;
 import com.docu.user.dto.User;
@@ -18,6 +20,9 @@ public class UserAction {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AccountService accountService;
 	
 	public void doSaveUser(TurbineRunData rundata, Context context) {
 		HttpSession session = rundata.getRequest().getSession();
@@ -33,16 +38,17 @@ public class UserAction {
 		
 		User user = userService.queryUser(userId);
 		if (user != null) {
-			String date = DateUtils.formatDate(new Date());
+			String updateTime = DateUtils.formatDate(new Date());
 			user.setUserId(userId);
 			user.setUserName(userName);
 			user.setTelphoneNumber(telphoneNumber);
 			user.setActive(active);
 			user.setUpdateBy(loginUserId);
-			user.setUpdateTime(date);
+			user.setUpdateTime(updateTime);
 			
 			int result = userService.updateUser(user);
 			if (result == 1) {
+				setDefaultAccount(loginUserId, userId, updateTime);
 				rundata.setRedirectLocation(EnvUtils.getContextPath()+"/user/index.htm?userId=" + userId);
 			} else {
 				context.put("msg", "更新失败");
@@ -51,6 +57,7 @@ public class UserAction {
 			context.put("msg", "更新失败");
 		}
 	}
+	
 	public void doAddUser(TurbineRunData rundata, Context context) {
 		HttpSession session = rundata.getRequest().getSession();
 		String loginUserId = (String) session.getAttribute("loginUserId");
@@ -68,16 +75,17 @@ public class UserAction {
 		User user = userService.queryUser(userId);
 		if (user == null) {
 			user = new User();
-			String date = DateUtils.formatDate(new Date());
+			String updateTime = DateUtils.formatDate(new Date());
 			user.setUserId(userId);
 			user.setUserName(userName);
 			user.setTelphoneNumber(telphoneNumber);
 			user.setUpdateBy(loginUserId);
-			user.setUpdateTime(date);
+			user.setUpdateTime(updateTime);
 			setDefaultValue(user, password, active, admin);
 			
 			int result = userService.saveUser(user);
 			if (result == 1) {
+				setDefaultAccount(loginUserId, userId, updateTime);
 				rundata.setRedirectLocation(EnvUtils.getContextPath()+"/user/index.htm?userId=" + userId);
 			} else {
 				context.put("msg", "新增用户失败");
@@ -135,6 +143,20 @@ public class UserAction {
 			user.setAdmin(Constants.DEFAULT_ADMIN_STATUS);
 		} else {
 			user.setAdmin(admin);
+		}
+	}
+	
+	private void setDefaultAccount(String loginUserId, String userId, String updateTime) {
+		Account account = accountService.queryAccount(userId);
+		if (account == null) {
+			account = new Account();
+			account.setUserId(userId);
+			account.setBalanceAmount(0.0f);
+			account.setPrivateAmount(0.0f);
+			account.setCommonAmount(0.0f);
+			account.setUpdateBy(loginUserId);
+			account.setUpdateTime(updateTime);
+			accountService.saveAccount(account);
 		}
 	}
 }

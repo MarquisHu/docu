@@ -13,7 +13,7 @@
 	<sql id="BALANCE_DO_QUERY_COLUMNS">
 	    A1.USER_ID 					userId, 
 	    A2.ACCOUNT_ID				accountId,
-		A1.USER_NAME		 			userName, 
+		A1.USER_NAME		 		userName, 
 		A2.BALANCE_AMOUNT 			balance,
 		date_format(A2.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
@@ -33,9 +33,9 @@
 			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-	        <if test="entity.accountId != null">
+	        <if test="entity.accountId != null &amp;&amp; entity.accountId != 0">
 			    <![CDATA[
-			    	AND A2.ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
+			    	AND A2.ACCOUNT_ID = #{entity.accountId,jdbcType=BIGINT}
 				]]>
 			</if>
 			<if test="entity.userName != null">
@@ -66,9 +66,9 @@
 			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-	        <if test="entity.accountId != null">
+	        <if test="entity.accountId != null &amp;&amp; entity.accountId != 0">
 			    <![CDATA[
-			    	AND A2.ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
+			    	AND A2.ACCOUNT_ID = #{entity.accountId,jdbcType=BIGINT}
 				]]>
 			</if>
 			<if test="entity.userName != null">

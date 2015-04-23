@@ -2,7 +2,7 @@ package com.docu.account.dto;
 
 
 public class Account {
-	String accountId;
+	Long accountId;
 	String userId;
 	Float balanceAmount;
 	Float privateAmount;
@@ -10,10 +10,10 @@ public class Account {
 	String updateBy;
 	String updateTime;
 	
-	public String getAccountId() {
+	public Long getAccountId() {
 		return accountId;
 	}
-	public void setAccountId(String accountId) {
+	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
 	public String getUserId() {

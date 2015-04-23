@@ -28,7 +28,7 @@ public class BillDetails {
 		}
 		int pageNum = rundata.getParameters().getInt("pageNum");
 		String userId = rundata.getParameters().getString("userId");
-		String activityId = rundata.getParameters().getString("activityId");
+		Long activityId = rundata.getParameters().getLong("activityId");
 		String startDate = rundata.getParameters().getString("startDate");
 		String endDate = rundata.getParameters().getString("endDate");
 		

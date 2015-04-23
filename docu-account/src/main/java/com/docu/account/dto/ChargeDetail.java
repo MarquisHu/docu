@@ -2,19 +2,19 @@ package com.docu.account.dto;
 
 
 public class ChargeDetail {
-	long chargeId;
+	Long chargeId;
 	String userId;
-	String accountId;
+	Long accountId;
 	Float recvAmount;
 	String recvTime;
 	Integer percent;
 	String updateBy;
 	String updateTime;
 	
-	public long getChargeId() {
+	public Long getChargeId() {
 		return chargeId;
 	}
-	public void setChargeId(long chargeId) {
+	public void setChargeId(Long chargeId) {
 		this.chargeId = chargeId;
 	}
 	public String getUserId() {
@@ -23,10 +23,10 @@ public class ChargeDetail {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getAccountId() {
+	public Long getAccountId() {
 		return accountId;
 	}
-	public void setAccountId(String accountId) {
+	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
 	public Float getRecvAmount() {

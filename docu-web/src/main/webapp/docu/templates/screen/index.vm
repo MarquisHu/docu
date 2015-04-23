@@ -1,23 +1,23 @@
 #set($title = "DOCU账务管理系统")
 <link rel="stylesheet" type="text/css" href="${docuCdnServer}/css/front/login.css">
 <!-- main Start -->	
-<div class="body"></div>
-<div class="grad"></div>
 <div class="login">
-	<div class="login-form">
-		<form method="post">
-			<input type="hidden" name="redirectUrl" value="$!redirectUrl" />
-			<input type="hidden" name="action" value="/LoginAction" />
-			<input type="hidden" name="event_submit_do_login" value="1" />
-			
-			<input type="text" id="loginUserId" name="loginUserId" value="$!loginUserId" placeholder="用户账号" />
-			<input type="password" id="password" name="password" placeholder="用户密码" />
-			<input type="submit" value="登录" onclick="return loginCheck();"/>
-		</form>
-		<br><br />
-		<div class="error-tip">
-			#if($errorMsg) <label> $errorMsg </label>#end 
-		</div>
+	<div id="container">
+        <form method="post">
+    		<input type="hidden" name="redirectUrl" value="$!redirectUrl" />
+    		<input type="hidden" name="action" value="/LoginAction" />
+    		<input type="hidden" name="event_submit_do_login" value="1" />
+    		
+            <input type="text" id="loginUserId" name="loginUserId" value="$!loginUserId" placeholder="用户账号" />
+            <input type="password" id="password" name="password" placeholder="用户密码" />
+            <div id="lower">
+                <input type="submit" value="Login" onclick="return loginCheck();"/>
+            </div>
+        </form>
+    	<br><br/>
+    	<div class="error-tip">
+    		#if($errorMsg) <label> $errorMsg </label>#end 
+    	</div>
 	</div>
 </div>
 <!-- main End -->

@@ -33,16 +33,16 @@
 	
 	<sql id="ACCOUNT_BALANCE_DO_QUERY_COLUMNS">
 	    A1.USER_ID 			userId,
-	    A1.USER_NAME 			userName,
+	    A1.USER_NAME 		userName,
 	    A2.ACCOUNT_ID		accountId,
 		A2.BALANCE_AMOUNT 	balance
 	</sql>
 	
 	<sql id="CHARGE_DETAILS_DO_QUERY_PARAMS">
 		<where>
-		    <if test="chargeId != null">AND CHARGE_ID = #{chargeId,jdbcType=BIGINT}</if>
+		    <if test="chargeId != null &amp;&amp; chargeId != 0">AND CHARGE_ID = #{chargeId,jdbcType=BIGINT}</if>
 		    <if test="userId != null">AND USER_ID = #{userId,jdbcType=VARCHAR}</if>
-		    <if test="accountId != null">ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}</if>
+		    <if test="accountId != null &amp;&amp; accountId != 0">ACCOUNT_ID = #{accountId,jdbcType=BIGINT}</if>
 			<if test="recvAmount != null">AND RECV_AMOUNT = #{recvAmount,jdbcType=FLOAT}</if>
 			<if test="percent != null">AND PERCENT = #{percent,jdbcType=INTEGER}</if>
 			<if test="updateBy != null">AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}</if>
@@ -60,7 +60,7 @@
 			UPDATE_TIME
 		) VALUES (
 			#{userId,jdbcType=VARCHAR},
-		 	#{accountId,jdbcType=VARCHAR},
+		 	#{accountId,jdbcType=BIGINT},
 		 	#{recvAmount,jdbcType=FLOAT},
 		 	#{recvTime,jdbcType=VARCHAR},
 		 	#{percent,jdbcType=INTEGER},
@@ -91,9 +91,9 @@
 			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-	        <if test="entity.accountId != null">
+	        <if test="entity.accountId != null &amp;&amp; entity.accountId != 0">
 			    <![CDATA[
-			    	AND A1.ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
+			    	AND A1.ACCOUNT_ID = #{entity.accountId,jdbcType=BIGINT}
 				]]>
 			</if>
 			<choose>
@@ -131,9 +131,9 @@
 			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-	        <if test="entity.accountId != null">
+	        <if test="entity.accountId != null &amp;&amp; entity.accountId != 0">
 			    <![CDATA[
-			    	AND A1.ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
+			    	AND A1.ACCOUNT_ID = #{entity.accountId,jdbcType=BIGINT}
 				]]>
 			</if>
 			<choose>

@@ -36,7 +36,7 @@
 	    </ul>
 		#if($!admin == '1')
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'addActivity'))active#end"><a href="$!envUtil.getContextPath()/activity/addactivity.htm">&emsp;&emsp;&emsp;新增活动</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'addActivity'))active#end"><a href="$!envUtil.getContextPath()/activity/addActivity.htm">&emsp;&emsp;&emsp;新增活动</a></li>
 	    </ul>	
 		#end
     </li>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.docu.user.dao.UserDao">
+    
+    <resultMap id="USER_RESULT_MAP" type="User">
+		<result property="userId" column="USER_ID" />
+		<result property="userName" column="USER_NAME" />
+		<result property="telphoneNumber" column="TEL_NUMBER" />
+		<result property="active" column="IS_ACTIVE" />
+		<result property="admin" column="IS_ADMIN" />
+		<result property="password" column="PASSWORD" />
+		<result property="updateBy" column="UPDATE_BY" />
+		<result property="updateTime" column="UPDATE_TIME" />
+	</resultMap>
+	
+	<sql id="USER_DO_QUERY_COLUMNS">
+		A1.USER_ID 		userId, 
+		A1.USER_NAME 	userName, 
+		A1.TEL_NUMBER 	telphoneNumber,
+		A1.IS_ACTIVE 	active,
+		A1.IS_ADMIN 	admin,
+		A1.PASSWORD 	password,
+		A1.UPDATE_BY 	updateBy,
+		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
+	</sql>
+
+	<sql id="USER_DO_QUERY_PARAMS">
+		<where>
+			<if test="userId != null">USER_ID = #{userId,jdbcType=VARCHAR}</if>
+			<if test="userName != null">AND USER_NAME = #{userName,jdbcType=VARCHAR}</if>
+			<if test="telphoneNumber != null">AND TEL_NUMBER = #{telphoneNumber,jdbcType=VARCHAR}</if>
+			<if test="active != null">AND IS_ACTIVE = #{active,jdbcType=VARCHAR}</if>
+			<if test="admin != null">AND IS_ADMIN = #{admin,jdbcType=VARCHAR}</if>
+			<if test="updateBy != null">AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}</if>
+		</where>
+	</sql>
+	
+    <insert id="insertUser" parameterType="User">
+		INSERT INTO DOCU_ERP_USER(
+			USER_ID, 
+			USER_NAME, 
+			TEL_NUMBER,
+			IS_ACTIVE,
+			IS_ADMIN,
+			UPDATE_BY,
+			UPDATE_TIME
+		) VALUES (
+		 	#{userId,jdbcType=VARCHAR},
+		 	#{userName,jdbcType=VARCHAR},
+		 	#{telphoneNumber,jdbcType=VARCHAR},
+		 	#{active,jdbcType=VARCHAR},
+		 	#{admin,jdbcType=VARCHAR},
+		 	#{updateBy,jdbcType=VARCHAR},
+		 	#{updateTime,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+    <update id="updateUser" parameterType="User">
+	    <![CDATA[
+			UPDATE DOCU_ERP_USER
+		]]>
+		<set>
+			<if test="userName != null">
+			    <![CDATA[
+			    	USER_NAME = #{userName,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="telphoneNumber != null">
+			    <![CDATA[
+			    	TEL_NUMBER = #{telphoneNumber,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="active != null">
+			    <![CDATA[
+			    	IS_ACTIVE = #{active,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="admin != null">
+			    <![CDATA[
+			    	IS_ADMIN = #{admin,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="updateBy != null">
+			    <![CDATA[
+			    	UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="updateTime != null">
+			    <![CDATA[
+			    	UPDATE_TIME = #{updateTime,jdbcType=VARCHAR}
+				]]>
+			</if>
+		</set>
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="findUser" parameterType="String" resultMap="USER_RESULT_MAP">
+		SELECT
+		<include refid="USER_DO_QUERY_COLUMNS" />
+	    <![CDATA[  
+	     FROM DOCU_ERP_USER A1 WHERE A1.USER_ID = #{userId,jdbcType=VARCHAR}
+	    ]]>
+	</select>
+	
+	<select id="findUsers" parameterType="User" resultMap="USER_RESULT_MAP">
+		SELECT
+		<include refid="USER_DO_QUERY_COLUMNS" />
+		FROM DOCU_ERP_USER A1
+		<include refid="USER_DO_QUERY_PARAMS" />
+	</select>
+	
+	<select id="queryUserTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
+	    SELECT
+		COUNT(*)
+		<![CDATA[  
+	     	FROM DOCU_ERP_USER A1
+	    ]]>
+	    <where>
+			<if test="entity.userId != null">
+			    <![CDATA[
+			    	AND USER_ID = #{entity.userId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.userName != null">
+			    <![CDATA[
+			    	AND USER_NAME = #{entity.userName,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.telphoneNumber != null">
+			    <![CDATA[
+			    	AND TEL_NUMBER = #{entity.telphoneNumber,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.active != null">
+			    <![CDATA[
+			    	AND IS_ACTIVE = #{entity.active,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.admin != null">
+			    <![CDATA[
+			    	AND IS_ADMIN = #{entity.admin,jdbcType=VARCHAR}
+				]]>
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryUser" parameterType="com.docu.components.common.QueryBase" resultMap="USER_RESULT_MAP">
+	    SELECT
+		<include refid="USER_DO_QUERY_COLUMNS" />
+		<![CDATA[  
+	     	FROM DOCU_ERP_USER A1
+	    ]]>
+	    <where>
+			<if test="entity.userId != null">
+			    <![CDATA[
+			    	AND USER_ID = #{entity.userId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.userName != null">
+			    <![CDATA[
+			    	AND USER_NAME = #{entity.userName,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.telphoneNumber != null">
+			    <![CDATA[
+			    	AND TEL_NUMBER = #{entity.telphoneNumber,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.active != null">
+			    <![CDATA[
+			    	AND IS_ACTIVE = #{entity.active,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="entity.admin != null">
+			    <![CDATA[
+			    	AND IS_ADMIN = #{entity.admin,jdbcType=VARCHAR}
+				]]>
+			</if>
+		</where>
+		ORDER BY A1.USER_ID 
+		LIMIT #{preEndNum}, #{pageSize}
+	</select>
+</mapper>

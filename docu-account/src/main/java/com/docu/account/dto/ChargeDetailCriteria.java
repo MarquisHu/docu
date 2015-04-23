@@ -2,16 +2,16 @@ package com.docu.account.dto;
 
 
 public class ChargeDetailCriteria {
-	String chargeId;
+	Long chargeId;
 	String userId;
-	String accountId;
+	Long accountId;
 	String startDate;
 	String endDate;
 	
-	public String getChargeId() {
+	public Long getChargeId() {
 		return chargeId;
 	}
-	public void setChargeId(String chargeId) {
+	public void setChargeId(Long chargeId) {
 		this.chargeId = chargeId;
 	}
 	public String getUserId() {
@@ -20,10 +20,10 @@ public class ChargeDetailCriteria {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getAccountId() {
+	public Long getAccountId() {
 		return accountId;
 	}
-	public void setAccountId(String accountId) {
+	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
 	public String getStartDate() {

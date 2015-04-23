@@ -22,6 +22,7 @@
 		<module>docu-config</module>
 		<module>docu-user</module>
 		<module>docu-account</module>
+		<module>docu-activity</module>
 		<module>docu-web</module>
 	</modules>
 	
@@ -45,6 +46,11 @@
 			<dependency>
 				<groupId>com.docu</groupId>
 				<artifactId>docu-account</artifactId>
+				<version>${docu.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.docu</groupId>
+				<artifactId>docu-activity</artifactId>
 				<version>${docu.version}</version>
 			</dependency>
 			<dependency>

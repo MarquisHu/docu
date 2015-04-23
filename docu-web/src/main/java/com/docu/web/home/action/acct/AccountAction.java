@@ -35,7 +35,7 @@ public class AccountAction {
 			return;
 		}
 		String userId = rundata.getParameters().getString("userId");
-		String accountId = rundata.getParameters().getString("accountId");
+		long accountId = rundata.getParameters().getLong("accountId");
 		Float recvAmount = rundata.getParameters().getFloat("recvAmount");
 		Integer percent = rundata.getParameters().getInt("percent");
 		

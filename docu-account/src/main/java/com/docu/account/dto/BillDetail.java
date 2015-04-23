@@ -2,20 +2,20 @@ package com.docu.account.dto;
 
 
 public class BillDetail {
-	long billId;
+	Long billId;
 	String userId;
-	String accountId;
+	Long accountId;
 	Float originAmount;
 	Float expenseAmount;
 	Float balance;
-	long activityId;
+	Long activityId;
 	String updateBy;
 	String updateTime;
 	
-	public long getBillId() {
+	public Long getBillId() {
 		return billId;
 	}
-	public void setBillId(long billId) {
+	public void setBillId(Long billId) {
 		this.billId = billId;
 	}
 	public String getUserId() {
@@ -24,10 +24,10 @@ public class BillDetail {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getAccountId() {
+	public Long getAccountId() {
 		return accountId;
 	}
-	public void setAccountId(String accountId) {
+	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
 	public Float getOriginAmount() {
@@ -48,10 +48,10 @@ public class BillDetail {
 	public void setBalance(Float balance) {
 		this.balance = balance;
 	}
-	public long getActivityId() {
+	public Long getActivityId() {
 		return activityId;
 	}
-	public void setActivityId(long activityId) {
+	public void setActivityId(Long activityId) {
 		this.activityId = activityId;
 	}
 	public String getUpdateBy() {

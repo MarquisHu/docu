@@ -28,9 +28,9 @@ public class ChargeDetails {
 			return;
 		}
 		int pageNum = rundata.getParameters().getInt("pageNum");
-		String chargeId = rundata.getParameters().getString("chargeId");
+		Long chargeId = rundata.getParameters().getLong("chargeId");
 		String userId = rundata.getParameters().getString("userId");
-		String accountId = rundata.getParameters().getString("accountId");
+		Long accountId = rundata.getParameters().getLong("accountId");
 		String startDate = rundata.getParameters().getString("startDate");
 		String endDate = rundata.getParameters().getString("endDate");
 		

@@ -2,7 +2,7 @@ package com.docu.account.dto;
 
 public class BillDetailCriteria {
 	String userId;
-	String activityId;
+	Long activityId;
 	String startDate;
 	String endDate;
 	
@@ -12,10 +12,10 @@ public class BillDetailCriteria {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getActivityId() {
+	public Long getActivityId() {
 		return activityId;
 	}
-	public void setActivityId(String activityId) {
+	public void setActivityId(Long activityId) {
 		this.activityId = activityId;
 	}
 	public String getStartDate() {

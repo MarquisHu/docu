@@ -24,7 +24,7 @@
 
 	<sql id="ACCOUNT_DO_QUERY_PARAMS">
 		<where>
-		    <if test="accountId != null">ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}</if>
+		    <if test="accountId != null &amp;&amp; accountId != 0">ACCOUNT_ID = #{accountId,jdbcType=BIGINT}</if>
 			<if test="userId != null">AND USER_ID = #{userId,jdbcType=VARCHAR}</if>
 			<if test="balanceAmount != null">AND BALANCE_AMOUNT = #{balanceAmount,jdbcType=FLOAT}</if>
 			<if test="privateAmount != null">AND PRIVATE_AMOUNT = #{privateAmount,jdbcType=FLOAT}</if>
@@ -35,7 +35,6 @@
 	
     <insert id="insertAccount" parameterType="Account">
 		INSERT INTO DOCU_ERP_ACCOUNT(
-			ACCOUNT_ID,
 			USER_ID, 
 			BALANCE_AMOUNT, 
 			PRIVATE_AMOUNT, 
@@ -43,7 +42,6 @@
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
-		 	#{accountId,jdbcType=VARCHAR},
 		 	#{userId,jdbcType=VARCHAR},
 		 	#{balanceAmount,jdbcType=FLOAT},
 		 	#{privateAmount,jdbcType=FLOAT},
@@ -109,9 +107,9 @@
 	     	FROM DOCU_ERP_ACCOUNT A1
 	    ]]>
 	    <where>
-	        <if test="entity.accountId != null">
+	        <if test="entity.accountId != null &amp;&amp; entity.accountId != 0">
 			    <![CDATA[
-			    	AND ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
+			    	AND ACCOUNT_ID = #{entity.accountId,jdbcType=BIGINT}
 				]]>
 			</if>
 			<if test="entity.userId != null">
@@ -149,9 +147,9 @@
 	     	FROM DOCU_ERP_ACCOUNT A1
 	    ]]>
 	    <where>
-	        <if test="entity.accountId != null">
+	        <if test="entity.accountId != null &amp;&amp; entity.accountId != 0">
 			    <![CDATA[
-			    	AND ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
+			    	AND ACCOUNT_ID = #{entity.accountId,jdbcType=BIGINT}
 				]]>
 			</if>
 			<if test="entity.userId != null">

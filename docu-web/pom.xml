@@ -28,6 +28,10 @@
 			<groupId>com.docu</groupId>
 			<artifactId>docu-account</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.docu</groupId>
+			<artifactId>docu-activity</artifactId>
+		</dependency>
 		
         <dependency>
             <groupId>com.alibaba.citrus</groupId>
