@@ -15,4 +15,6 @@ public interface ActivityDao {
 	int queryActivityTotal(QueryBase query);
 	
 	List<Activity> queryActivity(QueryBase query);
+	
+	Long getSequenceUuid(String sequenceName);
 }

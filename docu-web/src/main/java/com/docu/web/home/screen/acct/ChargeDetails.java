@@ -46,6 +46,8 @@ public class ChargeDetails {
 		
 		context.put("page", page);
 		context.put("admin", admin);
+		context.put("startDate", startDate);
+		context.put("endDate", endDate);
 		context.put("userId", userId);
 		context.put("loginUserId", loginUserId);
 	}

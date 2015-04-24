@@ -121,9 +121,8 @@ $!msg
 <script>
 	function clearQuery(){
 		$("#userId").val("");
-		$("#stratDate").val("");
+		$("#startDate").val("");
 		$("#endDate").val("");
-		$(".select2-choice span").html("所有");
 	}
     $(document).ready(function () {
         $('select').select2({minimumResultsForSearch: 1});

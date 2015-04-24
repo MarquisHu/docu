@@ -15,4 +15,6 @@ public interface AccountDao {
 	int queryAccountTotal(QueryBase query);
 	
 	List<Account> queryAccount(QueryBase query);
+	
+	Long getSequenceUuid(String sequenceName);
 }

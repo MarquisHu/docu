@@ -1,83 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.docu.user.dao.UserDao">
+<mapper namespace="com.docu.activity.dao.ActivityDao">
     
-    <resultMap id="USER_RESULT_MAP" type="User">
-		<result property="userId" column="USER_ID" />
-		<result property="userName" column="USER_NAME" />
-		<result property="telphoneNumber" column="TEL_NUMBER" />
-		<result property="active" column="IS_ACTIVE" />
-		<result property="admin" column="IS_ADMIN" />
-		<result property="password" column="PASSWORD" />
+    <resultMap id="ACTIVITY_RESULT_MAP" type="Activity">
+		<result property="activityId" column="ACTIVITY_ID" />
+		<result property="expenseAmount" column="EXPENSE_AMOUNT" />
+		<result property="remark" column="REMARK" />
+		<result property="location" column="LOCATION" />
+		<result property="activityTime" column="ACTIVITY_TIME" />
 		<result property="updateBy" column="UPDATE_BY" />
 		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
 	
-	<sql id="USER_DO_QUERY_COLUMNS">
-		A1.USER_ID 		userId, 
-		A1.USER_NAME 	userName, 
-		A1.TEL_NUMBER 	telphoneNumber,
-		A1.IS_ACTIVE 	active,
-		A1.IS_ADMIN 	admin,
-		A1.PASSWORD 	password,
-		A1.UPDATE_BY 	updateBy,
+	<sql id="ACTIVITY_DO_QUERY_COLUMNS">
+		A1.ACTIVITY_ID 		activityId, 
+		A1.EXPENSE_AMOUNT 	expenseAmount, 
+		A1.REMARK 			remark,
+		A1.LOCATION 		location,
+		date_format(A1.ACTIVITY_TIME, '%Y-%m-%d %h:%i:%s') activityTime,
+		A1.UPDATE_BY 		updateBy,
 		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
 
-	<sql id="USER_DO_QUERY_PARAMS">
+	<sql id="ACTIVITY_DO_QUERY_PARAMS">
 		<where>
-			<if test="userId != null">USER_ID = #{userId,jdbcType=VARCHAR}</if>
-			<if test="userName != null">AND USER_NAME = #{userName,jdbcType=VARCHAR}</if>
-			<if test="telphoneNumber != null">AND TEL_NUMBER = #{telphoneNumber,jdbcType=VARCHAR}</if>
-			<if test="active != null">AND IS_ACTIVE = #{active,jdbcType=VARCHAR}</if>
-			<if test="admin != null">AND IS_ADMIN = #{admin,jdbcType=VARCHAR}</if>
+			<if test="activityId != null">ACTIVITY_ID = #{activityId,jdbcType=BIGINT}</if>
+			<if test="expenseAmount != null">AND EXPENSE_AMOUNT = #{expenseAmount,jdbcType=VARCHAR}</if>
+			<if test="remark != null">AND REMARK = #{remark,jdbcType=VARCHAR}</if>
+			<if test="location != null">AND LOCATION = #{location,jdbcType=VARCHAR}</if>
+			<if test="activityTime != null">AND ACTIVITY_TIME = #{activityTime,jdbcType=VARCHAR}</if>
 			<if test="updateBy != null">AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}</if>
 		</where>
 	</sql>
 	
-    <insert id="insertUser" parameterType="User">
-		INSERT INTO DOCU_ERP_USER(
-			USER_ID, 
-			USER_NAME, 
-			TEL_NUMBER,
-			IS_ACTIVE,
-			IS_ADMIN,
+    <insert id="insertActivity" parameterType="Activity">
+		INSERT INTO DOCU_ERP_ACTIVITY(
+			ACTIVITY_ID,
+			EXPENSE_AMOUNT, 
+			REMARK, 
+			LOCATION, 
+			ACTIVITY_TIME, 
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
-		 	#{userId,jdbcType=VARCHAR},
-		 	#{userName,jdbcType=VARCHAR},
-		 	#{telphoneNumber,jdbcType=VARCHAR},
-		 	#{active,jdbcType=VARCHAR},
-		 	#{admin,jdbcType=VARCHAR},
+			#{activityId,jdbcType=BIGINT},
+		 	#{expenseAmount,jdbcType=FLOAT},
+		 	#{remark,jdbcType=VARCHAR},
+		 	#{location,jdbcType=VARCHAR},
+		 	#{activityTime,jdbcType=VARCHAR},
 		 	#{updateBy,jdbcType=VARCHAR},
 		 	#{updateTime,jdbcType=VARCHAR}
 		)
 	</insert>
 	
-    <update id="updateUser" parameterType="User">
+    <update id="updateActivity" parameterType="Activity">
 	    <![CDATA[
-			UPDATE DOCU_ERP_USER
+			UPDATE DOCU_ERP_ACTIVITY
 		]]>
 		<set>
-			<if test="userName != null">
+			<if test="expenseAmount != null">
 			    <![CDATA[
-			    	USER_NAME = #{userName,jdbcType=VARCHAR},
+			    	EXPENSE_AMOUNT = #{expenseAmount,jdbcType=FLOAT},
 				]]>
 			</if>
-			<if test="telphoneNumber != null">
+			<if test="remark != null">
 			    <![CDATA[
-			    	TEL_NUMBER = #{telphoneNumber,jdbcType=VARCHAR},
+			    	REMARK = #{remark,jdbcType=VARCHAR},
 				]]>
 			</if>
-			<if test="active != null">
+			<if test="location != null">
 			    <![CDATA[
-			    	IS_ACTIVE = #{active,jdbcType=VARCHAR},
+			    	LOCATION = #{location,jdbcType=VARCHAR},
 				]]>
 			</if>
-			<if test="admin != null">
+			<if test="activityTime != null">
 			    <![CDATA[
-			    	IS_ADMIN = #{admin,jdbcType=VARCHAR},
+			    	ACTIVITY_TIME = #{activityTime,jdbcType=VARCHAR},
 				]]>
 			</if>
 			<if test="updateBy != null">
@@ -91,93 +89,90 @@
 				]]>
 			</if>
 		</set>
-		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+		WHERE ACTIVITY_ID = #{activityId,jdbcType=BIGINT}
 	</update>
 	
-	<select id="findUser" parameterType="String" resultMap="USER_RESULT_MAP">
+    <select id="findActivity" parameterType="Long" resultMap="ACTIVITY_RESULT_MAP">
 		SELECT
-		<include refid="USER_DO_QUERY_COLUMNS" />
+		<include refid="ACTIVITY_DO_QUERY_COLUMNS" />
 	    <![CDATA[  
-	     FROM DOCU_ERP_USER A1 WHERE A1.USER_ID = #{userId,jdbcType=VARCHAR}
+	     FROM DOCU_ERP_ACTIVITY A1 WHERE A1.ACTIVITY_ID = #{activityId,jdbcType=BIGINT}
 	    ]]>
 	</select>
 	
-	<select id="findUsers" parameterType="User" resultMap="USER_RESULT_MAP">
-		SELECT
-		<include refid="USER_DO_QUERY_COLUMNS" />
-		FROM DOCU_ERP_USER A1
-		<include refid="USER_DO_QUERY_PARAMS" />
-	</select>
-	
-	<select id="queryUserTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
+    <select id="queryActivityTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
 	    SELECT
 		COUNT(*)
 		<![CDATA[  
-	     	FROM DOCU_ERP_USER A1
+	     	FROM DOCU_ERP_ACTIVITY A1
 	    ]]>
 	    <where>
-			<if test="entity.userId != null">
+			<if test="entity.activityId != null &amp;&amp; entity.activityId != 0">
 			    <![CDATA[
-			    	AND USER_ID = #{entity.userId,jdbcType=VARCHAR}
+			    	AND ACTIVITY_ID = #{entity.activityId,jdbcType=BIGINT}
 				]]>
 			</if>
-			<if test="entity.userName != null">
-			    <![CDATA[
-			    	AND USER_NAME = #{entity.userName,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.telphoneNumber != null">
-			    <![CDATA[
-			    	AND TEL_NUMBER = #{entity.telphoneNumber,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.active != null">
-			    <![CDATA[
-			    	AND IS_ACTIVE = #{entity.active,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.admin != null">
-			    <![CDATA[
-			    	AND IS_ADMIN = #{entity.admin,jdbcType=VARCHAR}
-				]]>
-			</if>
+			<choose>
+				<when test="entity.startDate != null &amp;&amp; entity.endDate != null">
+				    <![CDATA[
+						and DATE_FORMAT(A1.ACTIVITY_TIME, '%Y-%m-%d') between DATE_FORMAT(#{entity.startDate,jdbcType=VARCHAR}, '%Y-%m-%d') 
+						and DATE_FORMAT(#{entity.endDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					]]>
+				</when>
+				<otherwise>
+				    <if test="entity.startDate != null">
+					    <![CDATA[
+					    	and DATE_FORMAT(A1.ACTIVITY_TIME, '%Y-%m-%d') >= DATE_FORMAT(#{entity.startDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					    ]]>
+				    </if>
+				    <if test="entity.endDate != null">
+					    <![CDATA[
+					    	and DATE_FORMAT(A1.ACTIVITY_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{entity.endDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					    ]]>
+				    </if>
+				</otherwise>
+			</choose>
 		</where>
 	</select>
 	
-	<select id="queryUser" parameterType="com.docu.components.common.QueryBase" resultMap="USER_RESULT_MAP">
+	<select id="queryActivity" parameterType="com.docu.components.common.QueryBase" resultMap="ACTIVITY_RESULT_MAP">
 	    SELECT
-		<include refid="USER_DO_QUERY_COLUMNS" />
+		<include refid="ACTIVITY_DO_QUERY_COLUMNS" />
 		<![CDATA[  
-	     	FROM DOCU_ERP_USER A1
+	     	FROM DOCU_ERP_ACTIVITY A1
 	    ]]>
 	    <where>
-			<if test="entity.userId != null">
+			<if test="entity.activityId != null &amp;&amp; entity.activityId != 0">
 			    <![CDATA[
-			    	AND USER_ID = #{entity.userId,jdbcType=VARCHAR}
+			    	AND ACTIVITY_ID = #{entity.activityId,jdbcType=BIGINT}
 				]]>
 			</if>
-			<if test="entity.userName != null">
-			    <![CDATA[
-			    	AND USER_NAME = #{entity.userName,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.telphoneNumber != null">
-			    <![CDATA[
-			    	AND TEL_NUMBER = #{entity.telphoneNumber,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.active != null">
-			    <![CDATA[
-			    	AND IS_ACTIVE = #{entity.active,jdbcType=VARCHAR}
-				]]>
-			</if>
-			<if test="entity.admin != null">
-			    <![CDATA[
-			    	AND IS_ADMIN = #{entity.admin,jdbcType=VARCHAR}
-				]]>
-			</if>
+			<choose>
+				<when test="entity.startDate != null &amp;&amp; entity.endDate != null">
+				    <![CDATA[
+						and DATE_FORMAT(A1.ACTIVITY_TIME, '%Y-%m-%d') between DATE_FORMAT(#{entity.startDate,jdbcType=VARCHAR}, '%Y-%m-%d') 
+						and DATE_FORMAT(#{entity.endDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					]]>
+				</when>
+				<otherwise>
+				    <if test="entity.startDate != null">
+					    <![CDATA[
+					    	and DATE_FORMAT(A1.ACTIVITY_TIME, '%Y-%m-%d') >= DATE_FORMAT(#{entity.startDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					    ]]>
+				    </if>
+				    <if test="entity.endDate != null">
+					    <![CDATA[
+					    	and DATE_FORMAT(A1.ACTIVITY_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{entity.endDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					    ]]>
+				    </if>
+				</otherwise>
+			</choose>
 		</where>
-		ORDER BY A1.USER_ID 
+		ORDER BY A1.ACTIVITY_ID 
 		LIMIT #{preEndNum}, #{pageSize}
+	</select>
+	
+	<select id="getSequenceUuid" parameterType="String" resultType="long">
+		SELECT NEXTVAL(#{sequenceName,jdbcType=VARCHAR}) AS NEXT_SEQUENCE;
 	</select>
 </mapper>

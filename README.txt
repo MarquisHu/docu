@@ -1,1 +1,1 @@
-This is a project based on Webx3.0/Velocity/Turbine
+This is a project based on Webx3.0/Velocity/Mybatis/Turbine

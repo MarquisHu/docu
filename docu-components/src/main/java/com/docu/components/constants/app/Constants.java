@@ -14,5 +14,11 @@ public class Constants {
 	public static String DEFAULT_PASSWORD = "123456";
 	public static String DEFAULT_ACTIVE_STATUS = "1";
 	public static String DEFAULT_ADMIN_STATUS = "0";
-
+	
+	public static String BILL_UUID_SEQUENCE_NAME = "DOCU_BILL_UUID";
+	public static String CHARGE_UUID_SEQUENCE_NAME = "DOCU_CHARGE_UUID";
+	public static String ACCOUNT_UUID_SEQUENCE_NAME = "DOCU_ACCOUNT_UUID";
+	public static String ACTIVITY_UUID_SEQUENCE_NAME = "DOCU_ACTIVITY_UUID";
+	
+	public static String USER_ID_SEPARATOR = "|";
 }

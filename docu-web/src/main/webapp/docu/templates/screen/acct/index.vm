@@ -44,7 +44,7 @@ $!msg
 				                <th style="width: 5px;">用户姓名</th>
 				                <th style="width: 5px;">账户余额</th>
 								<th style="width: 5px;">更新时间</th>
-								<th style="width: 25px;">操作</th>
+								<th style="width: 30px;">操作</th>
 				            </tr>
 				        </thead>
 				        <tbody>
@@ -76,7 +76,7 @@ $!msg
 					                            $!account.updateTime
 					                        </span>
 					                    </td>
-										<td style="width: 25px;" class="center">
+										<td style="width: 30px;" class="center">
 				                            <p>
 												#if($!admin == '1')
 												<a href="$!envUtil.getContextPath()/acct/chargeAccount.htm?userId=$!{account.userId}"><span style="color:red">充值</span></a>

@@ -51,6 +51,7 @@
 	
     <insert id="insertChargeDetail" parameterType="ChargeDetail">
 		INSERT INTO DOCU_ERP_CHARGE(
+			CHARGE_ID,
 			USER_ID, 
 			ACCOUNT_ID,
 			RECV_AMOUNT, 
@@ -59,6 +60,7 @@
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
+			#{chargeId,jdbcType=BIGINT},
 			#{userId,jdbcType=VARCHAR},
 		 	#{accountId,jdbcType=BIGINT},
 		 	#{recvAmount,jdbcType=FLOAT},

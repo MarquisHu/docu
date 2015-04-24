@@ -145,7 +145,8 @@ $!msg
 		$("#userId").val("");
 		$("#cycleId").val("");
 		$("#activityId").val("");
-		$(".select2-choice span").html("所有");
+		$("#startDate").val("");
+		$("#endDate").val("");
 	}
     $(document).ready(function () {
         $('select').select2({minimumResultsForSearch: 1});

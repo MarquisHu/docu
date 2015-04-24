@@ -25,6 +25,12 @@ public class IbatisUserDao extends BaseDao implements UserDao {
 		return (User) getSqlSessionTemplate().selectOne(NAMESPACE + "findUser", userId);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> findUsers() {
+		return (List<User>) getSqlSessionTemplate().selectList(NAMESPACE + "findUsers");
+	}
+
 	@Override
 	public int queryUserTotal(QueryBase query) {
 		return (Integer) getSqlSessionTemplate().selectOne(NAMESPACE + "queryUserTotal", query);

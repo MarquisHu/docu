@@ -35,4 +35,9 @@ public class IbatisAccountDao extends BaseDao implements AccountDao {
 	public List<Account> queryAccount(QueryBase query) {
 		return (List<Account>) getSqlSessionTemplate().selectList(NAMESPACE + "queryAccount", query);
 	}
+	
+	@Override
+	public Long getSequenceUuid(String sequenceName) {
+		return (Long) getSqlSessionTemplate().selectOne(NAMESPACE + "getSequenceUuid", sequenceName);
+	}
 }

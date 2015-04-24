@@ -6,20 +6,17 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.docu.account.dto.Account;
 import com.docu.account.dto.ChargeDetail;
 import com.docu.account.service.AccountService;
 import com.docu.account.service.ChargeService;
+import com.docu.components.constants.app.Constants;
 import com.docu.components.util.DateUtils;
 import com.docu.web.common.context.EnvUtils;
 
 public class AccountAction {
-	
-	@Autowired
-	private URIBrokerService uriBrokerService;
 	
 	@Autowired
 	private AccountService accountService;
@@ -55,7 +52,11 @@ public class AccountAction {
 			
 			int result = accountService.updateAccount(account);
 			if (result == 1) {
+				String sequenceName = Constants.CHARGE_UUID_SEQUENCE_NAME;
+				long chargeId = accountService.getSequenceUuid(sequenceName);
+				
 				ChargeDetail charge = new ChargeDetail();
+				charge.setChargeId(chargeId);
 				charge.setUserId(userId);
 				charge.setAccountId(accountId);
 				charge.setRecvAmount(recvAmount);

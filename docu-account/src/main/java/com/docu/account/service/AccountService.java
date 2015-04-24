@@ -13,4 +13,6 @@ public interface AccountService {
 	Account queryAccount(String userId);
 	
 	PageDO<Account> queryAccounts(QueryBase query);
+	
+	long getSequenceUuid(String sequenceName);
 }

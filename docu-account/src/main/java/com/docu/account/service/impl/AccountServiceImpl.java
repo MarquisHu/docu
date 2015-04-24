@@ -37,4 +37,9 @@ public class AccountServiceImpl implements AccountService {
         page.setRows(accounts);
         return page;
 	}
+	
+	@Override
+	public long getSequenceUuid(String sequenceName) {
+		return accountDao.getSequenceUuid(sequenceName);
+	}
 }

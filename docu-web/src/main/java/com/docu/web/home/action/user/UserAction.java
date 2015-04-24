@@ -149,7 +149,11 @@ public class UserAction {
 	private void setDefaultAccount(String loginUserId, String userId, String updateTime) {
 		Account account = accountService.queryAccount(userId);
 		if (account == null) {
+			String sequenceName = Constants.ACCOUNT_UUID_SEQUENCE_NAME;
+			long accountId = accountService.getSequenceUuid(sequenceName);
+			
 			account = new Account();
+			account.setAccountId(accountId);
 			account.setUserId(userId);
 			account.setBalanceAmount(0.0f);
 			account.setPrivateAmount(0.0f);

@@ -12,6 +12,8 @@ public interface UserDao {
 	
 	User findUser(String userId);
 	
+	List<User> findUsers();
+	
 	int queryUserTotal(QueryBase query);
 	
 	List<User> queryUser(QueryBase query);

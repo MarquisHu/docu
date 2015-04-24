@@ -35,6 +35,7 @@
 	
     <insert id="insertAccount" parameterType="Account">
 		INSERT INTO DOCU_ERP_ACCOUNT(
+			ACCOUNT_ID,
 			USER_ID, 
 			BALANCE_AMOUNT, 
 			PRIVATE_AMOUNT, 
@@ -42,6 +43,7 @@
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
+			#{accountId,jdbcType=BIGINT},
 		 	#{userId,jdbcType=VARCHAR},
 		 	#{balanceAmount,jdbcType=FLOAT},
 		 	#{privateAmount,jdbcType=FLOAT},
@@ -180,5 +182,9 @@
 		</where>
 		ORDER BY A1.ACCOUNT_ID, A1.USER_ID 
 		LIMIT #{preEndNum}, #{pageSize}
+	</select>
+	
+	<select id="getSequenceUuid" parameterType="String" resultType="long">
+		SELECT NEXTVAL(#{sequenceName,jdbcType=VARCHAR}) AS NEXT_SEQUENCE;
 	</select>
 </mapper>

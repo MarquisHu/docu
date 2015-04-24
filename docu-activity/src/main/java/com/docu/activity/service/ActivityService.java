@@ -6,11 +6,13 @@ import com.docu.components.common.QueryBase;
 
 
 public interface ActivityService {
-	int saveActivity(Activity user);
+	int saveActivity(Activity activity);
 	
-	int updateActivity(Activity user);
+	int updateActivity(Activity activity);
 	
-	Activity queryActivity(String userId);
+	Activity queryActivity(String activityId);
 	
 	PageDO<Activity> queryActivity(QueryBase query);
+	
+	long getSequenceUuid(String sequenceName);
 }

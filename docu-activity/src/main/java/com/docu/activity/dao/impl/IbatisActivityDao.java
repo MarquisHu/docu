@@ -12,7 +12,7 @@ public class IbatisActivityDao extends BaseDao implements ActivityDao {
 	
 	@Override
 	public Integer insertActivity(Activity activity) {
-		return getSqlSessionTemplate().insert(NAMESPACE + "insertUser", activity);
+		return getSqlSessionTemplate().insert(NAMESPACE + "insertActivity", activity);
 	}
 	
 	@Override
@@ -34,5 +34,10 @@ public class IbatisActivityDao extends BaseDao implements ActivityDao {
 	@Override
 	public List<Activity> queryActivity(QueryBase query) {
 		return (List<Activity>) getSqlSessionTemplate().selectList(NAMESPACE + "queryActivity", query);
+	}
+	
+	@Override
+	public Long getSequenceUuid(String sequenceName) {
+		return (Long) getSqlSessionTemplate().selectOne(NAMESPACE + "getSequenceUuid", sequenceName);
 	}
 }

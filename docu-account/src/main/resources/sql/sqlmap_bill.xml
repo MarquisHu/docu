@@ -28,7 +28,7 @@
 	
 	<sql id="BILL_DETAILS_DO_QUERY_PARAMS">
 		<where>
-		    <if test="billId != null &amp;&amp; billId != 0">AND CHARGE_ID = #{billId,jdbcType=BIGINT}</if>
+		    <if test="billId != null &amp;&amp; billId != 0">AND BILL_ID = #{billId,jdbcType=BIGINT}</if>
 		    <if test="userId != null">AND USER_ID = #{userId,jdbcType=VARCHAR}</if>
 		    <if test="accountId != null &amp;&amp; accountId != 0">ACCOUNT_ID = #{accountId,jdbcType=BIGINT}</if>
 			<if test="originAmount != null">AND ORIGIN_AMOUNT = #{originAmount,jdbcType=FLOAT}</if>
@@ -40,9 +40,10 @@
 	</sql>
 	
     <insert id="insertBillDetail" parameterType="BillDetail">
-		INSERT INTO DOCU_ERP_CHARGE(
-			USER_ID, 
+		INSERT INTO DOCU_ERP_BILL(
+			BILL_ID,
 			ACCOUNT_ID,
+			USER_ID, 
 			ORIGIN_AMOUNT, 
 			EXPENSE_AMOUNT, 
 			BALANCE,
@@ -50,8 +51,9 @@
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
-			#{userId,jdbcType=VARCHAR},
+			#{billId,jdbcType=BIGINT},
 		 	#{accountId,jdbcType=BIGINT},
+		 	#{userId,jdbcType=VARCHAR},
 		 	#{originAmount,jdbcType=FLOAT},
 		 	#{expenseAmount,jdbcType=FLOAT},
 		 	#{balance,jdbcType=FLOAT},

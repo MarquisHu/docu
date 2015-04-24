@@ -12,4 +12,7 @@
 	<bean id="balanceDao" class="com.docu.account.dao.impl.IbatisAccountBalanceDao" />
 	<bean id="chargeDao" class="com.docu.account.dao.impl.IbatisChargeDao" />
 	<bean id="billDao" class="com.docu.account.dao.impl.IbatisBillDao" />
+	
+	<!-- 活动模块dao start -->
+	<bean id="activityDao" class="com.docu.activity.dao.impl.IbatisActivityDao" />
 </beans>

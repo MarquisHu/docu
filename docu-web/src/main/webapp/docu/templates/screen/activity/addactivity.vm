@@ -5,125 +5,294 @@ $!msg
 	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
 	.line{height:auto;}
 </style>
-<!--End-breadcrumbs-->
 <div class="container-fluid">
-	<div class="widget-box">
-		<div class="widget-content tab-content">
-			<div id="tab1" class="tab-pane active">
-				<div class="widget-content nopadding">
-			        <form id="query_page_form" class="form-horizontal" method="post" action="$!envUtil.getContextPath()/acct/index.htm">
-						<input type="hidden" name="pageNum" value="1" />
-			            <div class="tablesearchcase">
-			                <div class="dataTables_length" id="">
-								<input class="span2" style="margin-left:10px;" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
-								<button class="btn btn-success" style="margin-left:10px;" type="submit">查询</button>
-								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
-			                </div>
-			            </div>
-			        </form>
-			        <br />
-			    </div>
-			</div>			    	
-		    <div class="container-fluid"> 
-				<!-- InstanceBeginEditable name="content" -->
-		    	<br />
-		    	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
-		    	<div class="widget-box">
-		    		<form id="query_page_form" class="form-horizontal" method="post" action="">
-		    			<input type="hidden" name="pageNum" value="1" />
-		    		</form>
-				    <table class="table table-bordered table-striped with-check">
-				    	<thead>
-				            <tr>
-								<th style="width: 5px;">账号编码</th>
-				            	<th style="width: 5px;">用户编码</th>
-				                <th style="width: 5px;">用户姓名</th>
-				                <th style="width: 5px;">账户余额</th>
-								<th style="width: 5px;">更新时间</th>
-								<th style="width: 10px;">操作</th>
-				            </tr>
-				        </thead>
-				        <tbody>
-				            #foreach($account in $!page.rows)
-				            	<td colspan="6" class="tablegroup nopadding">
-					        		<tr id="$!account.userId">
-										<td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.accountId
-					                        </span>
-					                    </td>
-					        			<td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.userId
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.englishName
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.balance
-					                        </span>
-					                    </td>
-										<td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!account.updateTime
-					                        </span>
-					                    </td>
-										<td style="width: 10px;" class="center">
-				                            <p>
-												<a href="$!envUtil.getContextPath()/user/index.htm?userId=$!{user.userId}"><span style="color:red">充值</span></a>
-												<a href="$!envUtil.getContextPath()/user/index.htm?userId=$!{user.userId}"><span style="color:red">明细</span></a>
-											</p>
-				                        </td>
-					                </tr>
-				                </td>
-				             #end
-				        </tbody>
-				    </table>
+	<div class="row-fluid">
+		<div id="chargeaccount" class="span12">
+			<form class="form-horizontal" method="post" action="" name="basic_validate" id="basic_validate" novalidate>
+				<div class="widget-box">
+					<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+						<h5>新增活动</h5>
+					</div>
+					<div class="widget-content nopadding">
+						<div class="widget-content "> 
+						
+						<div class="control-group">
+							<label class="control-label">活动描述：</label>
+							<div class="controls">
+    							<input type="text" name="remark" id="remark" value="$!remark" style="width:320px" placeholder="活动描述" />
+								<div class="s_remark" style="color:red;display:none;"></div>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">活动地点：</label>
+							<div class="controls">
+								<input type="text" name="location" id="location" value="$!location" style="width:175px" placeholder="活动地点" />
+								<div class="s_location" style="color:red;display:none;"></div>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">活动时间：</label>
+							<div class="controls">
+								<div class="input-append date" id="start_datetimepicker" data-date-format="yyyy-mm-dd">
+    		                        <input class="span2" size="120" type="text" name="activityTime" id="activityTime" value="$!activityTime" placeholder="活动时间" >
+    		                        <span class="add-on"><i class="icon-remove"></i></span>
+    		                        <span class="add-on"><i class="icon-th"></i></span>
+		                    	</div> 
+								<div class="s_activityTime" style="color:red;display:none;"></div>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">活动开销：</label>
+							<div class="controls">
+								<input type="text" name="expenseAmount" id="expenseAmount" value="$!expenseAmount" style="width:80px" placeholder="活动开销" />
+								<div class="s_expenseAmount" style="color:red;display:none;"></div>
+							</div>
+						</div>
+						
+						<table class="control-group" style="margin-left:100px;" border="0" cellpadding="20" cellspacing="0">
+							<tr>
+								<td>
+									<select id="userList" size="9" MULTIPLE style="width:180px;height:200px;">
+										#foreach($user in $users)
+											<option  value="$user.userId">$user.userName</option>
+           								#end
+									</select>
+								</td>
+								<td align="center" valign="middle">
+									<input type="Button" id="choose" value=">>" style="width:50px" onClick="SelectMoveRowsTo()"><br>
+									<br>
+									<input type="Button" value="<<" style="width:50px" onClick="SelectMoveRowsBack()">
+								</td>
+								<td>
+									<select id="participators" size="9" MULTIPLE  style="width:180px;height:200px;">
+									</select>
+								</td>
+								<td>
+									<div class="s_participators" style="color:red;display:none;"></div>
+								</td>
+							</tr>
+						</table>
+						
+						<div class="form-actions">
+							<input  type="hidden" name="userIds" id="userIds" value=""/>
+							<input type="hidden" name="action" value="/activity/ActivityAction" />
+							<input type="hidden" name="event_submit_do_add_activity" value="1" />
+							<div class="controls">
+								<input type="submit" value="提交" class="btn btn-success" onclick="return onSubmit();" />
+								&emsp;&emsp;
+								<span style="color:red">$!msg</span>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
-	             	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
-	          	</div>
-			</div>
-		</div>
-	</div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="select_date" class="modal hide">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>选择日期</h3>
+    </div>
+    <div class="modal-body">
+        <p id="select_info"></p>
+    </div>
+    <div class="modal-footer">
+        <a data-dismiss="modal" class="btn btn-primary" onclick="">确定</a>
+    </div>
 </div>
 <script src="${docuCdnServer}/js/docu/select.min.js"></script>
 <script src="${docuCdnServer}/js/docu/jquery.gritter.min.js"></script>
 <script src="${docuCdnServer}/js/docu/jquery.uniform.js"></script>
-<script>
-	function clearQuery(){
-		$("#userId").val("");
-		$(".select2-choice span").html("所有");
+<script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>	
+<script type="text/javascript" src="${docuCdnServer}/js/docu/docu-datetime.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	function onSubmit() {
+		var optionValues = '';
+
+		$('#participators option').each(function() {
+			if (optionValues.length == 0) {
+				optionValues += $(this).val();
+			} else {
+				optionValues += '|' + $(this).val();
+			}
+		});
+		$("#userIds").val(optionValues);
+		
+		var result = true;
+		var remark = $("#remark");
+		var location = $("#location");
+		var activityTime = $("#activityTime");
+		var expenseAmount = $("#expenseAmount");
+		var participators = $("#participators");
+	
+		if($.trim(remark.val()).length == 0){
+			$('.s_remark').html("<label/>活动描述不能为空</label>");
+			$('.s_remark').css('display','block');
+        	result = false;
+		}
+		
+		if($.trim(location.val()).length == 0){
+			$('.s_location').html("<label/>活动地点不能为空</label>");
+			$('.s_location').css('display','block');
+        	result = false;
+		}
+		
+		if($.trim(activityTime.val()).length == 0){
+			$('.s_activityTime').html("<label/>活动时间不能为空</label>");
+			$('.s_activityTime').css('display','block');
+        	result = false;
+		}
+		
+		if($.trim(expenseAmount.val()).length == 0){
+			$('.s_expenseAmount').html("<label/>活动开销不能为空</label>");
+			$('.s_expenseAmount').css('display','block');
+        	result = false;
+		}
+		
+		if(optionValues.length == 0){
+			$('.s_participators').html("<label/>参与人员不能为空</label>");
+			$('.s_participators').css('display','block');
+        	result = false;
+		}
+		
+		return result;
+ 	}
+ </script>
+ <script type="text/javascript">
+ 	function addListener(element, e, fn) {
+		if (element.addEventListener) {
+			element.addEventListener(e, fn, false);
+		} else {
+			element.attachEvent("on" + e, fn);
+		}
 	}
-    $(document).ready(function () {
-        $('select').select2({minimumResultsForSearch: 1});
-        $('.logotip').delay(500).animate({opacity: 1, left: 130});
-        //单选，勾选美化调用
-        $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
-        //勾选全部选中
-        $("span.icon input:checkbox, th input:checkbox").click(function () {
-            var checkedStatus = this.checked;
-            var checkbox;
-            if (this.id == 'tab1chka') {
-                checkbox = $("#tab1 input[type=checkbox] ");
-            }
-            else {
-                checkbox = $("#tab2 input[type=checkbox] ");
-            }
-            //var checkbox = $(this).parents('.widget-box').find('tr td:first-child input:checkbox');
-            checkbox.each(function () {
-                this.checked = checkedStatus;
-                if (checkedStatus == this.checked) {
-                    $(this).closest('.checker > span').removeClass('checked');
-                }
-                if (this.checked) {
-                    $(this).closest('.checker > span').addClass('checked');
-                }
-            });
-        });
-    });
+	
+	var myRemark = document.getElementById("remark");
+	var myLocation = document.getElementById("location");
+	var myActivityTime = document.getElementById("activityTime");
+	var myExpenseAmount = document.getElementById("expenseAmount");
+	var myChoose = document.getElementById("choose");
+	
+	addListener(myRemark,"click",function(){  
+    	myRemark.placeholder = ""; 
+		$('.s_remark').css('display','none');
+   	})
+	addListener(myLocation,"click",function(){  
+    	myLocation.placeholder = ""; 
+		$('.s_location').css('display','none');
+   	})
+   	addListener(myActivityTime,"click",function(){  
+    	myActivityTime.placeholder = ""; 
+		$('.s_activityTime').css('display','none');
+   	})
+	addListener(myExpenseAmount,"click",function(){  
+    	myExpenseAmount.placeholder = ""; 
+		$('.s_expenseAmount').css('display','none');
+   	})
+   	addListener(myChoose,"click",function(){  
+    	myChoose.placeholder = ""; 
+		$('.s_participators').css('display','none');
+   	})
+	
+	addListener(myRemark,"focus",function(){  
+    	myRemark.placeholder = ""; 
+		$('.s_remark').css('display','none');
+   	})
+	addListener(myLocation,"focus",function(){  
+    	myUserName.placeholder = ""; 
+		$('.s_location').css('display','none');
+   	})
+   	addListener(myActivityTime,"focus",function(){  
+    	myActivityTime.placeholder = ""; 
+		$('.s_activityTime').css('display','none');
+   	})
+	addListener(myExpenseAmount,"focus",function(){  
+    	myExpenseAmount.placeholder = ""; 
+		$('.s_expenseAmount').css('display','none');
+   	})
+   	addListener(myChoose,"focus",function(){  
+    	myChoose.placeholder = ""; 
+		$('.s_participators').css('display','none');
+   	})
+	
+	addListener(myRemark,"blur",function(){  
+    	myRemark.placeholder = ""; 
+		$('.s_remark').css('display','none');
+   	})
+	addListener(myLocation,"blur",function(){  
+    	myUserName.placeholder = ""; 
+		$('.s_location').css('display','none');
+   	})
+   	addListener(myActivityTime,"blur",function(){  
+    	myActivityTime.placeholder = ""; 
+		$('.s_activityTime').css('display','none');
+   	})
+	addListener(myExpenseAmount,"blur",function(){  
+    	myExpenseAmount.placeholder = ""; 
+		$('.s_expenseAmount').css('display','none');
+   	})
+   	addListener(myChoose,"blur",function(){  
+    	myChoose.placeholder = ""; 
+		$('.s_participators').css('display','none');
+   	})
+	
+	function SelectMoveRowsTo() {
+		var SelID='';
+		var SelText='';
+		var SS1 = document.getElementById('userList');
+		var SS2 = document.getElementById('participators');
+		// Move rows from SS1 to SS2 from bottom to top
+		for (i=SS1.options.length - 1; i>=0; i--) {
+			if (SS1.options[i].selected == true)
+			{
+				SelID = SS1.options[i].value;
+				SelText = SS1.options[i].text;
+				var newRow = new Option(SelText,SelID);
+				SS2.options[SS2.length] = newRow;
+				SS1.options[i] = null;
+			}
+		}
+		SelectSort(SS2);
+	}
+	
+	function SelectMoveRowsBack() {
+		var SelID='';
+		var SelText='';
+		var SS1 = document.getElementById('participators');
+		var SS2 = document.getElementById('userList');
+		// Move rows from SS1 to SS2 from bottom to top
+		for (i=SS1.options.length - 1; i>=0; i--) {
+			if (SS1.options[i].selected == true)
+			{
+				SelID = SS1.options[i].value;
+				SelText = SS1.options[i].text;
+				var newRow = new Option(SelText,SelID);
+				SS2.options[SS2.length] = newRow;
+				SS1.options[i] = null;
+			}
+		}
+		SelectSort(SS2);
+	}
+
+	function SelectSort(SelList) {
+		var ID = '';
+		var Text = '';
+		for (x = 0; x < SelList.length - 1; x++) {
+			for (y = x + 1; y < SelList.length; y++) {
+				if (SelList[x].text > SelList[y].text) {
+					ID = SelList[x].value;
+					Text = SelList[x].text;
+					SelList[x].value = SelList[y].value;
+					SelList[x].text = SelList[y].text;
+					SelList[y].value = ID;
+					SelList[y].text = Text;
+				}
+			}
+		}
+	}
 </script>

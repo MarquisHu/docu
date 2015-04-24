@@ -37,4 +37,9 @@ public class ActivityServiceImpl implements ActivityService {
         page.setRows(activities);
         return page;
 	}
+	
+	@Override
+	public long getSequenceUuid(String sequenceName) {
+		return activityDao.getSequenceUuid(sequenceName);
+	}
 }

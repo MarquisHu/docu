@@ -1,9 +1,8 @@
 /*
-SQLyog ÆóÒµ°æ - MySQL GUI v8.14 
+SQLyog ä¼ä¸šç‰ˆ - MySQL GUI v8.14 
 MySQL - 5.6.16 : Database - docu_erp
 *********************************************************************
-*/
-
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -22,7 +21,7 @@ USE `docu_erp`;
 DROP TABLE IF EXISTS `docu_erp_account`;
 
 CREATE TABLE `docu_erp_account` (
-  `ACCOUNT_ID` char(20) NOT NULL,
+  `ACCOUNT_ID` bigint(20) NOT NULL,
   `USER_ID` char(20) NOT NULL,
   `BALANCE_AMOUNT` float DEFAULT NULL,
   `PRIVATE_AMOUNT` float DEFAULT NULL,
@@ -36,15 +35,32 @@ CREATE TABLE `docu_erp_account` (
 
 /*Data for the table `docu_erp_account` */
 
-insert  into `docu_erp_account`(`ACCOUNT_ID`,`USER_ID`,`BALANCE_AMOUNT`,`PRIVATE_AMOUNT`,`COMMON_AMOUNT`,`UPDATE_BY`,`UPDATE_TIME`) values ('1','HUMA4',400,80,320,'huma4','2015-04-22 17:00:15'),('2','ADMIN',100,20,80,'huma4','2015-04-22 12:46:43');
+insert  into `docu_erp_account`(`ACCOUNT_ID`,`USER_ID`,`BALANCE_AMOUNT`,`PRIVATE_AMOUNT`,`COMMON_AMOUNT`,`UPDATE_BY`,`UPDATE_TIME`) values (1000001,'HUMA4',0,0,0,'huma4','2015-04-24 22:52:04');
+
+/*Table structure for table `docu_erp_activity` */
+
+DROP TABLE IF EXISTS `docu_erp_activity`;
+
+CREATE TABLE `docu_erp_activity` (
+  `ACTIVITY_ID` bigint(20) NOT NULL,
+  `EXPENSE_AMOUNT` float NOT NULL,
+  `REMARK` char(255) NOT NULL,
+  `LOCATION` char(255) NOT NULL,
+  `ACTIVITY_TIME` datetime NOT NULL,
+  `UPDATE_BY` char(20) NOT NULL,
+  `UPDATE_TIME` datetime NOT NULL,
+  PRIMARY KEY (`ACTIVITY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `docu_erp_activity` */
 
 /*Table structure for table `docu_erp_bill` */
 
 DROP TABLE IF EXISTS `docu_erp_bill`;
 
 CREATE TABLE `docu_erp_bill` (
-  `BILL_ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ACCOUNT_ID` char(20) NOT NULL,
+  `BILL_ID` bigint(20) NOT NULL,
+  `ACCOUNT_ID` bigint(20) NOT NULL,
   `USER_ID` char(20) NOT NULL,
   `ORIGIN_AMOUNT` float NOT NULL,
   `EXPENSE_AMOUNT` float NOT NULL,
@@ -53,31 +69,27 @@ CREATE TABLE `docu_erp_bill` (
   `UPDATE_BY` char(20) NOT NULL,
   `UPDATE_TIME` datetime NOT NULL,
   PRIMARY KEY (`BILL_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `docu_erp_bill` */
-
-insert  into `docu_erp_bill`(`BILL_ID`,`ACCOUNT_ID`,`USER_ID`,`ORIGIN_AMOUNT`,`EXPENSE_AMOUNT`,`BALANCE`,`ACTIVITY_ID`,`UPDATE_BY`,`UPDATE_TIME`) values (1,'1','HUMA4',100,10,90,1,'HUMA4','2015-04-22 09:41:03');
 
 /*Table structure for table `docu_erp_charge` */
 
 DROP TABLE IF EXISTS `docu_erp_charge`;
 
 CREATE TABLE `docu_erp_charge` (
-  `CHARGE_ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `CHARGE_ID` bigint(20) NOT NULL,
   `USER_ID` char(20) NOT NULL,
-  `ACCOUNT_ID` char(20) NOT NULL,
+  `ACCOUNT_ID` bigint(20) NOT NULL,
   `RECV_AMOUNT` float NOT NULL,
   `RECV_TIME` datetime NOT NULL,
   `PERCENT` int(11) NOT NULL,
   `UPDATE_BY` char(20) NOT NULL,
   `UPDATE_TIME` datetime NOT NULL,
   PRIMARY KEY (`CHARGE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `docu_erp_charge` */
-
-insert  into `docu_erp_charge`(`CHARGE_ID`,`USER_ID`,`ACCOUNT_ID`,`RECV_AMOUNT`,`RECV_TIME`,`PERCENT`,`UPDATE_BY`,`UPDATE_TIME`) values (1,'HUMA4','1',100,'2015-04-20 22:39:42',20,'HUMA4','2015-04-20 22:39:42'),(2,'ADMIN','2',100,'2015-04-22 12:46:43',20,'ADMIN','2015-04-22 12:46:43'),(3,'HUMA4','1',200,'2015-04-22 13:12:30',20,'HUMA4','2015-04-22 13:12:30'),(4,'HUMA4','1',100,'2015-04-22 17:00:15',20,'HUMA4','2015-04-22 17:00:15');
 
 /*Table structure for table `docu_erp_user` */
 
@@ -97,7 +109,55 @@ CREATE TABLE `docu_erp_user` (
 
 /*Data for the table `docu_erp_user` */
 
-insert  into `docu_erp_user`(`USER_ID`,`USER_NAME`,`TEL_NUMBER`,`IS_ACTIVE`,`IS_ADMIN`,`PASSWORD`,`UPDATE_BY`,`UPDATE_TIME`) values ('ADMIN','ADMIN','18688187011','1','0','123456','huma4','2015-04-22 17:01:22'),('HUMA4','Marquis Hu','18688187017','1','1','123456','huma4','2015-04-22 18:15:43'),('TEST','TEST','18988187011','0','0','123456','huma4','2015-04-22 17:01:36');
+insert  into `docu_erp_user`(`USER_ID`,`USER_NAME`,`TEL_NUMBER`,`IS_ACTIVE`,`IS_ADMIN`,`PASSWORD`,`UPDATE_BY`,`UPDATE_TIME`) values ('HUMA4','Marquis Hu','18688187017','1','1','123456','huma4','2015-04-24 22:52:04');
+
+/*Table structure for table `docu_erp_uuid` */
+
+DROP TABLE IF EXISTS `docu_erp_uuid`;
+
+CREATE TABLE `docu_erp_uuid` (
+  `SEQUENCE_NAME` varchar(100) NOT NULL,
+  `SEQUENCE_INCREMENT` int(11) unsigned NOT NULL DEFAULT '1',
+  `SEQUENCE_MIN_VALUE` int(11) unsigned NOT NULL DEFAULT '1000000',
+  `SEQUENCE_MAX_VALUE` bigint(20) unsigned NOT NULL DEFAULT '18446744073709551615',
+  `SEQUENCE_CUR_VALUE` bigint(20) unsigned NOT NULL DEFAULT '1000001',
+  `SEQUENCE_CYCLE` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`SEQUENCE_NAME`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `docu_erp_uuid` */
+
+insert  into `docu_erp_uuid`(`SEQUENCE_NAME`,`SEQUENCE_INCREMENT`,`SEQUENCE_MIN_VALUE`,`SEQUENCE_MAX_VALUE`,`SEQUENCE_CUR_VALUE`,`SEQUENCE_CYCLE`) values ('DOCU_BILL_UUID',1,1000000,18446744073709551615,1000001,0),('DOCU_CHARGE_UUID',1,1000000,18446744073709551615,1000001,0),('DOCU_ACCOUNT_UUID',1,1000000,18446744073709551615,1000002,0),('DOCU_ACTIVITY_UUID',1,1000000,18446744073709551615,1000001,0);
+
+/* Function  structure for function  `NEXTVAL` */
+
+/*!50003 DROP FUNCTION IF EXISTS `NEXTVAL` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `NEXTVAL`(`SEQ_NAME` VARCHAR(100)) RETURNS bigint(20)
+BEGIN
+	DECLARE CUR_VAL BIGINT(20);
+ 
+	SELECT SEQUENCE_CUR_VALUE INTO CUR_VAL
+	 FROM DOCU_ERP_UUID
+	WHERE SEQUENCE_NAME = SEQ_NAME;
+ 
+	IF CUR_VAL IS NOT NULL THEN
+		UPDATE DOCU_ERP_UUID
+		SET SEQUENCE_CUR_VALUE = IF (
+			(SEQUENCE_CUR_VALUE + SEQUENCE_INCREMENT) > SEQUENCE_MAX_VALUE,
+			IF (
+			SEQUENCE_CYCLE = TRUE,
+			SEQUENCE_MIN_VALUE,
+			NULL
+			),
+			SEQUENCE_CUR_VALUE + SEQUENCE_INCREMENT
+		)
+		WHERE SEQUENCE_NAME = SEQ_NAME;
+	END IF; 
+	RETURN CUR_VAL;
+    END */$$
+DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

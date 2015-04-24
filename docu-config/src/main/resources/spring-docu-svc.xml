@@ -12,4 +12,7 @@
 	<bean id="balanceService" class="com.docu.account.service.impl.AccountBalanceServiceImpl"></bean>
 	<bean id="chargeService" class="com.docu.account.service.impl.ChargeServiceImpl"></bean>
 	<bean id="billService" class="com.docu.account.service.impl.BillServiceImpl"></bean>
+	
+	<!-- 活动模块service start -->
+	<bean id="activityService" class="com.docu.activity.service.impl.ActivityServiceImpl"></bean>
 </beans>

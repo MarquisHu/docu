@@ -44,6 +44,11 @@ public class BillDetails {
 		context.put("page", page);
 		context.put("admin", admin);
 		context.put("userId", userId);
+		if (activityId != null && activityId != 0) {
+			context.put("activityId", activityId);
+		}
+		context.put("startDate", startDate);
+		context.put("endDate", endDate);
 		context.put("loginUserId", loginUserId);
 	}
 }
