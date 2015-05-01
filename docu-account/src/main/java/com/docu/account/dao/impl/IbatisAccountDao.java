@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.docu.account.dao.AccountDao;
 import com.docu.account.dto.Account;
+import com.docu.account.dto.AccountBalance;
 import com.docu.components.common.BaseDao;
 import com.docu.components.common.QueryBase;
 
@@ -26,14 +27,19 @@ public class IbatisAccountDao extends BaseDao implements AccountDao {
 	}
 	
 	@Override
-	public int queryAccountTotal(QueryBase query) {
-		return (Integer) getSqlSessionTemplate().selectOne(NAMESPACE + "queryAccountTotal", query);
+	public AccountBalance findAccountBalance(String userId) {
+		return (AccountBalance) getSqlSessionTemplate().selectOne(NAMESPACE + "findAccountBalance", userId);
+	}
+	
+	@Override
+	public int queryAccountBalanceTotal(QueryBase query) {
+		return (Integer) getSqlSessionTemplate().selectOne(NAMESPACE + "queryAccountBalanceTotal", query);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Account> queryAccount(QueryBase query) {
-		return (List<Account>) getSqlSessionTemplate().selectList(NAMESPACE + "queryAccount", query);
+	public List<AccountBalance> queryAccountBalance(QueryBase query) {
+		return (List<AccountBalance>) getSqlSessionTemplate().selectList(NAMESPACE + "queryAccountBalance", query);
 	}
 	
 	@Override

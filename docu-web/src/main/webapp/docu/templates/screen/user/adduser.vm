@@ -160,7 +160,7 @@ $!msg
 		$('.s_userName').css('display','none');
    	})
    	addListener(myTelphoneNumber,"blur",function(){  
-    	myTelphoneNumber.placeholder = "请输入充值金额"; 
+    	myTelphoneNumber.placeholder = "请输入电话号码"; 
 		$('.s_telphoneNumber').css('display','none');
    	})
 </script>

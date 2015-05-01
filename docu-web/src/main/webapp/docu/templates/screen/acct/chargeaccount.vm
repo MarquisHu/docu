@@ -32,28 +32,40 @@ $!msg
 						<div class="control-group">
 							<label class="control-label">账户余额：</label>
 							<div class="controls">
-								<input type="text" name="balance" id="balance" value="$!account.balance" style="width:90px" readonly="readonly" autocomplete="off" />
+								<input type="text" name="balance" id="balance" value="$!account.balance" style="width:100px" readonly="readonly" autocomplete="off" />
+                			</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label"><span style="color:red">* </span>付款人：</label>
+							<div class="controls">
+								<input type="text" name="payerId" id="payerId" value="$!payerId" style="width:100px" placeholder="请输入付款人信息" />
+								<div class="s_payerId" style="color:red;display:none;"></div>
                 			</div>
 						</div>
 						
 						<div class="control-group">
 							<label class="control-label"><span style="color:red">* </span>充值金额：</label>
 							<div class="controls">
-								<input type="text" name="recvAmount" id="recvAmount" style="width:90px" placeholder="请输入充值金额" />
+								<input type="text" name="recvAmount" id="recvAmount" style="width:100px" placeholder="请输入充值金额" />
 								<div class="s_recvAmount" style="color:red;display:none;"></div>
                 			</div>
 						</div>
 						
+						#if($!account.userId!='CMN')
 						<div class="control-group">
 							<label class="control-label"><span style="color:red">* </span>百分比：</label>
 							<div class="controls">
 								<select style="width:60px" name="percent">
                                     <option>20</option>
+									<option>30</option>
+									<option>40</option>
                                     <option>50</option>
                                </select>
 							<label >公共账户所占比例</label>
                 			</div>
 						</div>
+						#end
 						
 						<div class="form-actions">
 							<input type="hidden" name="action" value="/acct/AccountAction" />
@@ -72,14 +84,23 @@ $!msg
 </div>
 <script type="text/javascript">
 	function onSubmit() {
+		var result = true;
+		var payerId = $("#payerId");
 		var recvAmount = $("#recvAmount");
 	
+		if($.trim(payerId.val()).length == 0){
+			$('.s_payerId').html("<label/>付款人信息不能为空</label>");
+			$('.s_payerId').css('display','block');
+        	result = false;
+		}
+		
 		if($.trim(recvAmount.val()).length == 0){
 			$('.s_recvAmount').html("<label/>充值金额不能为空</label>");
 			$('.s_recvAmount').css('display','block');
-        	return false;
+        	result = false;
 		}
-		return true;
+		
+		return result;
  	}
  </script>
  <script type="text/javascript">
@@ -90,18 +111,32 @@ $!msg
 			element.attachEvent("on" + e, fn);
 		}
 	}
-   	var myRecvAmount = document.getElementById("recvAmount");  
+	
+	var myPayerId = document.getElementById("payerId");
+   	var myRecvAmount = document.getElementById("recvAmount");
    
+	addListener(myPayerId,"click",function(){  
+    	myPayerId.placeholder = ""; 
+		$('.s_payerId').css('display','none');
+   	})
    	addListener(myRecvAmount,"click",function(){  
     	myRecvAmount.placeholder = ""; 
 		$('.s_recvAmount').css('display','none');
    	})
    
+	addListener(myPayerId,"focus",function(){  
+    	myPayerId.placeholder = "";  
+		$('.s_payerId').css('display','none');
+   	})
    	addListener(myRecvAmount,"focus",function(){  
     	myRecvAmount.placeholder = "";  
 		$('.s_recvAmount').css('display','none');
    	})
    
+	addListener(myPayerId,"blur",function(){  
+    	myPayerId.placeholder = "请输入付款人信息"; 
+		$('.s_payerId').css('display','none');
+   	})
    	addListener(myRecvAmount,"blur",function(){  
     	myRecvAmount.placeholder = "请输入充值金额"; 
 		$('.s_recvAmount').css('display','none');

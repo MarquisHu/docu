@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import com.docu.account.dao.AccountDao;
 import com.docu.account.dto.Account;
+import com.docu.account.dto.AccountBalance;
 import com.docu.account.service.AccountService;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
@@ -28,13 +29,18 @@ public class AccountServiceImpl implements AccountService {
 	public Account queryAccount(String userId) {
 		return accountDao.findAccount(userId);
 	}
-
+	
 	@Override
-	public PageDO<Account> queryAccounts(QueryBase query) {
-		query.setTotal(accountDao.queryAccountTotal(query));
-		List<Account> accounts = accountDao.queryAccount(query);
-		PageDO<Account> page = new PageDO<Account>(query.getPageNum(), query.getPageSize(), query.getTotal());
-        page.setRows(accounts);
+	public AccountBalance queryAccountBalance(String userId) {
+		return accountDao.findAccountBalance(userId);
+	}
+	
+	@Override
+	public PageDO<AccountBalance> queryAccountBalance(QueryBase query) {
+		query.setTotal(accountDao.queryAccountBalanceTotal(query));
+		List<AccountBalance> balances = accountDao.queryAccountBalance(query);
+		PageDO<AccountBalance> page = new PageDO<AccountBalance>(query.getPageNum(), query.getPageSize(), query.getTotal());
+        page.setRows(balances);
         return page;
 	}
 	

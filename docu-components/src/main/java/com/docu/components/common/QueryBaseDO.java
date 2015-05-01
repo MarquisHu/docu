@@ -8,7 +8,7 @@ public abstract class QueryBaseDO  implements Serializable{
      * 
      */
     private static final long serialVersionUID = 1L;
-    public static final int DEFAULT_PAGE_SIZE = 5;
+    public static final int DEFAULT_PAGE_SIZE = 10;
     public static final int DEFAULT_PAGE_NO = 1;
     public static final int MAX_PAGE_SIZE = 5000;
     private Integer mod;

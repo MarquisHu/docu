@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `docu_erp_account`;
 CREATE TABLE `docu_erp_account` (
   `ACCOUNT_ID` bigint(20) NOT NULL,
   `USER_ID` char(20) NOT NULL,
-  `BALANCE_AMOUNT` float DEFAULT NULL,
-  `PRIVATE_AMOUNT` float DEFAULT NULL,
+  `BALANCE` float DEFAULT NULL,
   `COMMON_AMOUNT` float DEFAULT NULL,
+  `ACCOUNT_TYPE` char(1) NOT NULL DEFAULT '1',
   `UPDATE_BY` char(20) DEFAULT NULL,
   `UPDATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ACCOUNT_ID`),
@@ -35,7 +35,30 @@ CREATE TABLE `docu_erp_account` (
 
 /*Data for the table `docu_erp_account` */
 
-insert  into `docu_erp_account`(`ACCOUNT_ID`,`USER_ID`,`BALANCE_AMOUNT`,`PRIVATE_AMOUNT`,`COMMON_AMOUNT`,`UPDATE_BY`,`UPDATE_TIME`) values (1000001,'HUMA4',0,0,0,'huma4','2015-04-24 22:52:04');
+insert  into `docu_erp_account`(`ACCOUNT_ID`,`USER_ID`,`BALANCE`,`COMMON_AMOUNT`,`ACCOUNT_TYPE`,`UPDATE_BY`,`UPDATE_TIME`) values (1000001,'CMN',0,0,'0','huma4','2015-05-01 22:38:54'),(1000002,'HUMA4',0,0,'1','huma4','2015-05-01 22:38:54');
+
+/*Table structure for table `docu_erp_acct_detail` */
+
+DROP TABLE IF EXISTS `docu_erp_acct_detail`;
+
+CREATE TABLE `docu_erp_acct_detail` (
+  `ACCT_DETAIL_ID` bigint(20) NOT NULL,
+  `ACCOUNT_ID` bigint(20) NOT NULL,
+  `USER_ID` char(20) NOT NULL,
+  `ORIGIN_AMOUNT` float NOT NULL,
+  `CHANGE_AMOUNT` float NOT NULL,
+  `BALANCE` float NOT NULL,
+  `PAYER_ID` char(20) NOT NULL,
+  `TRANSACTION_TYPE` char(1) NOT NULL DEFAULT '1',
+  `TRANSACTION_TIME` datetime NOT NULL,
+  `ACTIVITY_ID` bigint(20) DEFAULT NULL,
+  `PERCENT` int(11) NOT NULL DEFAULT '20',
+  `UPDATE_BY` char(20) NOT NULL,
+  `UPDATE_TIME` datetime NOT NULL,
+  PRIMARY KEY (`ACCT_DETAIL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `docu_erp_acct_detail` */
 
 /*Table structure for table `docu_erp_activity` */
 
@@ -47,49 +70,13 @@ CREATE TABLE `docu_erp_activity` (
   `REMARK` char(255) NOT NULL,
   `LOCATION` char(255) NOT NULL,
   `ACTIVITY_TIME` datetime NOT NULL,
+  `PERCENT` int(11) NOT NULL DEFAULT '20',
   `UPDATE_BY` char(20) NOT NULL,
   `UPDATE_TIME` datetime NOT NULL,
   PRIMARY KEY (`ACTIVITY_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `docu_erp_activity` */
-
-/*Table structure for table `docu_erp_bill` */
-
-DROP TABLE IF EXISTS `docu_erp_bill`;
-
-CREATE TABLE `docu_erp_bill` (
-  `BILL_ID` bigint(20) NOT NULL,
-  `ACCOUNT_ID` bigint(20) NOT NULL,
-  `USER_ID` char(20) NOT NULL,
-  `ORIGIN_AMOUNT` float NOT NULL,
-  `EXPENSE_AMOUNT` float NOT NULL,
-  `BALANCE` float NOT NULL,
-  `ACTIVITY_ID` bigint(20) NOT NULL,
-  `UPDATE_BY` char(20) NOT NULL,
-  `UPDATE_TIME` datetime NOT NULL,
-  PRIMARY KEY (`BILL_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `docu_erp_bill` */
-
-/*Table structure for table `docu_erp_charge` */
-
-DROP TABLE IF EXISTS `docu_erp_charge`;
-
-CREATE TABLE `docu_erp_charge` (
-  `CHARGE_ID` bigint(20) NOT NULL,
-  `USER_ID` char(20) NOT NULL,
-  `ACCOUNT_ID` bigint(20) NOT NULL,
-  `RECV_AMOUNT` float NOT NULL,
-  `RECV_TIME` datetime NOT NULL,
-  `PERCENT` int(11) NOT NULL,
-  `UPDATE_BY` char(20) NOT NULL,
-  `UPDATE_TIME` datetime NOT NULL,
-  PRIMARY KEY (`CHARGE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `docu_erp_charge` */
 
 /*Table structure for table `docu_erp_user` */
 
@@ -109,7 +96,7 @@ CREATE TABLE `docu_erp_user` (
 
 /*Data for the table `docu_erp_user` */
 
-insert  into `docu_erp_user`(`USER_ID`,`USER_NAME`,`TEL_NUMBER`,`IS_ACTIVE`,`IS_ADMIN`,`PASSWORD`,`UPDATE_BY`,`UPDATE_TIME`) values ('HUMA4','Marquis Hu','18688187017','1','1','123456','huma4','2015-04-24 22:52:04');
+insert  into `docu_erp_user`(`USER_ID`,`USER_NAME`,`TEL_NUMBER`,`IS_ACTIVE`,`IS_ADMIN`,`PASSWORD`,`UPDATE_BY`,`UPDATE_TIME`) values ('CMN','Common','18600000001','1','0','123456','HUMA4','2015-04-28 20:43:58'),('HUMA4','Marquis Hu','18688187017','1','1','123456','HUMA4','2015-04-28 20:44:04');
 
 /*Table structure for table `docu_erp_uuid` */
 
@@ -127,7 +114,7 @@ CREATE TABLE `docu_erp_uuid` (
 
 /*Data for the table `docu_erp_uuid` */
 
-insert  into `docu_erp_uuid`(`SEQUENCE_NAME`,`SEQUENCE_INCREMENT`,`SEQUENCE_MIN_VALUE`,`SEQUENCE_MAX_VALUE`,`SEQUENCE_CUR_VALUE`,`SEQUENCE_CYCLE`) values ('DOCU_BILL_UUID',1,1000000,18446744073709551615,1000001,0),('DOCU_CHARGE_UUID',1,1000000,18446744073709551615,1000001,0),('DOCU_ACCOUNT_UUID',1,1000000,18446744073709551615,1000002,0),('DOCU_ACTIVITY_UUID',1,1000000,18446744073709551615,1000001,0);
+insert  into `docu_erp_uuid`(`SEQUENCE_NAME`,`SEQUENCE_INCREMENT`,`SEQUENCE_MIN_VALUE`,`SEQUENCE_MAX_VALUE`,`SEQUENCE_CUR_VALUE`,`SEQUENCE_CYCLE`) values ('DOCU_ACCOUNT_UUID',1,1000000,18446744073709551615,1000001,0),('DOCU_ACTIVITY_UUID',1,1000000,18446744073709551615,1000001,0),('DOCU_ACCT_DETAIL_UUID',1,1000000,18446744073709551615,1000001,0);
 
 /* Function  structure for function  `NEXTVAL` */
 

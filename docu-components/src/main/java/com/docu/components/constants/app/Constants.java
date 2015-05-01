@@ -18,7 +18,17 @@ public class Constants {
 	public static String BILL_UUID_SEQUENCE_NAME = "DOCU_BILL_UUID";
 	public static String CHARGE_UUID_SEQUENCE_NAME = "DOCU_CHARGE_UUID";
 	public static String ACCOUNT_UUID_SEQUENCE_NAME = "DOCU_ACCOUNT_UUID";
+	public static String ACCT_DETAIL_UUID_SEQUENCE_NAME = "DOCU_ACCT_DETAIL_UUID";
 	public static String ACTIVITY_UUID_SEQUENCE_NAME = "DOCU_ACTIVITY_UUID";
 	
 	public static String USER_ID_SEPARATOR = "|";
+	public static String COMMON_USER_ID = "CMN";
+	
+	public static String TRANSACTION_TYPE_EXPENSE = "0";
+	public static String TRANSACTION_TYPE_CHARGE = "1";
+	public static String TRANSACTION_TYPE_ALL = "2";
+
+	public static String ACCOUNT_TYPE_COMMON = "0";
+	public static String ACCOUNT_TYPE_PRIVATE = "1";
+	public static String ACCOUNT_TYPE_ALL = "2";
 }

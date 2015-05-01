@@ -105,8 +105,13 @@
 	<select id="findUsers" parameterType="User" resultMap="USER_RESULT_MAP">
 		SELECT
 		<include refid="USER_DO_QUERY_COLUMNS" />
-		FROM DOCU_ERP_USER A1
-		<include refid="USER_DO_QUERY_PARAMS" />
+		<![CDATA[  
+	     	FROM DOCU_ERP_USER A1
+	    ]]>
+		<where>
+			A1.USER_ID != 'CMN'
+		</where>
+		ORDER BY A1.USER_ID 
 	</select>
 	
 	<select id="queryUserTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">

@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.docu.account.dto.Account;
-import com.docu.account.dto.BillDetail;
+import com.docu.account.dto.AccountDetail;
+import com.docu.account.service.AccountDetailService;
 import com.docu.account.service.AccountService;
-import com.docu.account.service.BillService;
 import com.docu.activity.dto.Activity;
 import com.docu.activity.service.ActivityService;
 import com.docu.components.constants.app.Constants;
@@ -21,10 +21,10 @@ import com.docu.web.common.context.EnvUtils;
 public class ActivityAction {
 	
 	@Autowired
-	private BillService billService;
+	private AccountService accountService;
 	
 	@Autowired
-	private AccountService accountService;
+	private AccountDetailService detailService;
 	
 	@Autowired
 	private ActivityService activityService;
@@ -36,12 +36,12 @@ public class ActivityAction {
 			rundata.setRedirectLocation(EnvUtils.getContextPath() + "/index.htm");
 			return;
 		}
-		String userIds = rundata.getParameters().getString("userIds");
-		Float expenseAmount = rundata.getParameters().getFloat("expenseAmount");
 		String remark = rundata.getParameters().getString("remark");
 		String location = rundata.getParameters().getString("location");
 		String activityTime = rundata.getParameters().getString("activityTime");
+		Float expenseAmount = rundata.getParameters().getFloat("expenseAmount");
 		Integer percent = rundata.getParameters().getInt("percent");
+		String userIds = rundata.getParameters().getString("userIds");
 		String updateTime = DateUtils.formatDate(new Date());
 		
 		
@@ -54,56 +54,64 @@ public class ActivityAction {
 		activity.setRemark(remark);
 		activity.setLocation(location);
 		activity.setActivityTime(activityTime);
+		activity.setPercent(percent);
 		activity.setUpdateBy(loginUserId);
 		activity.setUpdateTime(updateTime);
 		
 		int result = activityService.saveActivity(activity);
 		if (result == 1) {
-			insertBillDetail(loginUserId, activityId, userIds, expenseAmount, percent, updateTime);
+			float commonAmount = (expenseAmount * percent) / 100;
+			float privateAmount = expenseAmount - commonAmount;
+
+			String[] userId = userIds.split("\\|");
+			int length = userId.length;
+			
+			privateAmount = privateAmount / length;
+			commonAmount = commonAmount + privateAmount % length;
+			
+			for (int i = 0; i < length; i++) {
+				updateAccount(activityId, userId[i], privateAmount, percent, activityTime, loginUserId, updateTime);
+			}
+			updateAccount(activityId, Constants.COMMON_USER_ID, commonAmount, percent, activityTime, loginUserId, updateTime);
+			
 			rundata.setRedirectLocation(EnvUtils.getContextPath()+"/activity/index.htm?activityId=" + activityId);
 		} else {
 			context.put("msg", "充值失败");
 		}
 	}
 	
-	private void insertBillDetail(String loginUserId, long activityId, String userIds, Float amount, int percent, String updateTime) {
-		String[] userId = userIds.split("\\|");
-		int length = userId.length;
-		if (length == 0) {
-			return;
-		}
-		
-		Float expenseAmount = amount / length;
-		
-		for (int i = 0; i < length; i++) {
-			Account account = accountService.queryAccount(userId[i]);
-			Float balanceAmount = account.getBalanceAmount();
+	private void updateAccount(long activityId, String userId, float changeAmount, int percent, String activityTime, String updateBy, String updateTime) {
+		Account account = accountService.queryAccount(userId);
+		if (account != null) {
+			Float originAmount = account.getBalance();
+			Float balance = originAmount - changeAmount;
 			
-			Float balance = balanceAmount - expenseAmount;
-			Float privateAmount = (expenseAmount * percent) / 100;
-			Float commontAmount = expenseAmount - privateAmount;
-			
-			String sequenceName = Constants.BILL_UUID_SEQUENCE_NAME;
-			long billId = accountService.getSequenceUuid(sequenceName);
-			
-			BillDetail bill = new BillDetail();
-			bill.setBillId(billId);
-			bill.setUserId(userId[i]);
-			bill.setAccountId(account.getAccountId());
-			bill.setOriginAmount(balanceAmount);
-			bill.setExpenseAmount(expenseAmount);
-			bill.setBalance(balance);
-			bill.setActivityId(activityId);
-			bill.setUpdateBy(loginUserId);
-			bill.setUpdateTime(updateTime);
-			billService.saveBillDetail(bill);
-			
-			account.setBalanceAmount(balance);
-			account.setPrivateAmount(account.getPrivateAmount() - privateAmount);
-			account.setCommonAmount(account.getCommonAmount() - commontAmount);
-			account.setUpdateBy(loginUserId);
+			account.setBalance(balance);
+			account.setCommonAmount(balance);
+			account.setUpdateBy(updateBy);
 			account.setUpdateTime(updateTime);
+			
 			accountService.updateAccount(account);
+			
+			String sequenceName = Constants.ACCT_DETAIL_UUID_SEQUENCE_NAME;
+			long detailId = accountService.getSequenceUuid(sequenceName);
+			
+			AccountDetail detail = new AccountDetail();
+			detail.setDetailId(detailId);
+			detail.setAccountId(account.getAccountId());
+			detail.setUserId(account.getUserId());
+			detail.setOriginAmount(originAmount);
+			detail.setChangeAmount(changeAmount);
+			detail.setBalance(balance);
+			detail.setPayerId(userId);
+			detail.setTransactionType(Constants.TRANSACTION_TYPE_EXPENSE);
+			detail.setTransactionTime(activityTime);
+			detail.setActivityId(activityId);
+			detail.setPercent(percent);
+			detail.setUpdateBy(updateBy);
+			detail.setUpdateTime(updateTime);
+			
+			detailService.saveAccountDetail(detail);
 		}
 	}
 }

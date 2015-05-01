@@ -17,10 +17,7 @@
 	    </ul>
 		#end
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'chargeDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeDetails.htm">&emsp;&emsp;&emsp;充值查询</a></li>
-	    </ul>
-		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'billDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/billDetails.htm">&emsp;&emsp;&emsp;账单查询</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'accountDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/accountDetails.htm">&emsp;&emsp;&emsp;交易明细</a></li>
 	    </ul>
     </li>
 	

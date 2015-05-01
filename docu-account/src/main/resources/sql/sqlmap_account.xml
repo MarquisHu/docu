@@ -5,48 +5,50 @@
     <resultMap id="ACCOUNT_RESULT_MAP" type="Account">
         <result property="accountId" column="ACCOUNT_ID" />
 		<result property="userId" column="USER_ID" />
-		<result property="balanceAmount" column="BALANCE_AMOUNT" />
-		<result property="privateAmount" column="PRIVATE_AMOUNT" />
+		<result property="balance" column="BALANCE" />
 		<result property="commonAmount" column="COMMON_AMOUNT" />
 		<result property="updateBy" column="UPDATE_BY" />
+		<result property="updateTime" column="UPDATE_TIME" />
+	</resultMap>
+	
+    <resultMap id="BALANCE_RESULT_MAP" type="AccountBalance">
+        <result property="userId" column="USER_ID" />
+        <result property="accountId" column="ACCOUNT_ID" />
+        <result property="userName" column="USER_NAME" />
+		<result property="balance" column="BALANCE" />
+		<result property="commonAmount" column="COMMON_AMOUNT" />
 		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
 	
 	<sql id="ACCOUNT_DO_QUERY_COLUMNS">
 	    A1.ACCOUNT_ID		accountId,
 		A1.USER_ID 			userId, 
-		A1.BALANCE_AMOUNT 	balanceAmount, 
-		A1.PRIVATE_AMOUNT 	privateAmount, 
-		A1.COMMON_AMOUNT 	commonAmount,
+		A1.BALANCE 			balance,
+		A1.COMMON_AMOUNT	commonAmount,  
 		A1.UPDATE_BY 		updateBy,
 		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
-
-	<sql id="ACCOUNT_DO_QUERY_PARAMS">
-		<where>
-		    <if test="accountId != null &amp;&amp; accountId != 0">ACCOUNT_ID = #{accountId,jdbcType=BIGINT}</if>
-			<if test="userId != null">AND USER_ID = #{userId,jdbcType=VARCHAR}</if>
-			<if test="balanceAmount != null">AND BALANCE_AMOUNT = #{balanceAmount,jdbcType=FLOAT}</if>
-			<if test="privateAmount != null">AND PRIVATE_AMOUNT = #{privateAmount,jdbcType=FLOAT}</if>
-			<if test="commonAmount != null">AND COMMON_AMOUNT = #{commonAmount,jdbcType=FLOAT}</if>
-			<if test="updateBy != null">AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR}</if>
-		</where>
+	
+	<sql id="BALANCE_DO_QUERY_COLUMNS">
+	    A1.USER_ID 					userId, 
+	    A2.ACCOUNT_ID				accountId,
+		A1.USER_NAME		 		userName, 
+		A2.BALANCE		 			balance,
+		date_format(A2.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
 	
     <insert id="insertAccount" parameterType="Account">
 		INSERT INTO DOCU_ERP_ACCOUNT(
 			ACCOUNT_ID,
 			USER_ID, 
-			BALANCE_AMOUNT, 
-			PRIVATE_AMOUNT, 
+			BALANCE, 
 			COMMON_AMOUNT,
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
 			#{accountId,jdbcType=BIGINT},
 		 	#{userId,jdbcType=VARCHAR},
-		 	#{balanceAmount,jdbcType=FLOAT},
-		 	#{privateAmount,jdbcType=FLOAT},
+		 	#{balance,jdbcType=FLOAT},
 		 	#{commonAmount,jdbcType=FLOAT},
 		 	#{updateBy,jdbcType=VARCHAR},
 		 	#{updateTime,jdbcType=VARCHAR}
@@ -58,14 +60,9 @@
 			UPDATE DOCU_ERP_ACCOUNT
 		]]>
 		<set>
-			<if test="balanceAmount != null">
+			<if test="balance != null">
 			    <![CDATA[
-			    	BALANCE_AMOUNT = #{balanceAmount,jdbcType=FLOAT},
-				]]>
-			</if>
-			<if test="privateAmount != null">
-			    <![CDATA[
-			    	PRIVATE_AMOUNT = #{privateAmount,jdbcType=FLOAT},
+			    	BALANCE = #{balance,jdbcType=FLOAT},
 				]]>
 			</if>
 			<if test="commonAmount != null">
@@ -95,92 +92,70 @@
 	    ]]>
 	</select>
 	
-	<select id="findAccounts" parameterType="Account" resultMap="ACCOUNT_RESULT_MAP">
+    <select id="findAccountBalance" parameterType="String" resultMap="BALANCE_RESULT_MAP">
 		SELECT
-		<include refid="ACCOUNT_DO_QUERY_COLUMNS" />
-		FROM DOCU_ERP_ACCOUNT A1
-		<include refid="ACCOUNT_DO_QUERY_PARAMS" />
+		<include refid="BALANCE_DO_QUERY_COLUMNS" />
+	    <![CDATA[  
+	     FROM DOCU_ERP_USER A1, DOCU_ERP_ACCOUNT A2 WHERE A1.USER_ID = A2.USER_ID AND A1.USER_ID = #{userId,jdbcType=VARCHAR}
+	    ]]>
 	</select>
 	
-	<select id="queryAccountTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
+	
+    <select id="queryAccountBalanceTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
 	    SELECT
 		COUNT(*)
 		<![CDATA[  
-	     	FROM DOCU_ERP_ACCOUNT A1
+	     	FROM DOCU_ERP_USER A1, DOCU_ERP_ACCOUNT A2
 	    ]]>
 	    <where>
-	        <if test="entity.accountId != null &amp;&amp; entity.accountId != 0">
+	         <![CDATA[
+		    		A1.USER_ID = A2.USER_ID
+		    ]]>
+	        <if test="entity.userId != null">
 			    <![CDATA[
-			    	AND ACCOUNT_ID = #{entity.accountId,jdbcType=BIGINT}
+			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.userId != null">
+			<if test="entity.accountId != null">
 			    <![CDATA[
-			    	AND USER_ID = #{entity.userId,jdbcType=VARCHAR}
+			    	AND A2.ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.balanceAmount != null">
+			<if test="entity.accountType != null">
 			    <![CDATA[
-			    	AND BALANCE_AMOUNT = #{entity.balanceAmount,jdbcType=FLOAT}
-				]]>
-			</if>
-			<if test="entity.privateAmount != null">
-			    <![CDATA[
-			    	AND PRIVATE_AMOUNT = #{entity.privateAmount,jdbcType=FLOAT}
-				]]>
-			</if>
-			<if test="entity.commonAmount != null">
-			    <![CDATA[
-			    	AND COMMON_AMOUNT = #{entity.commonAmount,jdbcType=FLOAT}
-				]]>
-			</if>
-			<if test="entity.updateBy != null">
-			    <![CDATA[
-			    	AND UPDATE_BY = #{entity.updateBy,jdbcType=VARCHAR}
+			    	AND A2.ACCOUNT_TYPE = #{entity.accountType,jdbcType=VARCHAR}
 				]]>
 			</if>
 		</where>
 	</select>
 	
-	<select id="queryAccount" parameterType="com.docu.components.common.QueryBase" resultMap="ACCOUNT_RESULT_MAP">
+	<select id="queryAccountBalance" parameterType="com.docu.components.common.QueryBase" resultMap="BALANCE_RESULT_MAP">
 	    SELECT
-		<include refid="ACCOUNT_DO_QUERY_COLUMNS" />
+		<include refid="BALANCE_DO_QUERY_COLUMNS" />
 		<![CDATA[  
-	     	FROM DOCU_ERP_ACCOUNT A1
+	     	FROM DOCU_ERP_USER A1, DOCU_ERP_ACCOUNT A2
 	    ]]>
 	    <where>
-	        <if test="entity.accountId != null &amp;&amp; entity.accountId != 0">
+	         <![CDATA[
+		    		A1.USER_ID = A2.USER_ID
+		    ]]>
+	        <if test="entity.userId != null">
 			    <![CDATA[
-			    	AND ACCOUNT_ID = #{entity.accountId,jdbcType=BIGINT}
+			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.userId != null">
+			<if test="entity.accountId != null">
 			    <![CDATA[
-			    	AND USER_ID = #{entity.userId,jdbcType=VARCHAR}
+			    	AND A2.ACCOUNT_ID = #{entity.accountId,jdbcType=VARCHAR}
 				]]>
 			</if>
-			<if test="entity.balanceAmount != null">
+			<if test="entity.accountType != null">
 			    <![CDATA[
-			    	AND BALANCE_AMOUNT = #{entity.balanceAmount,jdbcType=FLOAT}
-				]]>
-			</if>
-			<if test="entity.privateAmount != null">
-			    <![CDATA[
-			    	AND PRIVATE_AMOUNT = #{entity.privateAmount,jdbcType=FLOAT}
-				]]>
-			</if>
-			<if test="entity.commonAmount != null">
-			    <![CDATA[
-			    	AND COMMON_AMOUNT = #{entity.commonAmount,jdbcType=FLOAT}
-				]]>
-			</if>
-			<if test="entity.updateBy != null">
-			    <![CDATA[
-			    	AND UPDATE_BY = #{entity.updateBy,jdbcType=VARCHAR}
+			    	AND A2.ACCOUNT_TYPE = #{entity.accountType,jdbcType=VARCHAR}
 				]]>
 			</if>
 		</where>
-		ORDER BY A1.ACCOUNT_ID, A1.USER_ID 
+		ORDER BY A2.ACCOUNT_ID, A1.USER_ID 
 		LIMIT #{preEndNum}, #{pageSize}
 	</select>
 	

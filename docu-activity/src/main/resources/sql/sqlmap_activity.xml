@@ -8,6 +8,7 @@
 		<result property="remark" column="REMARK" />
 		<result property="location" column="LOCATION" />
 		<result property="activityTime" column="ACTIVITY_TIME" />
+		<result property="percent" column="PERCENT" />
 		<result property="updateBy" column="UPDATE_BY" />
 		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
@@ -18,6 +19,7 @@
 		A1.REMARK 			remark,
 		A1.LOCATION 		location,
 		date_format(A1.ACTIVITY_TIME, '%Y-%m-%d %h:%i:%s') activityTime,
+		A1.PERCENT 			percent,
 		A1.UPDATE_BY 		updateBy,
 		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
@@ -40,6 +42,7 @@
 			REMARK, 
 			LOCATION, 
 			ACTIVITY_TIME, 
+			PERCENT,
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
@@ -48,6 +51,7 @@
 		 	#{remark,jdbcType=VARCHAR},
 		 	#{location,jdbcType=VARCHAR},
 		 	#{activityTime,jdbcType=VARCHAR},
+		 	#{percent,jdbcType=INTEGER},
 		 	#{updateBy,jdbcType=VARCHAR},
 		 	#{updateTime,jdbcType=VARCHAR}
 		)
@@ -76,6 +80,11 @@
 			<if test="activityTime != null">
 			    <![CDATA[
 			    	ACTIVITY_TIME = #{activityTime,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="percent != null">
+			    <![CDATA[
+			    	PERCENT = #{percent,jdbcType=INTEGER},
 				]]>
 			</if>
 			<if test="updateBy != null">

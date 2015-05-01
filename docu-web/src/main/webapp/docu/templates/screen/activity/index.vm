@@ -56,6 +56,7 @@ $!msg
 				                <th style="width: 30px;">活动描述</th>
 				                <th style="width: 30px;">活动地点</th>
 								<th style="width: 10px;">活动时间</th>
+								<th style="width: 30px;">操作</th>
 				            </tr>
 				        </thead>
 				        <tbody>
@@ -87,6 +88,9 @@ $!msg
 					                            $!activity.activityTime
 					                        </span>
 					                    </td>
+										<td style="width: 30px;" class="center">
+				                            <a href="$!envUtil.getContextPath()/acct/accountDetails.htm?activityId=$!{activity.activityId}"><span style="color:red">交易明细</span></a>
+				                        </td>
 					                </tr>
 				                </td>
 				             #end

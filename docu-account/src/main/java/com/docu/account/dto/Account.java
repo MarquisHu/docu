@@ -4,8 +4,7 @@ package com.docu.account.dto;
 public class Account {
 	Long accountId;
 	String userId;
-	Float balanceAmount;
-	Float privateAmount;
+	Float balance;
 	Float commonAmount;
 	String updateBy;
 	String updateTime;
@@ -22,17 +21,11 @@ public class Account {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Float getBalanceAmount() {
-		return balanceAmount;
+	public Float getBalance() {
+		return balance;
 	}
-	public void setBalanceAmount(Float balanceAmount) {
-		this.balanceAmount = balanceAmount;
-	}
-	public Float getPrivateAmount() {
-		return privateAmount;
-	}
-	public void setPrivateAmount(Float privateAmount) {
-		this.privateAmount = privateAmount;
+	public void setBalance(Float balance) {
+		this.balance = balance;
 	}
 	public Float getCommonAmount() {
 		return commonAmount;

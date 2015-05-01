@@ -17,26 +17,26 @@ $!msg
 						<div class="widget-content "> 
 						
 						<div class="control-group">
-							<label class="control-label">活动描述：</label>
+							<label class="control-label"><span style="color:red">* </span>活动描述：</label>
 							<div class="controls">
-    							<input type="text" name="remark" id="remark" value="$!remark" style="width:320px" placeholder="活动描述" />
+    							<input type="text" name="remark" id="remark" value="$!remark" style="width:320px" placeholder="请输入活动描述" />
 								<div class="s_remark" style="color:red;display:none;"></div>
 							</div>
 						</div>
 						
 						<div class="control-group">
-							<label class="control-label">活动地点：</label>
+							<label class="control-label"><span style="color:red">* </span>活动地点：</label>
 							<div class="controls">
-								<input type="text" name="location" id="location" value="$!location" style="width:175px" placeholder="活动地点" />
+								<input type="text" name="location" id="location" value="$!location" style="width:175px" placeholder="请输入活动地点" />
 								<div class="s_location" style="color:red;display:none;"></div>
 							</div>
 						</div>
 						
 						<div class="control-group">
-							<label class="control-label">活动时间：</label>
+							<label class="control-label"><span style="color:red">* </span>活动时间：</label>
 							<div class="controls">
 								<div class="input-append date" id="start_datetimepicker" data-date-format="yyyy-mm-dd">
-    		                        <input class="span2" size="120" type="text" name="activityTime" id="activityTime" value="$!activityTime" placeholder="活动时间" >
+    		                        <input class="span2" size="120" type="text" name="activityTime" id="activityTime" value="$!activityTime" placeholder="请选择活动时间" >
     		                        <span class="add-on"><i class="icon-remove"></i></span>
     		                        <span class="add-on"><i class="icon-th"></i></span>
 		                    	</div> 
@@ -45,10 +45,18 @@ $!msg
 						</div>
 						
 						<div class="control-group">
-							<label class="control-label">活动开销：</label>
+							<label class="control-label"><span style="color:red">* </span>活动开销：</label>
 							<div class="controls">
-								<input type="text" name="expenseAmount" id="expenseAmount" value="$!expenseAmount" style="width:80px" placeholder="活动开销" />
+								<input type="text" name="expenseAmount" id="expenseAmount" value="$!expenseAmount" style="width:100px" placeholder="请输入开销金额" />
 								<div class="s_expenseAmount" style="color:red;display:none;"></div>
+								<label style="margin-left:50px"><span style="color:red">* </span>百分比：</label>
+    							<select style="width:60px" name="percent">
+                                    <option>20</option>
+									<option>30</option>
+									<option>40</option>
+                                    <option>50</option>
+								</select>
+    							<label >公共账户所占比例</label>
 							</div>
 						</div>
 						
@@ -149,7 +157,7 @@ $!msg
 		}
 		
 		if($.trim(expenseAmount.val()).length == 0){
-			$('.s_expenseAmount').html("<label/>活动开销不能为空</label>");
+			$('.s_expenseAmount').html("<label/>开销金额不能为空</label>");
 			$('.s_expenseAmount').css('display','block');
         	result = false;
 		}
@@ -221,23 +229,23 @@ $!msg
    	})
 	
 	addListener(myRemark,"blur",function(){  
-    	myRemark.placeholder = ""; 
+    	myRemark.placeholder = "请输入活动描述"; 
 		$('.s_remark').css('display','none');
    	})
 	addListener(myLocation,"blur",function(){  
-    	myUserName.placeholder = ""; 
+    	myLocation.placeholder = "请输入活动地点"; 
 		$('.s_location').css('display','none');
    	})
    	addListener(myActivityTime,"blur",function(){  
-    	myActivityTime.placeholder = ""; 
+    	myActivityTime.placeholder = "请选择活动时间"; 
 		$('.s_activityTime').css('display','none');
    	})
 	addListener(myExpenseAmount,"blur",function(){  
-    	myExpenseAmount.placeholder = ""; 
+    	myExpenseAmount.placeholder = "请输入开销金额"; 
 		$('.s_expenseAmount').css('display','none');
    	})
    	addListener(myChoose,"blur",function(){  
-    	myChoose.placeholder = ""; 
+    	myChoose.placeholder = "请选择活动参与人员"; 
 		$('.s_participators').css('display','none');
    	})
 	

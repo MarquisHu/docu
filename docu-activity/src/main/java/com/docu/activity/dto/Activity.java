@@ -1,11 +1,12 @@
 package com.docu.activity.dto;
 
 public class Activity {
-	private Long activityId;
-	private Float expenseAmount;
-	private String remark;
+	Long activityId;
+	Float expenseAmount;
+	String remark;
 	String location;
 	String activityTime;
+	Integer percent;
 	String updateBy;
 	String updateTime;
 	public Long getActivityId() {
@@ -37,6 +38,12 @@ public class Activity {
 	}
 	public void setActivityTime(String activityTime) {
 		this.activityTime = activityTime;
+	}
+	public Integer getPercent() {
+		return percent;
+	}
+	public void setPercent(Integer percent) {
+		this.percent = percent;
 	}
 	public String getUpdateBy() {
 		return updateBy;

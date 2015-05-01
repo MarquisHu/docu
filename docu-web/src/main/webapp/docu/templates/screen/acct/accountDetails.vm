@@ -1,5 +1,5 @@
 #set($title = "DOCU账务管理系统")
-#set($menu = "acct#chargeDetails")
+#set($menu = "acct#accountDetails")
 $!msg
 <style >
 	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
@@ -9,18 +9,44 @@ $!msg
 <div class="container-fluid">
 	<div class="widget-box">
 		<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-			<h5>充值查询</h5>
+			<h5>交易明细</h5>
 		</div>
 		<div class="widget-content tab-content">
 			<div id="tab1" class="tab-pane active">
 				<div class="widget-content nopadding">
-			        <form id="query_page_form" class="form-horizontal" method="post" action="$!envUtil.getContextPath()/acct/chargeDetails.htm">
+			        <form id="query_page_form" class="form-horizontal" method="post" action="$!envUtil.getContextPath()/acct/accountDetails.htm">
 						<input type="hidden" name="pageNum" value="1" />
 			            <div class="tablesearchcase">
 							<div class="dataTables_length" id="">
 								<label>用户账号：</label>
 								<input class="span2" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
-								<label style="margin-left:50px;" >交易时间：</label>
+								<label style="margin-left:20px;">交易类型：</label>
+    							<select style="width:80px" id="transactionType" name="transactionType">
+									#if($!transactionType=='0')
+										<option value="2">所有</option>
+										<option value="1">收入</option>
+										<option value="0" selected>支出</option>
+									#elseif($!transactionType=='1')
+										<option value="2">所有</option>
+										<option value="1" selected>收入</option>
+										<option value="0">支出</option>
+									#else
+										<option value="2" selected>所有</option>
+										<option value="1">收入</option>
+										<option value="0">支出</option>
+									#end
+								</select>
+			                </div>
+							<div class="dataTables_length" id="">
+								<label>账户编号：</label>
+								<input class="span2" type="text" id="accountId" name="accountId" value="$!accountId" placeholder="账户编号" />
+								<label style="margin-left:20px;">付款人：</label>
+								<input class="span2" type="text" id="payerId" name="payerId" value="$!payerId" placeholder="付款人" />
+			                </div>
+							<div class="dataTables_length" id="">
+								<label>活动编号：</label>
+								<input class="span2" type="text" id="activityId" name="activityId" value="$!activityId" placeholder="活动编号" />
+								<label style="margin-left:20px;">交易时间：</label>
 								<div class="input-append date" id="start_datetimepicker" data-date-format="yyyy-mm-dd">
 			                        <input class="span2" size="16" type="text" name="startDate" id="startDate" value="$!startDate" >
 			                        <span class="add-on"><i class="icon-remove"></i></span>
@@ -34,7 +60,7 @@ $!msg
 			                    </div>
 								<button class="btn btn-success" style="margin-left:80px;" type="submit">查询</button>
 								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
-			                </div>
+							</div>
 			            </div>
 			        </form>
 			        <br />
@@ -51,40 +77,68 @@ $!msg
 				    <table class="table table-bordered table-striped with-check">
 				    	<thead>
 				            <tr>
-								<th style="width: 10px;">交易流水</th>
-				            	<th style="width: 10px;">用户账号</th>
 				                <th style="width: 10px;">账户编号</th>
-				                <th style="width: 5px;">充值金额</th>
-								<th style="width: 10px;">交易时间</th>
+								<th style="width: 10px;">用户账号</th>
+								<th style="width: 5px;">原始金额</th>
+								<th style="width: 5px;">交易金额</th>
+								<th style="width: 5px;">账户余额</th>
+								<th style="width: 5px;">交易类型</th>
+								<th style="width: 5px;">付款人</th>
+								<th style="width: 10px;">活动编号</th>
+								<th style="width: 30px;">交易时间</th>
 				            </tr>
 				        </thead>
 				        <tbody>
-				            #foreach($charge in $!page.rows)
-				            	<td colspan="6" class="tablegroup nopadding">
-					        		<tr id="$!charge.userId">
+				            #foreach($detail in $!page.rows)
+				            	<td colspan="9" class="tablegroup nopadding">
+					        		<tr id="$!detail.userId">
 										<td class="noborder center" style="width: 10px;">
 					                        <span class="">
-					                            $!charge.chargeId
+					                            $!detail.accountId
 					                        </span>
 					                    </td>
 										<td class="noborder center" style="width: 10px;">
 					                        <span class="">
-					                            $!charge.userId
-					                        </span>
-					                    </td>
-										<td class="noborder center" style="width: 10px;">
-					                        <span class="">
-					                            $!charge.accountId
+					                            $!detail.userId
 					                        </span>
 					                    </td>
 					                    <td class="noborder center" style="width: 5px;">
 					                        <span class="">
-					                            $!charge.recvAmount
+					                            $!detail.originAmount
 					                        </span>
 					                    </td>
-					                    <td class="noborder center" style="width: 10px;">
+										<td class="noborder center" style="width: 5px;">
 					                        <span class="">
-					                            $!charge.recvTime
+					                            $!detail.changeAmount
+					                        </span>
+					                    </td>
+										<td class="noborder center" style="width: 5px;">
+					                        <span class="">
+					                            $!detail.balance
+					                        </span>
+					                    </td>
+										<td class="noborder center" style="width: 5px;">
+					                        <span class="">
+												#if($!detail.transactionType == '1')
+													收入
+												#else
+													支出
+												#end
+					                        </span>
+					                    </td>
+										<td class="noborder center" style="width: 5px;">
+					                        <span class="">
+					                            $!detail.payerId
+					                        </span>
+					                    </td>
+										<td class="noborder center" style="width: 10px;">
+					                        <span class="">
+					                            $!detail.activityId
+					                        </span>
+					                    </td>
+										<td class="noborder center" style="width: 30px;">
+					                        <span class="">
+					                            $!detail.updateTime
 					                        </span>
 					                    </td>
 					                </tr>
@@ -121,6 +175,11 @@ $!msg
 <script>
 	function clearQuery(){
 		$("#userId").val("");
+		$("#transactionType").val("2");
+		$(".select2-choice span").html("所有");
+		$("#accountId").val("");
+		$("#payerId").val("");
+		$("#activityId").val("");
 		$("#startDate").val("");
 		$("#endDate").val("");
 	}

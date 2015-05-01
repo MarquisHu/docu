@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.webx.WebxException;
-import com.docu.account.dto.ChargeAccountDetail;
-import com.docu.account.service.ChargeService;
+import com.docu.account.dto.AccountBalance;
+import com.docu.account.service.AccountService;
 import com.docu.web.common.context.EnvUtils;
 
 public class ChargeAccount {
 	
 	@Autowired
-	private ChargeService chargeService;
+	private AccountService accountService;
 	
 	public void execute(TurbineRunData rundata, Context context) throws WebxException {
 		HttpSession session = rundata.getRequest().getSession();
@@ -28,10 +28,11 @@ public class ChargeAccount {
 		if (userId == null) {
 			userId = loginUserId;
 		}
-		ChargeAccountDetail account = chargeService.findChargeAccountDetail(userId);
+		AccountBalance account = accountService.queryAccountBalance(userId);
 		context.put("account", account);
 		context.put("admin", admin);
 		context.put("userId", userId);
+		context.put("payerId", userId);
 		context.put("loginUserId", loginUserId);
 	}
 }

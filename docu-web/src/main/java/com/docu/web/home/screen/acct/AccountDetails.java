@@ -7,17 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.webx.WebxException;
-import com.docu.account.dto.ChargeDetail;
-import com.docu.account.dto.ChargeDetailCriteria;
-import com.docu.account.service.ChargeService;
+import com.docu.account.dto.AccountDetail;
+import com.docu.account.dto.AccountDetailCriteria;
+import com.docu.account.service.AccountDetailService;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
+import com.docu.components.constants.app.Constants;
 import com.docu.web.common.context.EnvUtils;
 
-public class ChargeDetails {
-	
+public class AccountDetails {
 	@Autowired
-	private ChargeService chargeService;
+	private AccountDetailService detailService;
 	
 	public void execute(TurbineRunData rundata, Context context) throws WebxException {
 		HttpSession session = rundata.getRequest().getSession();
@@ -28,27 +28,44 @@ public class ChargeDetails {
 			return;
 		}
 		int pageNum = rundata.getParameters().getInt("pageNum");
-		Long chargeId = rundata.getParameters().getLong("chargeId");
 		String userId = rundata.getParameters().getString("userId");
-		Long accountId = rundata.getParameters().getLong("accountId");
+		String accountId = rundata.getParameters().getString("accountId");
+		String payerId = rundata.getParameters().getString("payerId");
+		String transactionType = rundata.getParameters().getString("transactionType");
+		String activityId = rundata.getParameters().getString("activityId");
 		String startDate = rundata.getParameters().getString("startDate");
 		String endDate = rundata.getParameters().getString("endDate");
 		
-		ChargeDetailCriteria entity = new ChargeDetailCriteria();
-		entity.setChargeId(chargeId);
+		AccountDetailCriteria entity = new AccountDetailCriteria();
 		entity.setUserId(userId);
 		entity.setAccountId(accountId);
+		entity.setPayerId(payerId);
+		if (transactionType != null && Constants.TRANSACTION_TYPE_ALL.equals(transactionType)) {
+			entity.setTransactionType(null);
+		} else {
+			entity.setTransactionType(transactionType);
+		}
+		
+		entity.setActivityId(activityId);
 		entity.setStartDate(startDate);
 		entity.setEndDate(endDate);
 		
 		QueryBase query = new QueryBase(pageNum, entity);
-		PageDO<ChargeDetail> page = chargeService.queryChargeDetail(query);
+		PageDO<AccountDetail> page = detailService.queryAccountDetails(query);
 		
 		context.put("page", page);
 		context.put("admin", admin);
+		context.put("userId", userId);
+		context.put("accountId", accountId);
+		context.put("payerId", payerId);
+		if (transactionType == null) {
+			context.put("transactionType", Constants.TRANSACTION_TYPE_ALL);
+		} else {
+			context.put("transactionType", transactionType);
+		}
+		context.put("activityId", activityId);
 		context.put("startDate", startDate);
 		context.put("endDate", endDate);
-		context.put("userId", userId);
 		context.put("loginUserId", loginUserId);
 	}
 }
