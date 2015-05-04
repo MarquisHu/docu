@@ -6,7 +6,6 @@
         <result property="accountId" column="ACCOUNT_ID" />
 		<result property="userId" column="USER_ID" />
 		<result property="balance" column="BALANCE" />
-		<result property="commonAmount" column="COMMON_AMOUNT" />
 		<result property="updateBy" column="UPDATE_BY" />
 		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
@@ -16,7 +15,6 @@
         <result property="accountId" column="ACCOUNT_ID" />
         <result property="userName" column="USER_NAME" />
 		<result property="balance" column="BALANCE" />
-		<result property="commonAmount" column="COMMON_AMOUNT" />
 		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
 	
@@ -24,7 +22,6 @@
 	    A1.ACCOUNT_ID		accountId,
 		A1.USER_ID 			userId, 
 		A1.BALANCE 			balance,
-		A1.COMMON_AMOUNT	commonAmount,  
 		A1.UPDATE_BY 		updateBy,
 		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
@@ -42,14 +39,12 @@
 			ACCOUNT_ID,
 			USER_ID, 
 			BALANCE, 
-			COMMON_AMOUNT,
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
 			#{accountId,jdbcType=BIGINT},
 		 	#{userId,jdbcType=VARCHAR},
 		 	#{balance,jdbcType=FLOAT},
-		 	#{commonAmount,jdbcType=FLOAT},
 		 	#{updateBy,jdbcType=VARCHAR},
 		 	#{updateTime,jdbcType=VARCHAR}
 		)
@@ -63,11 +58,6 @@
 			<if test="balance != null">
 			    <![CDATA[
 			    	BALANCE = #{balance,jdbcType=FLOAT},
-				]]>
-			</if>
-			<if test="commonAmount != null">
-			    <![CDATA[
-			    	COMMON_AMOUNT = #{commonAmount,jdbcType=FLOAT},
 				]]>
 			</if>
 			<if test="updateBy != null">

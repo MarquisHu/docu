@@ -24,7 +24,6 @@ CREATE TABLE `docu_erp_account` (
   `ACCOUNT_ID` bigint(20) NOT NULL,
   `USER_ID` char(20) NOT NULL,
   `BALANCE` float DEFAULT NULL,
-  `COMMON_AMOUNT` float DEFAULT NULL,
   `ACCOUNT_TYPE` char(1) NOT NULL DEFAULT '1',
   `UPDATE_BY` char(20) DEFAULT NULL,
   `UPDATE_TIME` datetime DEFAULT NULL,
@@ -34,8 +33,6 @@ CREATE TABLE `docu_erp_account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `docu_erp_account` */
-
-insert  into `docu_erp_account`(`ACCOUNT_ID`,`USER_ID`,`BALANCE`,`COMMON_AMOUNT`,`ACCOUNT_TYPE`,`UPDATE_BY`,`UPDATE_TIME`) values (1000001,'CMN',0,0,'0','huma4','2015-05-01 22:38:54'),(1000002,'HUMA4',0,0,'1','huma4','2015-05-01 22:38:54');
 
 /*Table structure for table `docu_erp_acct_detail` */
 
@@ -96,7 +93,7 @@ CREATE TABLE `docu_erp_user` (
 
 /*Data for the table `docu_erp_user` */
 
-insert  into `docu_erp_user`(`USER_ID`,`USER_NAME`,`TEL_NUMBER`,`IS_ACTIVE`,`IS_ADMIN`,`PASSWORD`,`UPDATE_BY`,`UPDATE_TIME`) values ('CMN','Common','18600000001','1','0','123456','HUMA4','2015-04-28 20:43:58'),('HUMA4','Marquis Hu','18688187017','1','1','123456','HUMA4','2015-04-28 20:44:04');
+insert  into `docu_erp_user`(`USER_ID`,`USER_NAME`,`TEL_NUMBER`,`IS_ACTIVE`,`IS_ADMIN`,`PASSWORD`,`UPDATE_BY`,`UPDATE_TIME`) values ('CMN','Common','18600000001','1','0','123456','HUMA4','2015-05-04 20:23:24'),('HUMA4','Marquis Hu','18688187017','1','1','123456','HUMA4','2015-05-04 20:23:32');
 
 /*Table structure for table `docu_erp_uuid` */
 

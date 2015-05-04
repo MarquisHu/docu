@@ -52,11 +52,6 @@ public class AccountAction {
 			
 			account.setAccountId(accountId);
 			account.setBalance(balance + privateAmount);
-			if (account.getCommonAmount() == null) {
-				account.setCommonAmount(commontAmount);
-			} else {
-				account.setCommonAmount(account.getCommonAmount() + commontAmount);
-			}
 			account.setUpdateBy(loginUserId);
 			account.setUpdateTime(updateTime);
 			
@@ -97,7 +92,6 @@ public class AccountAction {
 			Float balance = originAmount + changeAmount;
 			
 			account.setBalance(balance);
-			account.setCommonAmount(balance);
 			account.setUpdateBy(updateBy);
 			account.setUpdateTime(updateTime);
 			

@@ -57,6 +57,7 @@ $!msg
 							<label class="control-label"><span style="color:red">* </span>百分比：</label>
 							<div class="controls">
 								<select style="width:60px" name="percent">
+									<option>10</option>
                                     <option>20</option>
 									<option>30</option>
 									<option>40</option>

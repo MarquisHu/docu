@@ -67,7 +67,6 @@ public class ActivityAction {
 			int length = userId.length;
 			
 			privateAmount = privateAmount / length;
-			commonAmount = commonAmount + privateAmount % length;
 			
 			for (int i = 0; i < length; i++) {
 				updateAccount(activityId, userId[i], privateAmount, percent, activityTime, loginUserId, updateTime);
@@ -87,7 +86,6 @@ public class ActivityAction {
 			Float balance = originAmount - changeAmount;
 			
 			account.setBalance(balance);
-			account.setCommonAmount(balance);
 			account.setUpdateBy(updateBy);
 			account.setUpdateTime(updateTime);
 			

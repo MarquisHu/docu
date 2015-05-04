@@ -156,7 +156,6 @@ public class UserAction {
 			account.setAccountId(accountId);
 			account.setUserId(userId);
 			account.setBalance(0.0f);
-			account.setCommonAmount(0.0f);
 			account.setUpdateBy(loginUserId);
 			account.setUpdateTime(updateTime);
 			accountService.saveAccount(account);

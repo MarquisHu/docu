@@ -42,6 +42,7 @@
 			TEL_NUMBER,
 			IS_ACTIVE,
 			IS_ADMIN,
+			PASSWORD,
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
@@ -50,6 +51,7 @@
 		 	#{telphoneNumber,jdbcType=VARCHAR},
 		 	#{active,jdbcType=VARCHAR},
 		 	#{admin,jdbcType=VARCHAR},
+		 	#{password,jdbcType=VARCHAR},
 		 	#{updateBy,jdbcType=VARCHAR},
 		 	#{updateTime,jdbcType=VARCHAR}
 		)
@@ -78,6 +80,11 @@
 			<if test="admin != null">
 			    <![CDATA[
 			    	IS_ADMIN = #{admin,jdbcType=VARCHAR},
+				]]>
+			</if>
+			<if test="password != null">
+			    <![CDATA[
+			    	PASSWORD = #{password,jdbcType=VARCHAR},
 				]]>
 			</if>
 			<if test="updateBy != null">

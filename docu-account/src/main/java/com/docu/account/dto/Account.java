@@ -5,7 +5,6 @@ public class Account {
 	Long accountId;
 	String userId;
 	Float balance;
-	Float commonAmount;
 	String updateBy;
 	String updateTime;
 	
@@ -26,12 +25,6 @@ public class Account {
 	}
 	public void setBalance(Float balance) {
 		this.balance = balance;
-	}
-	public Float getCommonAmount() {
-		return commonAmount;
-	}
-	public void setCommonAmount(Float commonAmount) {
-		this.commonAmount = commonAmount;
 	}
 	public String getUpdateBy() {
 		return updateBy;
