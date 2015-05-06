@@ -31,6 +31,11 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	@Override
+	public String getTotalBalance() {
+		return accountDao.getTotalBalance();
+	}
+
+	@Override
 	public AccountBalance queryAccountBalance(String userId) {
 		return accountDao.findAccountBalance(userId);
 	}

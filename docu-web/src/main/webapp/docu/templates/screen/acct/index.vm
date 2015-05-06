@@ -42,6 +42,13 @@ $!msg
 								<button class="btn btn-success" style="margin-left:20px;" type="submit">查询</button>
 								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
 			                </div>
+							<br>
+			                <div class="dataTables_length" id="">
+			                	<div class="span3 tr">总余额：$!balance</div>
+			                	<div class="span3 tr">总收入：$!incomeAmount</div>
+			                	<div class="span3 tr">总支出：$!expendAmount</div>
+		                	</div>
+							<br>
 			            </div>
 			        </form>
 			        <br />

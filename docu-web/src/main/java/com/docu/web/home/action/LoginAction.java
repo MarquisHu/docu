@@ -2,6 +2,7 @@ package com.docu.web.home.action;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,6 +33,7 @@ public class LoginAction {
 		String password = pars.getString("password");
 		String errmsg = null;
 		try {
+			password = DigestUtils.md5Hex(password);
 			User user = userService.queryUser(loginUserId);
 			if (user == null || !password.equals(user.getPassword())) {
 				errmsg="Please input right of UserId and Password!";

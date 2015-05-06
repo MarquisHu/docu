@@ -18,6 +18,7 @@
         <typeAlias type="com.docu.account.dto.Account" alias="Account" />
         <typeAlias type="com.docu.account.dto.AccountBalance" alias="AccountBalance" />
         <typeAlias type="com.docu.account.dto.AccountDetail" alias="AccountDetail" />
+        <typeAlias type="com.docu.account.dto.AccountDetailCriteria" alias="AccountDetailCriteria" />
         
         <typeAlias type="com.docu.activity.dto.Activity" alias="Activity" />
     </typeAliases>

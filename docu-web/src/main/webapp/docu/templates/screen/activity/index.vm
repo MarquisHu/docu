@@ -39,68 +39,74 @@ $!msg
 			        </form>
 			        <br />
 			    </div>
-			</div>			    	
-		    <div class="container-fluid"> 
-				<!-- InstanceBeginEditable name="content" -->
-		    	<br />
-		    	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
-		    	<div class="widget-box">
-		    		<form id="query_page_form" class="form-horizontal" method="post" action="">
-		    			<input type="hidden" name="pageNum" value="1" />
-		    		</form>
-				    <table class="table table-bordered table-striped with-check">
-				    	<thead>
-				            <tr>
-								<th style="width: 10px;">活动编号</th>
-				            	<th style="width: 5px;">消费金额</th>
-				                <th style="width: 30px;">活动描述</th>
-				                <th style="width: 30px;">活动地点</th>
-								<th style="width: 10px;">活动时间</th>
-								<th style="width: 30px;">操作</th>
-				            </tr>
-				        </thead>
-				        <tbody>
-				            #foreach($activity in $!page.rows)
-				            	<td colspan="6" class="tablegroup nopadding">
-					        		<tr id="$!activity.activityId">
-										<td class="noborder center" style="width: 10px;">
-					                        <span class="">
-					                            $!activity.activityId
-					                        </span>
-					                    </td>
-										<td class="noborder center" style="width: 5px;">
-					                        <span class="">
-					                            $!activity.expenseAmount
-					                        </span>
-					                    </td>
-										<td class="noborder center" style="width: 30px;">
-					                        <span class="">
-					                            $!activity.remark
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 30px;">
-					                        <span class="">
-					                            $!activity.location
-					                        </span>
-					                    </td>
-					                    <td class="noborder center" style="width: 10px;">
-					                        <span class="">
-					                            $!activity.activityTime
-					                        </span>
-					                    </td>
-										<td style="width: 30px;" class="center">
-				                            <a href="$!envUtil.getContextPath()/acct/accountDetails.htm?activityId=$!{activity.activityId}"><span style="color:red">交易明细</span></a>
-				                        </td>
-					                </tr>
-				                </td>
-				             #end
-				        </tbody>
-				    </table>
+			</div>	
+			<form method="post" action="" id="activity_list_form">
+				<input type="hidden" name="action" value="" />
+				<input type="hidden" id="event_submit_method" name="" value="1" />	
+				
+				<div class="container-fluid"> 
+    				<!-- InstanceBeginEditable name="content" -->
+    		    	<br />
+    		    	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
+    		    	<div class="widget-box">
+    		    		<form id="query_page_form" class="form-horizontal" method="post" action="">
+    		    			<input type="hidden" name="pageNum" value="1" />
+    		    		</form>
+    				    <table class="table table-bordered table-striped with-check">
+    				    	<thead>
+    				            <tr>
+    								<th style="width: 10px;">活动编号</th>
+    				            	<th style="width: 5px;">消费金额</th>
+    				                <th style="width: 30px;">活动描述</th>
+    				                <th style="width: 30px;">活动地点</th>
+    								<th style="width: 10px;">活动时间</th>
+    								<th style="width: 30px;">操作</th>
+    				            </tr>
+    				        </thead>
+    				        <tbody>
+    				            #foreach($activity in $!page.rows)
+    				            	<td colspan="6" class="tablegroup nopadding">
+    					        		<tr id="$!activity.activityId">
+    										<td class="noborder center" style="width: 10px;">
+    					                        <span class="">
+    					                            $!activity.activityId
+    					                        </span>
+    					                    </td>
+    										<td class="noborder center" style="width: 5px;">
+    					                        <span class="">
+    					                            $!activity.expenseAmount
+    					                        </span>
+    					                    </td>
+    										<td class="noborder center" style="width: 30px;">
+    					                        <span class="">
+    					                            $!activity.remark
+    					                        </span>
+    					                    </td>
+    					                    <td class="noborder center" style="width: 30px;">
+    					                        <span class="">
+    					                            $!activity.location
+    					                        </span>
+    					                    </td>
+    					                    <td class="noborder center" style="width: 10px;">
+    					                        <span class="">
+    					                            $!activity.activityTime
+    					                        </span>
+    					                    </td>
+    										<td style="width: 30px;" class="center">
+    											<a class="undo_apply" href="" activityId="$!activity.activityId" data-toggle="modal" onclick=""><span style="color:red">删除</span></a>
+    				                            <a href="$!envUtil.getContextPath()/acct/accountDetails.htm?activityId=$!{activity.activityId}"><span style="color:red">交易明细</span></a>
+    				                        </td>
+    					                </tr>
+    				                </td>
+    				             #end
+    				        </tbody>
+    				    </table>
+    				</div>
+    				<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
+    	             	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
+    	          	</div>
 				</div>
-				<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
-	             	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
-	          	</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -128,6 +134,20 @@ $!msg
 		$("#startDate").val("");
 		$("#endDate").val("");
 	}
+	
+	$(function(){
+    	$(".undo_apply").each(function(index, element){
+            $(element).click(function(){
+                var activityId=$(this).attr("activityId");
+                var form=$("#activity_list_form");
+                form.attr("action","$!envUtil.getContextPath()/activity/index.htm?activityId="+activityId);
+                form.find("input[name='action']").val("/activity/ActivityAction");
+                form.find("#event_submit_method").attr("name","event_submit_do_undo").val("1");
+                form.submit();
+            });
+        });
+	});
+	
     $(document).ready(function () {
         $('select').select2({minimumResultsForSearch: 1});
         $('.logotip').delay(500).animate({opacity: 1, left: 130});

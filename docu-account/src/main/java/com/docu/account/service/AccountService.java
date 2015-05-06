@@ -13,6 +13,8 @@ public interface AccountService {
 	
 	Account queryAccount(String userId);
 	
+	String getTotalBalance();
+	
 	AccountBalance queryAccountBalance(String userId);
 	
 	PageDO<AccountBalance> queryAccountBalance(QueryBase query);

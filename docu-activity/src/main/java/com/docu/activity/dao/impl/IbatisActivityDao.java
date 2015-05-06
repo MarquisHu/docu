@@ -21,6 +21,11 @@ public class IbatisActivityDao extends BaseDao implements ActivityDao {
 	}
 
 	@Override
+	public Integer deleteActivity(String activityId) {
+		return getSqlSessionTemplate().delete(NAMESPACE + "deleteActivity", activityId);
+	}
+
+	@Override
 	public Activity findActivity(String userId) {
 		return (Activity) getSqlSessionTemplate().selectOne(NAMESPACE + "findActivity", userId);
 	}

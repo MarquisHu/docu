@@ -27,6 +27,11 @@ public class IbatisAccountDao extends BaseDao implements AccountDao {
 	}
 	
 	@Override
+	public String getTotalBalance() {
+		return (String) getSqlSessionTemplate().selectOne(NAMESPACE + "getTotalBalance");
+	}
+
+	@Override
 	public AccountBalance findAccountBalance(String userId) {
 		return (AccountBalance) getSqlSessionTemplate().selectOne(NAMESPACE + "findAccountBalance", userId);
 	}

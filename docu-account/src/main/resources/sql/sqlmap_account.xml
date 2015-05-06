@@ -82,6 +82,13 @@
 	    ]]>
 	</select>
 	
+    <select id="getTotalBalance" resultType="String">
+		SELECT SUM(BALANCE) 
+	    <![CDATA[  
+	     FROM DOCU_ERP_ACCOUNT
+	    ]]>
+	</select>
+	
     <select id="findAccountBalance" parameterType="String" resultMap="BALANCE_RESULT_MAP">
 		SELECT
 		<include refid="BALANCE_DO_QUERY_COLUMNS" />

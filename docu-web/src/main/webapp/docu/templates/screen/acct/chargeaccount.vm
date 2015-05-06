@@ -62,6 +62,7 @@ $!msg
 									<option>30</option>
 									<option>40</option>
                                     <option>50</option>
+									<option>0</option>
                                </select>
 							<label >公共账户所占比例</label>
                 			</div>

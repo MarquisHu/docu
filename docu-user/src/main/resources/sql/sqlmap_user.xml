@@ -118,7 +118,7 @@
 		<where>
 			A1.USER_ID != 'CMN'
 		</where>
-		ORDER BY A1.USER_ID 
+		ORDER BY A1.USER_ID ASC
 	</select>
 	
 	<select id="queryUserTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
@@ -189,7 +189,7 @@
 				]]>
 			</if>
 		</where>
-		ORDER BY A1.USER_ID 
+		ORDER BY A1.USER_ID ASC
 		LIMIT #{preEndNum}, #{pageSize}
 	</select>
 </mapper>

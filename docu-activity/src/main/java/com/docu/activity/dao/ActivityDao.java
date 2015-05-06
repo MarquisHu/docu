@@ -10,6 +10,8 @@ public interface ActivityDao {
 	
 	Integer updateActivity(Activity activity);
 	
+	Integer deleteActivity(String activityId);
+	
 	Activity findActivity(String userId);
 	
 	int queryActivityTotal(QueryBase query);

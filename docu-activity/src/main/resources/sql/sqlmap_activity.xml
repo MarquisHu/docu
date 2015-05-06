@@ -101,6 +101,12 @@
 		WHERE ACTIVITY_ID = #{activityId,jdbcType=BIGINT}
 	</update>
 	
+    <delete id="deleteActivity" parameterType="String">
+        <![CDATA[
+			DELETE FROM DOCU_ERP_ACTIVITY WHERE ACTIVITY_ID = #{activityId,jdbcType=VARCHAR}
+		]]>
+    </delete>
+	
     <select id="findActivity" parameterType="Long" resultMap="ACTIVITY_RESULT_MAP">
 		SELECT
 		<include refid="ACTIVITY_DO_QUERY_COLUMNS" />

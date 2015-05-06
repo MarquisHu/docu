@@ -22,10 +22,10 @@ DROP TABLE IF EXISTS `docu_erp_account`;
 
 CREATE TABLE `docu_erp_account` (
   `ACCOUNT_ID` bigint(20) NOT NULL,
-  `USER_ID` char(20) NOT NULL,
+  `USER_ID` varchar(20) NOT NULL,
   `BALANCE` float DEFAULT NULL,
-  `ACCOUNT_TYPE` char(1) NOT NULL DEFAULT '1',
-  `UPDATE_BY` char(20) DEFAULT NULL,
+  `ACCOUNT_TYPE` varchar(1) NOT NULL DEFAULT '1',
+  `UPDATE_BY` varchar(20) DEFAULT NULL,
   `UPDATE_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ACCOUNT_ID`),
   KEY `FK_docu_erp_account` (`USER_ID`),
@@ -41,18 +41,24 @@ DROP TABLE IF EXISTS `docu_erp_acct_detail`;
 CREATE TABLE `docu_erp_acct_detail` (
   `ACCT_DETAIL_ID` bigint(20) NOT NULL,
   `ACCOUNT_ID` bigint(20) NOT NULL,
-  `USER_ID` char(20) NOT NULL,
+  `USER_ID` varchar(20) NOT NULL,
   `ORIGIN_AMOUNT` float NOT NULL,
   `CHANGE_AMOUNT` float NOT NULL,
   `BALANCE` float NOT NULL,
-  `PAYER_ID` char(20) NOT NULL,
-  `TRANSACTION_TYPE` char(1) NOT NULL DEFAULT '1',
+  `PAYER_ID` varchar(20) NOT NULL,
+  `TRANSACTION_TYPE` varchar(1) NOT NULL DEFAULT '1',
   `TRANSACTION_TIME` datetime NOT NULL,
   `ACTIVITY_ID` bigint(20) DEFAULT NULL,
   `PERCENT` int(11) NOT NULL DEFAULT '20',
-  `UPDATE_BY` char(20) NOT NULL,
+  `UPDATE_BY` varchar(20) NOT NULL,
   `UPDATE_TIME` datetime NOT NULL,
-  PRIMARY KEY (`ACCT_DETAIL_ID`)
+  PRIMARY KEY (`ACCT_DETAIL_ID`),
+  KEY `FK_activity_id_acct_detail` (`ACTIVITY_ID`),
+  KEY `FK_account_id_acct_detail` (`ACCOUNT_ID`),
+  KEY `FK_user_id_acct_detail` (`USER_ID`),
+  CONSTRAINT `FK_user_id_acct_detail` FOREIGN KEY (`USER_ID`) REFERENCES `docu_erp_user` (`USER_ID`),
+  CONSTRAINT `FK_account_id_acct_detail` FOREIGN KEY (`ACCOUNT_ID`) REFERENCES `docu_erp_account` (`ACCOUNT_ID`),
+  CONSTRAINT `FK_activity_id_acct_detail` FOREIGN KEY (`ACTIVITY_ID`) REFERENCES `docu_erp_activity` (`ACTIVITY_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `docu_erp_acct_detail` */
@@ -65,10 +71,10 @@ CREATE TABLE `docu_erp_activity` (
   `ACTIVITY_ID` bigint(20) NOT NULL,
   `EXPENSE_AMOUNT` float NOT NULL,
   `REMARK` char(255) NOT NULL,
-  `LOCATION` char(255) NOT NULL,
+  `LOCATION` varchar(255) NOT NULL,
   `ACTIVITY_TIME` datetime NOT NULL,
   `PERCENT` int(11) NOT NULL DEFAULT '20',
-  `UPDATE_BY` char(20) NOT NULL,
+  `UPDATE_BY` varchar(20) NOT NULL,
   `UPDATE_TIME` datetime NOT NULL,
   PRIMARY KEY (`ACTIVITY_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -80,20 +86,20 @@ CREATE TABLE `docu_erp_activity` (
 DROP TABLE IF EXISTS `docu_erp_user`;
 
 CREATE TABLE `docu_erp_user` (
-  `USER_ID` char(20) NOT NULL,
-  `USER_NAME` char(50) NOT NULL,
-  `TEL_NUMBER` char(11) NOT NULL,
-  `IS_ACTIVE` char(1) NOT NULL DEFAULT '1',
-  `IS_ADMIN` char(1) NOT NULL DEFAULT '0',
-  `PASSWORD` char(20) NOT NULL DEFAULT '123456',
-  `UPDATE_BY` char(20) NOT NULL,
+  `USER_ID` varchar(20) NOT NULL,
+  `USER_NAME` varchar(50) NOT NULL,
+  `TEL_NUMBER` varchar(11) NOT NULL,
+  `IS_ACTIVE` varchar(1) NOT NULL DEFAULT '1',
+  `IS_ADMIN` varchar(1) NOT NULL DEFAULT '0',
+  `PASSWORD` varchar(40) NOT NULL DEFAULT '123456',
+  `UPDATE_BY` varchar(20) NOT NULL,
   `UPDATE_TIME` datetime NOT NULL,
   PRIMARY KEY (`USER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `docu_erp_user` */
 
-insert  into `docu_erp_user`(`USER_ID`,`USER_NAME`,`TEL_NUMBER`,`IS_ACTIVE`,`IS_ADMIN`,`PASSWORD`,`UPDATE_BY`,`UPDATE_TIME`) values ('CMN','Common','18600000001','1','0','123456','HUMA4','2015-05-04 20:23:24'),('HUMA4','Marquis Hu','18688187017','1','1','123456','HUMA4','2015-05-04 20:23:32');
+insert  into `docu_erp_user`(`USER_ID`,`USER_NAME`,`TEL_NUMBER`,`IS_ACTIVE`,`IS_ADMIN`,`PASSWORD`,`UPDATE_BY`,`UPDATE_TIME`) values ('CMN','Common','18600000001','1','0','e10adc3949ba59abbe56e057f20f883e','huma4','2015-05-06 22:41:15'),('HUMA4','Marquis Hu','18688187017','1','1','e10adc3949ba59abbe56e057f20f883e','huma4','2015-05-06 23:03:30');
 
 /*Table structure for table `docu_erp_uuid` */
 

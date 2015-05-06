@@ -25,6 +25,11 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
+	public int deleteActivity(String activityId) {
+		return activityDao.deleteActivity(activityId);
+	}
+	
+	@Override
 	public Activity queryActivity(String activityId) {
 		return activityDao.findActivity(activityId);
 	}

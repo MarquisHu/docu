@@ -13,6 +13,8 @@ public interface AccountDao {
 	
 	Account findAccount(String userId);
 	
+	String getTotalBalance();
+	
 	AccountBalance findAccountBalance(String userId);
 	
 	int queryAccountBalanceTotal(QueryBase query);

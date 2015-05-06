@@ -1,6 +1,7 @@
 package com.docu.web.home.action.activity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.docu.account.dto.Account;
 import com.docu.account.dto.AccountDetail;
+import com.docu.account.dto.AccountDetailCriteria;
 import com.docu.account.service.AccountDetailService;
 import com.docu.account.service.AccountService;
 import com.docu.activity.dto.Activity;
@@ -80,6 +82,9 @@ public class ActivityAction {
 	}
 	
 	private void updateAccount(long activityId, String userId, float changeAmount, int percent, String activityTime, String updateBy, String updateTime) {
+		if (changeAmount <= 0) {
+			return;
+		}
 		Account account = accountService.queryAccount(userId);
 		if (account != null) {
 			Float originAmount = account.getBalance();
@@ -111,5 +116,34 @@ public class ActivityAction {
 			
 			detailService.saveAccountDetail(detail);
 		}
+	}
+	
+	public void doUndo(TurbineRunData rundata, Context context) {
+		HttpSession session = rundata.getRequest().getSession();
+		String loginUserId = (String) session.getAttribute("loginUserId");
+		if (loginUserId == null) {
+			rundata.setRedirectLocation(EnvUtils.getContextPath() + "/index.htm");
+			return;
+		}
+		String activityId = rundata.getParameters().getString("activityId");
+		String updateTime = DateUtils.formatDate(new Date());
+		
+		AccountDetailCriteria criteria = new AccountDetailCriteria();
+		criteria.setActivityId(activityId);
+		
+		
+		List<AccountDetail>  details = detailService.findAccountDetails(criteria);
+		for (AccountDetail detail : details) {
+			String userId = detail.getUserId();
+			Float changeAmount = detail.getChangeAmount();
+			
+			Account account = accountService.queryAccount(userId);
+			account.setBalance(account.getBalance() + changeAmount);
+			account.setUpdateBy(loginUserId);
+			account.setUpdateTime(updateTime);
+			accountService.updateAccount(account);
+		}
+		detailService.deleteAccountDetail(activityId);
+		activityService.deleteActivity(activityId);
 	}
 }

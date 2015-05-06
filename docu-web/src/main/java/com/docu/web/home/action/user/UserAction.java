@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.turbine.Context;
@@ -76,6 +77,7 @@ public class UserAction {
 		if (user == null) {
 			user = new User();
 			String updateTime = DateUtils.formatDate(new Date());
+			password = DigestUtils.md5Hex(password);
 			user.setUserId(userId);
 			user.setUserName(userName);
 			user.setTelphoneNumber(telphoneNumber);
@@ -106,9 +108,9 @@ public class UserAction {
 		String password1 = rundata.getParameters().getString("password1");
 		String password2 = rundata.getParameters().getString("password2");
 		User user = userService.queryUser(loginUserId);
-		if (user != null && user.getPassword().equals(password)) {
+		if (user != null && user.getPassword().equals(DigestUtils.md5Hex(password))) {
 			if (password1.equals(password2)) {
-				user.setPassword(password1);
+				user.setPassword(DigestUtils.md5Hex(password1));
 				user.setUpdateTime(DateUtils.formatDate(new Date()));
 				user.setUpdateBy(loginUserId);
 				
@@ -128,7 +130,7 @@ public class UserAction {
 	
 	private void setDefaultValue(User user, String password, String active, String admin) {
 		if (password == null) {
-			user.setPassword(Constants.DEFAULT_PASSWORD);
+			user.setPassword(DigestUtils.md5Hex(Constants.DEFAULT_PASSWORD));
 		} else {
 			user.setPassword(password);
 		}

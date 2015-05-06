@@ -10,6 +10,8 @@ public interface ActivityService {
 	
 	int updateActivity(Activity activity);
 	
+	int deleteActivity(String activityId);
+	
 	Activity queryActivity(String activityId);
 	
 	PageDO<Activity> queryActivity(QueryBase query);
