@@ -86,7 +86,7 @@ public class AccountAction {
 	}
 	
 	private void updateCommonAccount(String userId, String payerId, float changeAmount, int percent, String updateBy, String updateTime) {
-		if (changeAmount <= 0) {
+		if (changeAmount == 0) {
 			return;
 		}
 		Account account = accountService.queryAccount(Constants.COMMON_USER_ID);

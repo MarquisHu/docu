@@ -14,7 +14,7 @@ public class Index {
 		String loginUserId = (String) session.getAttribute("loginUserId");
 		if (loginUserId != null && loginUserId.length() != 0) {
 			context.put("loginUserId", loginUserId);
-			rundata.setRedirectTarget(EnvUtils.getContextPath() + "/acct/index.vm");
+			rundata.setRedirectLocation(EnvUtils.getContextPath() + "/acct/index.htm");
 			return;
 		}
 	}
