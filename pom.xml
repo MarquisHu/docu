@@ -14,7 +14,7 @@
 		<spring-version>3.2.7.RELEASE</spring-version>
 		<springext-plugin-version>1.2</springext-plugin-version>
 		<productionMode>false</productionMode>
-		<docu.version>1.0.0</docu.version>
+		<docu.version>1.0</docu.version>
 	</properties>
 	
 	<modules>
