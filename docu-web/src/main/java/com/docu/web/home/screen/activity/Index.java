@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.webx.WebxException;
-import com.docu.activity.dto.Activity;
 import com.docu.activity.dto.ActivityCriteria;
+import com.docu.activity.dto.ActivityResult;
 import com.docu.activity.service.ActivityService;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
@@ -38,7 +38,7 @@ public class Index {
 		
 		QueryBase query = new QueryBase(pageNum, entity);
 		
-		PageDO<Activity> page = activityService.queryActivity(query);
+		PageDO<ActivityResult> page = activityService.queryActivity(query);
 		
 		context.put("page", page);
 		context.put("admin", admin);

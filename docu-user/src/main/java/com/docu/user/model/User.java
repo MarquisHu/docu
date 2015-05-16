@@ -1,4 +1,4 @@
-package com.docu.user.dto;
+package com.docu.user.model;
 
 public class User {
 	private String userId;

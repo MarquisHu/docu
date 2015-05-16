@@ -1,4 +1,4 @@
-package com.docu.activity.dto;
+package com.docu.activity.model;
 
 public class Activity {
 	Long activityId;

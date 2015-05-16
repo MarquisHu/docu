@@ -5,8 +5,10 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.docu.account.dao.AccountDetailDao;
-import com.docu.account.dto.AccountDetail;
+import com.docu.account.dto.AccountBalanceCriteria;
 import com.docu.account.dto.AccountDetailCriteria;
+import com.docu.account.dto.AccountDetailResult;
+import com.docu.account.model.AccountDetail;
 import com.docu.account.service.AccountDetailService;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
@@ -27,8 +29,8 @@ public class AccountDetailServiceImpl implements AccountDetailService {
 	}
 	
 	@Override
-	public String getTotalBalance(String transactionType) {
-		return detailDao.getTotalBalance(transactionType);
+	public String getTotalBalance(AccountBalanceCriteria criteria) {
+		return detailDao.getTotalBalance(criteria);
 	}
 
 	@Override
@@ -37,10 +39,10 @@ public class AccountDetailServiceImpl implements AccountDetailService {
 	}
 
 	@Override
-	public PageDO<AccountDetail> queryAccountDetails(QueryBase query) {
+	public PageDO<AccountDetailResult> queryAccountDetails(QueryBase query) {
 		query.setTotal(detailDao.queryAccountDetailTotal(query));
-		List<AccountDetail> details = detailDao.queryAccountDetail(query);
-		PageDO<AccountDetail> page = new PageDO<AccountDetail>(query.getPageNum(), query.getPageSize(), query.getTotal());
+		List<AccountDetailResult> details = detailDao.queryAccountDetail(query);
+		PageDO<AccountDetailResult> page = new PageDO<AccountDetailResult>(query.getPageNum(), query.getPageSize(), query.getTotal());
         page.setRows(details);
         return page;
 	}

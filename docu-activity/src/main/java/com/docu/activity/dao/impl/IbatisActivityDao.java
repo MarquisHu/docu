@@ -3,7 +3,8 @@ package com.docu.activity.dao.impl;
 import java.util.List;
 
 import com.docu.activity.dao.ActivityDao;
-import com.docu.activity.dto.Activity;
+import com.docu.activity.dto.ActivityResult;
+import com.docu.activity.model.Activity;
 import com.docu.components.common.BaseDao;
 import com.docu.components.common.QueryBase;
 
@@ -26,8 +27,8 @@ public class IbatisActivityDao extends BaseDao implements ActivityDao {
 	}
 
 	@Override
-	public Activity findActivity(String userId) {
-		return (Activity) getSqlSessionTemplate().selectOne(NAMESPACE + "findActivity", userId);
+	public ActivityResult findActivity(String userId) {
+		return (ActivityResult) getSqlSessionTemplate().selectOne(NAMESPACE + "findActivity", userId);
 	}
 	
 	@Override
@@ -37,8 +38,8 @@ public class IbatisActivityDao extends BaseDao implements ActivityDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Activity> queryActivity(QueryBase query) {
-		return (List<Activity>) getSqlSessionTemplate().selectList(NAMESPACE + "queryActivity", query);
+	public List<ActivityResult> queryActivity(QueryBase query) {
+		return (List<ActivityResult>) getSqlSessionTemplate().selectList(NAMESPACE + "queryActivity", query);
 	}
 	
 	@Override

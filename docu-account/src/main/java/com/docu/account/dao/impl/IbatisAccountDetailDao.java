@@ -3,8 +3,10 @@ package com.docu.account.dao.impl;
 import java.util.List;
 
 import com.docu.account.dao.AccountDetailDao;
-import com.docu.account.dto.AccountDetail;
+import com.docu.account.dto.AccountBalanceCriteria;
 import com.docu.account.dto.AccountDetailCriteria;
+import com.docu.account.dto.AccountDetailResult;
+import com.docu.account.model.AccountDetail;
 import com.docu.components.common.BaseDao;
 import com.docu.components.common.QueryBase;
 
@@ -22,8 +24,8 @@ public class IbatisAccountDetailDao extends BaseDao implements AccountDetailDao 
 	}
 	
 	@Override
-	public String getTotalBalance(String transactionType) {
-		return (String) getSqlSessionTemplate().selectOne(NAMESPACE + "getTotalBalance", transactionType);
+	public String getTotalBalance(AccountBalanceCriteria criteria) {
+		return (String) getSqlSessionTemplate().selectOne(NAMESPACE + "getTotalBalance", criteria);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -39,7 +41,7 @@ public class IbatisAccountDetailDao extends BaseDao implements AccountDetailDao 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AccountDetail> queryAccountDetail(QueryBase query) {
-		return (List<AccountDetail>) getSqlSessionTemplate().selectList(NAMESPACE + "queryAccountDetail", query);
+	public List<AccountDetailResult> queryAccountDetail(QueryBase query) {
+		return (List<AccountDetailResult>) getSqlSessionTemplate().selectList(NAMESPACE + "queryAccountDetail", query);
 	}
 }

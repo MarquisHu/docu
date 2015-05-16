@@ -13,14 +13,22 @@
 	</settings>
 	
 	<typeAliases>
-        <typeAlias type="com.docu.user.dto.User" alias="User" />
+        <typeAlias type="com.docu.user.model.User" alias="User" />
+	        
+        <typeAlias type="com.docu.account.model.Account" alias="Account" />
+        <typeAlias type="com.docu.account.model.AccountDetail" alias="AccountDetail" />
+    
+        <typeAlias type="com.docu.activity.model.Activity" alias="Activity" />
         
-        <typeAlias type="com.docu.account.dto.Account" alias="Account" />
-        <typeAlias type="com.docu.account.dto.AccountBalance" alias="AccountBalance" />
-        <typeAlias type="com.docu.account.dto.AccountDetail" alias="AccountDetail" />
+        <typeAlias type="com.docu.user.dto.UserResult" alias="UserResult" />
+        
+        <typeAlias type="com.docu.account.dto.AccountResult" alias="AccountResult" />
+        <typeAlias type="com.docu.account.dto.AccountDetailResult" alias="AccountDetailResult" />
         <typeAlias type="com.docu.account.dto.AccountDetailCriteria" alias="AccountDetailCriteria" />
+        <typeAlias type="com.docu.account.dto.AccountBalanceCriteria" alias="AccountBalanceCriteria" />
+		<typeAlias type="com.docu.account.dto.AccountBalanceResult" alias="AccountBalanceResult" />
         
-        <typeAlias type="com.docu.activity.dto.Activity" alias="Activity" />
+        <typeAlias type="com.docu.activity.dto.ActivityResult" alias="ActivityResult" />
     </typeAliases>
 
 	<mappers>

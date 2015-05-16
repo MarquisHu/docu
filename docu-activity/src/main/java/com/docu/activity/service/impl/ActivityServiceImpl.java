@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.docu.activity.dao.ActivityDao;
-import com.docu.activity.dto.Activity;
+import com.docu.activity.dto.ActivityResult;
+import com.docu.activity.model.Activity;
 import com.docu.activity.service.ActivityService;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
@@ -30,15 +31,15 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	
 	@Override
-	public Activity queryActivity(String activityId) {
+	public ActivityResult queryActivity(String activityId) {
 		return activityDao.findActivity(activityId);
 	}
 
 	@Override
-	public PageDO<Activity> queryActivity(QueryBase query) {
+	public PageDO<ActivityResult> queryActivity(QueryBase query) {
 		query.setTotal(activityDao.queryActivityTotal(query));
-		List<Activity> activities = activityDao.queryActivity(query);
-		PageDO<Activity> page = new PageDO<Activity>(query.getPageNum(), query.getPageSize(), query.getTotal());
+		List<ActivityResult> activities = activityDao.queryActivity(query);
+		PageDO<ActivityResult> page = new PageDO<ActivityResult>(query.getPageNum(), query.getPageSize(), query.getTotal());
         page.setRows(activities);
         return page;
 	}

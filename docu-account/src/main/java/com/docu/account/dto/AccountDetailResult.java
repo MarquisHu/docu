@@ -1,31 +1,30 @@
 package com.docu.account.dto;
 
 
-public class AccountDetail {
-	Long detailId;
-	Long accountId;
+public class AccountDetailResult {
+	String detailId;
+	String accountId;
 	String userId;
-	Float originAmount;
-	Float changeAmount;
-	Float balance;
+	String originAmount;
+	String changeAmount;
+	String balance;
 	String payerId;
 	String transactionType;
 	String transactionTime;
-	Long activityId;
-	Integer percent;
+	String activityId;
+	String percent;
 	String updateBy;
 	String updateTime;
-	
-	public Long getDetailId() {
+	public String getDetailId() {
 		return detailId;
 	}
-	public void setDetailId(Long detailId) {
+	public void setDetailId(String detailId) {
 		this.detailId = detailId;
 	}
-	public Long getAccountId() {
+	public String getAccountId() {
 		return accountId;
 	}
-	public void setAccountId(Long accountId) {
+	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
 	public String getUserId() {
@@ -34,22 +33,22 @@ public class AccountDetail {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Float getOriginAmount() {
+	public String getOriginAmount() {
 		return originAmount;
 	}
-	public void setOriginAmount(Float originAmount) {
+	public void setOriginAmount(String originAmount) {
 		this.originAmount = originAmount;
 	}
-	public Float getChangeAmount() {
+	public String getChangeAmount() {
 		return changeAmount;
 	}
-	public void setChangeAmount(Float changeAmount) {
+	public void setChangeAmount(String changeAmount) {
 		this.changeAmount = changeAmount;
 	}
-	public Float getBalance() {
+	public String getBalance() {
 		return balance;
 	}
-	public void setBalance(Float balance) {
+	public void setBalance(String balance) {
 		this.balance = balance;
 	}
 	public String getPayerId() {
@@ -57,9 +56,6 @@ public class AccountDetail {
 	}
 	public void setPayerId(String payerId) {
 		this.payerId = payerId;
-	}
-	public Long getActivityId() {
-		return activityId;
 	}
 	public String getTransactionType() {
 		return transactionType;
@@ -73,13 +69,16 @@ public class AccountDetail {
 	public void setTransactionTime(String transactionTime) {
 		this.transactionTime = transactionTime;
 	}
-	public void setActivityId(Long activityId) {
+	public String getActivityId() {
+		return activityId;
+	}
+	public void setActivityId(String activityId) {
 		this.activityId = activityId;
 	}
-	public Integer getPercent() {
+	public String getPercent() {
 		return percent;
 	}
-	public void setPercent(Integer percent) {
+	public void setPercent(String percent) {
 		this.percent = percent;
 	}
 	public String getUpdateBy() {

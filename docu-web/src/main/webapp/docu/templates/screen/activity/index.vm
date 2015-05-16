@@ -93,7 +93,9 @@ $!msg
     					                        </span>
     					                    </td>
     										<td style="width: 30px;" class="center">
-    											<a class="undo_apply" href="" activityId="$!activity.activityId" data-toggle="modal" onclick=""><span style="color:red">删除</span></a>
+												#if($!admin == '1')
+												<a class="undo_apply" href="" activityId="$!activity.activityId" data-toggle="modal" onclick=""><span style="color:red">删除</span></a>
+												#end
     				                            <a href="$!envUtil.getContextPath()/acct/accountDetails.htm?activityId=$!{activity.activityId}"><span style="color:red">交易明细</span></a>
     				                        </td>
     					                </tr>

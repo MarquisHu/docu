@@ -1,6 +1,6 @@
 package com.docu.web.common.context;
 
-import com.docu.user.dto.User;
+import com.docu.user.model.User;
 
 public final class UserUtil {
 

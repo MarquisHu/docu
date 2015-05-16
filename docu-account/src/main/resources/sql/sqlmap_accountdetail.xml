@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.docu.account.dao.AccountDetailDao">
     
-    <resultMap id="DETAIL_RESULT_MAP" type="AccountDetail">
+    <resultMap id="DETAIL_RESULT_MAP" type="AccountDetailResult">
         <result property="detailId" column="ACCT_DETAIL_ID" />
         <result property="accountId" column="ACCOUNT_ID" />
 		<result property="userId" column="USER_ID" />
@@ -72,11 +72,36 @@
 		]]>
     </delete>
     
-    <select id="getTotalBalance" parameterType="String" resultType="String">
+    <select id="getTotalBalance" parameterType="AccountBalanceCriteria" resultType="String">
 		SELECT SUM(CHANGE_AMOUNT) 
 	    <![CDATA[  
-	     FROM DOCU_ERP_ACCT_DETAIL A1 WHERE A1.TRANSACTION_TYPE = #{transactionType,jdbcType=VARCHAR}
+	     FROM DOCU_ERP_ACCT_DETAIL A1, DOCU_ERP_ACCOUNT A2
 	    ]]>
+	    <where>
+	        <![CDATA[
+		    		A1.ACCOUNT_ID = A2.ACCOUNT_ID
+		    ]]>
+	        <if test="userId != null">
+			    <![CDATA[
+			    	AND A1.USER_ID = #{userId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="accountId != null">
+			    <![CDATA[
+			    	AND A1.ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="accountType != null">
+			    <![CDATA[
+			    	AND A2.ACCOUNT_TYPE = #{accountType,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="transactionType != null">
+			    <![CDATA[
+			    	AND A1.TRANSACTION_TYPE = #{transactionType,jdbcType=VARCHAR}
+				]]>
+			</if>
+		</where>
 	</select>
 	
     <select id="findAccountDetails" parameterType="AccountDetailCriteria" resultMap="DETAIL_RESULT_MAP">

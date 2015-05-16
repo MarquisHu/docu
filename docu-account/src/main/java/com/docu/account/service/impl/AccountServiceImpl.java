@@ -5,8 +5,9 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.docu.account.dao.AccountDao;
-import com.docu.account.dto.Account;
-import com.docu.account.dto.AccountBalance;
+import com.docu.account.dto.AccountBalanceCriteria;
+import com.docu.account.dto.AccountBalanceResult;
+import com.docu.account.model.Account;
 import com.docu.account.service.AccountService;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
@@ -31,20 +32,20 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	@Override
-	public String getTotalBalance() {
-		return accountDao.getTotalBalance();
+	public String getTotalBalance(AccountBalanceCriteria criteria) {
+		return accountDao.getTotalBalance(criteria);
 	}
 
 	@Override
-	public AccountBalance queryAccountBalance(String userId) {
+	public AccountBalanceResult queryAccountBalance(String userId) {
 		return accountDao.findAccountBalance(userId);
 	}
 	
 	@Override
-	public PageDO<AccountBalance> queryAccountBalance(QueryBase query) {
+	public PageDO<AccountBalanceResult> queryAccountBalance(QueryBase query) {
 		query.setTotal(accountDao.queryAccountBalanceTotal(query));
-		List<AccountBalance> balances = accountDao.queryAccountBalance(query);
-		PageDO<AccountBalance> page = new PageDO<AccountBalance>(query.getPageNum(), query.getPageSize(), query.getTotal());
+		List<AccountBalanceResult> balances = accountDao.queryAccountBalance(query);
+		PageDO<AccountBalanceResult> page = new PageDO<AccountBalanceResult>(query.getPageNum(), query.getPageSize(), query.getTotal());
         page.setRows(balances);
         return page;
 	}

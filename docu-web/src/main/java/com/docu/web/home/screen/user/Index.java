@@ -9,7 +9,7 @@ import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.webx.WebxException;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
-import com.docu.user.dto.User;
+import com.docu.user.model.User;
 import com.docu.user.service.UserService;
 import com.docu.web.common.context.EnvUtils;
 

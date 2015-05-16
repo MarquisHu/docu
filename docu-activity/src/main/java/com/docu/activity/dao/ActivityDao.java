@@ -2,7 +2,8 @@ package com.docu.activity.dao;
 
 import java.util.List;
 
-import com.docu.activity.dto.Activity;
+import com.docu.activity.dto.ActivityResult;
+import com.docu.activity.model.Activity;
 import com.docu.components.common.QueryBase;
 
 public interface ActivityDao {
@@ -12,11 +13,11 @@ public interface ActivityDao {
 	
 	Integer deleteActivity(String activityId);
 	
-	Activity findActivity(String userId);
+	ActivityResult findActivity(String userId);
 	
 	int queryActivityTotal(QueryBase query);
 	
-	List<Activity> queryActivity(QueryBase query);
+	List<ActivityResult> queryActivity(QueryBase query);
 	
 	Long getSequenceUuid(String sequenceName);
 }

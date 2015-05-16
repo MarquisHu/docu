@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
-import com.docu.account.dto.Account;
-import com.docu.account.dto.AccountDetail;
 import com.docu.account.dto.AccountDetailCriteria;
+import com.docu.account.model.Account;
+import com.docu.account.model.AccountDetail;
 import com.docu.account.service.AccountDetailService;
 import com.docu.account.service.AccountService;
-import com.docu.activity.dto.Activity;
+import com.docu.activity.model.Activity;
 import com.docu.activity.service.ActivityService;
 import com.docu.components.constants.app.Constants;
 import com.docu.components.util.DateUtils;

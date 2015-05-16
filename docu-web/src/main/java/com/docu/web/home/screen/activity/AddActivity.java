@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.webx.WebxException;
-import com.docu.user.dto.User;
+import com.docu.user.dto.UserResult;
 import com.docu.user.service.UserService;
 import com.docu.web.common.context.EnvUtils;
 
@@ -32,7 +32,7 @@ public class AddActivity {
 		String activityTime = rundata.getParameters().getString("activityTime");
 		Integer percent = rundata.getParameters().getInt("percent");
 		
-		List<User> users = userService.findUsers();
+		List<UserResult> users = userService.findUsers();
 		
 		context.put("users", users);
 		if (expenseAmount != null && expenseAmount != 0) {

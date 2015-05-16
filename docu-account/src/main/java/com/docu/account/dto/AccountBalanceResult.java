@@ -1,9 +1,9 @@
 package com.docu.account.dto;
 
 
-public class AccountBalance {
+public class AccountBalanceResult {
 	String userId;
-	Long accountId;
+	String accountId;
 	String userName;
 	String balance;
 	String updateTime;
@@ -14,10 +14,10 @@ public class AccountBalance {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Long getAccountId() {
+	public String getAccountId() {
 		return accountId;
 	}
-	public void setAccountId(Long accountId) {
+	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
 	public String getUserName() {

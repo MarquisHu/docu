@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
-import com.docu.account.dto.Account;
+import com.docu.account.model.Account;
 import com.docu.account.service.AccountService;
 import com.docu.components.constants.app.Constants;
 import com.docu.components.util.DateUtils;
-import com.docu.user.dto.User;
+import com.docu.user.model.User;
 import com.docu.user.service.UserService;
 import com.docu.web.common.context.EnvUtils;
 
@@ -157,7 +157,12 @@ public class UserAction {
 			account = new Account();
 			account.setAccountId(accountId);
 			account.setUserId(userId);
-			account.setBalance(0.0f);
+			account.setBalance(0.000f);
+			if (Constants.COMMON_USER_ID.equalsIgnoreCase(userId)) {
+				account.setAccountType(Constants.ACCOUNT_TYPE_COMMON);
+			} else {
+				account.setAccountType(Constants.ACCOUNT_TYPE_PRIVATE);
+			}
 			account.setUpdateBy(loginUserId);
 			account.setUpdateTime(updateTime);
 			accountService.saveAccount(account);

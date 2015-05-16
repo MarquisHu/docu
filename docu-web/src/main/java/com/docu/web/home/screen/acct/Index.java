@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.webx.WebxException;
-import com.docu.account.dto.AccountBalance;
 import com.docu.account.dto.AccountBalanceCriteria;
+import com.docu.account.dto.AccountBalanceResult;
 import com.docu.account.service.AccountDetailService;
 import com.docu.account.service.AccountService;
 import com.docu.components.common.PageDO;
@@ -46,19 +46,23 @@ public class Index {
 		}
 		
 		QueryBase query = new QueryBase(pageNum, entity);
-		PageDO<AccountBalance> page = accountService.queryAccountBalance(query);
+		PageDO<AccountBalanceResult> page = accountService.queryAccountBalance(query);
 		
-		String balance = accountService.getTotalBalance();
-		String incomeAmount = detailService.getTotalBalance(Constants.TRANSACTION_TYPE_CHARGE);
-		String expendAmount = detailService.getTotalBalance(Constants.TRANSACTION_TYPE_EXPENSE);
+		String balance = accountService.getTotalBalance(entity);
+		
+		entity.setTransactionType(Constants.TRANSACTION_TYPE_CHARGE);
+		String incomeAmount = detailService.getTotalBalance(entity);
+		
+		entity.setTransactionType(Constants.TRANSACTION_TYPE_EXPENSE);
+		String expendAmount = detailService.getTotalBalance(entity);
 		if (balance == null || "".equals(balance)) {
-			balance = "0.0";
+			balance = "0.000";
 		}
 		if (incomeAmount == null || "".equals(incomeAmount)) {
-			incomeAmount = "0.0";
+			incomeAmount = "0.000";
 		}
 		if (expendAmount == null || "".equals(expendAmount)) {
-			expendAmount = "0.0";
+			expendAmount = "0.000";
 		}
 		
 		context.put("page", page);

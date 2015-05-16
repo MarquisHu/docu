@@ -3,7 +3,8 @@ package com.docu.user.dao;
 import java.util.List;
 
 import com.docu.components.common.QueryBase;
-import com.docu.user.dto.User;
+import com.docu.user.dto.UserResult;
+import com.docu.user.model.User;
 
 public interface UserDao {
 	Integer insertUser(User user);
@@ -12,7 +13,7 @@ public interface UserDao {
 	
 	User findUser(String userId);
 	
-	List<User> findUsers();
+	List<UserResult> findUsers();
 	
 	int queryUserTotal(QueryBase query);
 	

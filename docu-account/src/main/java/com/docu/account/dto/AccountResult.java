@@ -1,17 +1,18 @@
 package com.docu.account.dto;
 
 
-public class Account {
-	Long accountId;
+public class AccountResult {
+	String accountId;
 	String userId;
-	Float balance;
+	String balance;
+	String accountType;
 	String updateBy;
 	String updateTime;
 	
-	public Long getAccountId() {
+	public String getAccountId() {
 		return accountId;
 	}
-	public void setAccountId(Long accountId) {
+	public void setAccountId(String accountId) {
 		this.accountId = accountId;
 	}
 	public String getUserId() {
@@ -20,11 +21,17 @@ public class Account {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Float getBalance() {
+	public String getBalance() {
 		return balance;
 	}
-	public void setBalance(Float balance) {
+	public void setBalance(String balance) {
 		this.balance = balance;
+	}
+	public String getAccountType() {
+		return accountType;
+	}
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 	public String getUpdateBy() {
 		return updateBy;

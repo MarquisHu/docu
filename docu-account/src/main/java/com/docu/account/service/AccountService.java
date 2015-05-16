@@ -1,7 +1,8 @@
 package com.docu.account.service;
 
-import com.docu.account.dto.Account;
-import com.docu.account.dto.AccountBalance;
+import com.docu.account.dto.AccountBalanceCriteria;
+import com.docu.account.dto.AccountBalanceResult;
+import com.docu.account.model.Account;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
 
@@ -13,11 +14,11 @@ public interface AccountService {
 	
 	Account queryAccount(String userId);
 	
-	String getTotalBalance();
+	String getTotalBalance(AccountBalanceCriteria criteria);
 	
-	AccountBalance queryAccountBalance(String userId);
+	AccountBalanceResult queryAccountBalance(String userId);
 	
-	PageDO<AccountBalance> queryAccountBalance(QueryBase query);
+	PageDO<AccountBalanceResult> queryAccountBalance(QueryBase query);
 	
 	long getSequenceUuid(String sequenceName);
 }
