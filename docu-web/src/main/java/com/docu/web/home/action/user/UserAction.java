@@ -142,7 +142,7 @@ public class UserAction {
 		}
 		
 		if (admin == null) {
-			user.setAdmin(Constants.DEFAULT_ADMIN_STATUS);
+			user.setAdmin(Constants.USER_TYPE_ADMIN_YES);
 		} else {
 			user.setAdmin(admin);
 		}

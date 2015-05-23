@@ -17,6 +17,7 @@
 	        
         <typeAlias type="com.docu.account.model.Account" alias="Account" />
         <typeAlias type="com.docu.account.model.AccountDetail" alias="AccountDetail" />
+        <typeAlias type="com.docu.account.model.ChargeDetail" alias="ChargeDetail" />
     
         <typeAlias type="com.docu.activity.model.Activity" alias="Activity" />
         
@@ -27,6 +28,7 @@
         <typeAlias type="com.docu.account.dto.AccountDetailCriteria" alias="AccountDetailCriteria" />
         <typeAlias type="com.docu.account.dto.AccountBalanceCriteria" alias="AccountBalanceCriteria" />
 		<typeAlias type="com.docu.account.dto.AccountBalanceResult" alias="AccountBalanceResult" />
+        <typeAlias type="com.docu.account.dto.ChargeDetailResult" alias="ChargeDetailResult" />
         
         <typeAlias type="com.docu.activity.dto.ActivityResult" alias="ActivityResult" />
     </typeAliases>

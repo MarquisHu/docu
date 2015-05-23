@@ -1,5 +1,8 @@
 package com.docu.web.home.screen.acct;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,22 +51,26 @@ public class Index {
 		QueryBase query = new QueryBase(pageNum, entity);
 		PageDO<AccountBalanceResult> page = accountService.queryAccountBalance(query);
 		
-		String balance = accountService.getTotalBalance(entity);
-		
 		entity.setTransactionType(Constants.TRANSACTION_TYPE_CHARGE);
 		String incomeAmount = detailService.getTotalBalance(entity);
 		
 		entity.setTransactionType(Constants.TRANSACTION_TYPE_EXPENSE);
 		String expendAmount = detailService.getTotalBalance(entity);
-		if (balance == null || "".equals(balance)) {
-			balance = "0.000";
-		}
+		
 		if (incomeAmount == null || "".equals(incomeAmount)) {
 			incomeAmount = "0.000";
 		}
 		if (expendAmount == null || "".equals(expendAmount)) {
 			expendAmount = "0.000";
 		}
+		
+		float incomeBalance = Float.parseFloat(incomeAmount);
+		float expendBalance = Float.parseFloat(expendAmount);
+		float totalBalance = incomeBalance - expendBalance;
+		
+		DecimalFormat formatter = new DecimalFormat(Constants.FORMATTER_PATTERN);
+		BigDecimal totalAmount = new BigDecimal(totalBalance);
+	    String balance = formatter.format(totalAmount);
 		
 		context.put("page", page);
 		context.put("balance", balance);

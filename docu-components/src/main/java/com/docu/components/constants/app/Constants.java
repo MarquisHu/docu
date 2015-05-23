@@ -13,7 +13,8 @@ public class Constants {
 	
 	public static String DEFAULT_PASSWORD = "123456";
 	public static String DEFAULT_ACTIVE_STATUS = "1";
-	public static String DEFAULT_ADMIN_STATUS = "0";
+	public static String USER_TYPE_ADMIN_NO = "0";
+	public static String USER_TYPE_ADMIN_YES = "1";
 	
 	public static String BILL_UUID_SEQUENCE_NAME = "DOCU_BILL_UUID";
 	public static String CHARGE_UUID_SEQUENCE_NAME = "DOCU_CHARGE_UUID";
@@ -31,4 +32,9 @@ public class Constants {
 	public static String ACCOUNT_TYPE_COMMON = "0";
 	public static String ACCOUNT_TYPE_PRIVATE = "1";
 	public static String ACCOUNT_TYPE_ALL = "2";
+	
+	public static String FORMATTER_PATTERN = "0.000";
+	
+	public static String CHARGE_STATUS_INIT = "0";
+	public static String CHARGE_STATUS_PROCESSED = "1";
 }

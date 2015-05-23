@@ -1,0 +1,214 @@
+#set($title = "DOCU账务管理系统")
+#set($menu = "acct#chargeDetails")
+$!msg
+<style >
+	ul.ztree {background: #f0f6e4;overflow-y:scroll;overflow-x:auto;position:absolute;left:200px;}
+	.line{height:auto;}
+</style>
+<!--End-breadcrumbs-->
+<div class="container-fluid">
+	<div class="widget-box">
+		<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+			<h5>充值申请</h5>
+		</div>
+		<div class="widget-content tab-content">
+			<div id="tab1" class="tab-pane active">
+				<div class="widget-content nopadding">
+			        <form id="query_page_form" class="form-horizontal" method="post" action="$!envUtil.getContextPath()/acct/chargeDetails.htm">
+						<input type="hidden" name="pageNum" value="1" />
+			            <div class="tablesearchcase">
+							<div class="dataTables_length" id="">
+								#if($!admin == '1')
+								<label>用户账号：</label>
+								<input class="span2" type="text" id="userId" name="userId" value="$!userId" placeholder="用户账号" />
+								<label style="margin-left:20px;">充值时间：</label>
+								#else
+								<label>充值时间：</label>
+								#end
+								<div class="input-append date" id="start_datetimepicker" data-date-format="yyyy-mm-dd">
+			                        <input class="span2" size="16" type="text" name="startDate" id="startDate" value="$!startDate" >
+			                        <span class="add-on"><i class="icon-remove"></i></span>
+			                        <span class="add-on"><i class="icon-th"></i></span>
+			                    </div>
+								至
+								<div class="input-append date" id="end_datetimepicker" data-date-format="yyyy-mm-dd">
+			                        <input class="span2" size="16" type="text" name="endDate" id="endDate" value="$!endDate" >
+			                        <span class="add-on"><i class="icon-remove"></i></span>
+			                        <span class="add-on"><i class="icon-th"></i></span>
+			                    </div>
+								<button class="btn btn-success" style="margin-left:80px;" type="submit">查询</button>
+								<button class="btn btn-success" style="margin-left:10px;" type="button" onclick="clearQuery();">清空</button>
+							</div>
+			            </div>
+			        </form>
+			        <br />
+			    </div>
+			</div>	
+			<form method="post" action="" id="charge_list_form">
+				<input type="hidden" name="action" value="" />
+				<input type="hidden" id="event_submit_method" name="" value="1" />
+				
+				<div class="container-fluid"> 
+    				<!-- InstanceBeginEditable name="content" -->
+    		    	<br />
+    		    	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
+    		    	<div class="widget-box">
+    		    		<form id="query_page_form" class="form-horizontal" method="post" action="">
+    		    			<input type="hidden" name="pageNum" value="1" />
+    		    		</form>
+    				    <table class="table table-bordered table-striped with-check">
+    				    	<thead>
+    				            <tr>
+    				                <th style="width: 10px;">账户编号</th>
+    								<th style="width: 10px;">用户账号</th>
+    								<th style="width: 5px;">充值金额</th>
+    								<th style="width: 10px;">付款人</th>
+    								<th style="width: 15px;">充值时间</th>
+    								<th style="width: 5px;">百分比</th>
+									<th style="width: 10px;">状态</th>
+    								<th style="width: 10px;">操作</th>
+    				            </tr>
+    				        </thead>
+    				        <tbody>
+    				            #foreach($detail in $!page.rows)
+    				            	<td colspan="8" class="tablegroup nopadding">
+    					        		<tr id="$!detail.userId">
+    										<td class="noborder center" style="width: 10px;">
+    					                        <span class="">
+    					                            $!detail.accountId
+    					                        </span>
+    					                    </td>
+    										<td class="noborder center" style="width: 10px;">
+    					                        <span class="">
+    					                            $!detail.userId
+    					                        </span>
+    					                    </td>
+    					                    <td class="noborder center" style="width: 5px;">
+    					                        <span class="">
+    					                            $!detail.recvAmount
+    					                        </span>
+    					                    </td>
+    										<td class="noborder center" style="width: 10px;">
+    					                        <span class="">
+    					                            $!detail.payerId
+    					                        </span>
+    					                    </td>
+    										<td class="noborder center" style="width: 15px;">
+    					                        <span class="">
+    					                            $!detail.recvTime
+    					                        </span>
+    					                    </td>
+    										<td class="noborder center" style="width: 5px;">
+    					                        <span class="">
+    					                            $!detail.percent%
+    					                        </span>
+    					                    </td>
+											<td class="noborder center" style="width: 5px;">
+    					                        <span class="">
+    					                            #if($!detail.status == '1')
+														已处理
+													#else
+														未处理
+													#end
+    					                        </span>
+    					                    </td>
+    										<td class="noborder center" style="width: 10px;">
+												#if($!admin == '1' && $!detail.status == '0')
+												<a class="charge_apply" href="" chargeId="$!detail.chargeId" data-toggle="modal" onclick=""><span style="color:red">确认</span></a>
+												#elseif($!admin == '0' && $!detail.status == '0')
+												<a class="charge_undo" href="" chargeId="$!detail.chargeId" data-toggle="modal" onclick=""><span style="color:red">删除</span></a>
+												#else
+												<a href="$!envUtil.getContextPath()/acct/index.htm?userId=$!{detail.userId}"><span style="color:red">查看</span></a>
+												#end
+    					                    </td>
+    					                </tr>
+    				                </td>
+    				             #end
+    				        </tbody>
+    				    </table>
+    				</div>
+    				<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
+    	             	$control.setTemplate("/common/page.vm").setParameter("form","query_page_form")
+    	          	</div>
+    			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div id="select_date" class="modal hide">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>选择日期</h3>
+    </div>
+    <div class="modal-body">
+        <p id="select_info"></p>
+    </div>
+    <div class="modal-footer">
+        <a data-dismiss="modal" class="btn btn-primary" onclick="">确定</a>
+    </div>
+</div>
+<script src="${docuCdnServer}/js/docu/select.min.js"></script>
+<script src="${docuCdnServer}/js/docu/jquery.gritter.min.js"></script>
+<script src="${docuCdnServer}/js/docu/jquery.uniform.js"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>	
+<script type="text/javascript" src="${docuCdnServer}/js/docu/docu-datetime.js" charset="UTF-8"></script>
+<script>
+	function clearQuery(){
+		$("#userId").val("");
+		$("#startDate").val("");
+		$("#endDate").val("");
+	}
+	
+	$(function(){
+    	$(".charge_apply").each(function(index, element){
+            $(element).click(function(){
+				var chargeId=$(this).attr("chargeId");
+                var form=$("#charge_list_form");
+                form.attr("action","$!envUtil.getContextPath()/acct/chargeDetails.htm?chargeId="+chargeId);
+                form.find("input[name='action']").val("/acct/AccountAction");
+                form.find("#event_submit_method").attr("name","event_submit_do_charge_confirm").val("1");
+                form.submit();
+            });
+        });
+		
+		$(".charge_undo").each(function(index, element){
+            $(element).click(function(){
+				var chargeId=$(this).attr("chargeId");
+                var form=$("#charge_list_form");
+                form.attr("action","$!envUtil.getContextPath()/acct/chargeDetails.htm?chargeId="+chargeId);
+                form.find("input[name='action']").val("/acct/AccountAction");
+                form.find("#event_submit_method").attr("name","event_submit_do_charge_undo").val("1");
+                form.submit();
+            });
+        });
+	});
+	
+    $(document).ready(function () {
+        $('select').select2({minimumResultsForSearch: 1});
+        $('.logotip').delay(500).animate({opacity: 1, left: 130});
+        //单选，勾选美化调用
+        $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
+        //勾选全部选中
+        $("span.icon input:checkbox, th input:checkbox").click(function () {
+            var checkedStatus = this.checked;
+            var checkbox;
+            if (this.id == 'tab1chka') {
+                checkbox = $("#tab1 input[type=checkbox] ");
+            }
+            else {
+                checkbox = $("#tab2 input[type=checkbox] ");
+            }
+            //var checkbox = $(this).parents('.widget-box').find('tr td:first-child input:checkbox');
+            checkbox.each(function () {
+                this.checked = checkedStatus;
+                if (checkedStatus == this.checked) {
+                    $(this).closest('.checker > span').removeClass('checked');
+                }
+                if (this.checked) {
+                    $(this).closest('.checker > span').addClass('checked');
+                }
+            });
+        });
+    });
+</script>

@@ -133,6 +133,7 @@ $!msg
 		$("#accountType").val("2");
 		$(".select2-choice span").html("所有");
 	}
+
     $(document).ready(function () {
         $('select').select2({minimumResultsForSearch: 1});
         $('.logotip').delay(500).animate({opacity: 1, left: 130});

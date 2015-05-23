@@ -34,7 +34,7 @@ $!msg
 						<div class="control-group">
 							<label class="control-label">电话号码：</label>
 							<div class="controls">
-								<input type="text" name="telphoneNumber" id="telphoneNumber" value="$!telphoneNumber" style="width:120px" placeholder="电话号码"  />
+								<input type="text" name="telphoneNumber" id="telphoneNumber" value="18000000000" style="width:120px" placeholder="电话号码"  />
 								<div class="s_telphoneNumber" style="color:red;display:none;"></div>
                 			</div>
 						</div>
