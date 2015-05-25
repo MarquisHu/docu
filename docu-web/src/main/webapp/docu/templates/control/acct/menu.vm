@@ -18,7 +18,7 @@
 	      <li class="#if($!vmUtil.menuEq($menu,'chargeAccount'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeAccount.htm">&emsp;&emsp;&emsp;账户充值</a></li>
 	    </ul>
 		<ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'chargeDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeDetails.htm">&emsp;&emsp;&emsp;充值申请</a></li>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargeDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeDetails.htm">&emsp;&emsp;&emsp;充值查询</a></li>
 	    </ul>
     </li>
 	

@@ -9,7 +9,7 @@ $!msg
 <div class="container-fluid">
 	<div class="widget-box">
 		<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-			<h5>充值申请</h5>
+			<h5>充值查询</h5>
 		</div>
 		<div class="widget-content tab-content">
 			<div id="tab1" class="tab-pane active">
@@ -56,14 +56,14 @@ $!msg
     		    		<form id="query_page_form" class="form-horizontal" method="post" action="">
     		    			<input type="hidden" name="pageNum" value="1" />
     		    		</form>
-    				    <table class="table table-bordered table-striped with-check">
+    				    <table id="chargeDetail_table" class="table table-bordered table-striped with-check">
     				    	<thead>
     				            <tr>
     				                <th style="width: 10px;">账户编号</th>
-    								<th style="width: 10px;">用户账号</th>
+    								<th id="userId_header" style="width: 10px;">用户账号</th>
     								<th style="width: 5px;">充值金额</th>
     								<th style="width: 10px;">付款人</th>
-    								<th style="width: 15px;">充值时间</th>
+    								<th id="recvTime_header" style="width: 15px;">充值时间</th>
     								<th style="width: 5px;">百分比</th>
 									<th style="width: 10px;">状态</th>
     								<th style="width: 10px;">操作</th>
@@ -150,6 +150,7 @@ $!msg
 <script src="${docuCdnServer}/js/docu/select.min.js"></script>
 <script src="${docuCdnServer}/js/docu/jquery.gritter.min.js"></script>
 <script src="${docuCdnServer}/js/docu/jquery.uniform.js"></script>
+<script src="${docuCdnServer}/js/docu/jquery.sortElements.js"></script>
 <script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>	
 <script type="text/javascript" src="${docuCdnServer}/js/docu/docu-datetime.js" charset="UTF-8"></script>
@@ -210,5 +211,25 @@ $!msg
                 }
             });
         });
+		
+		var table = $('#chargeDetail_table');
+        $('#userId_header, #recvTime_header')
+    	.wrapInner('<span title="sort this column"/>')
+		.each(function() {
+    		var th = $(this),
+    			thIndex = th.index(),
+    			inverse = false;
+    		th.click(function() {
+    			table.find('td').filter(function() {
+    				return $(this).index() === thIndex;                    
+    			}).sortElements(function(a, b) {
+    				return $(a).text() > $(b).text() ? inverse ? -1 : 1 : inverse ? 1 : -1;
+    			},
+    			function() {
+    				return this.parentNode;                    
+    			});
+    			inverse = !inverse;                    
+    		});
+    	});
     });
 </script>

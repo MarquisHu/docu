@@ -62,14 +62,14 @@ $!msg
 		    		<form id="query_page_form" class="form-horizontal" method="post" action="">
 		    			<input type="hidden" name="pageNum" value="1" />
 		    		</form>
-				    <table class="table table-bordered table-striped with-check">
+				    <table id="acctDetail_table" class="table table-bordered table-striped with-check">
 				    	<thead>
 				            <tr>
 								<th style="width: 5px;">账户编号</th>
-				            	<th style="width: 5px;">用户账号</th>
+				            	<th id="userId_header" style="width: 5px;">用户账号</th>
 				                <th style="width: 5px;">用户姓名</th>
 				                <th style="width: 5px;">账户余额</th>
-								<th style="width: 5px;">更新时间</th>
+								<th id="updateTime_header" style="width: 5px;">更新时间</th>
 								<th style="width: 30px;">操作</th>
 				            </tr>
 				        </thead>
@@ -126,6 +126,7 @@ $!msg
 <script src="${docuCdnServer}/js/docu/select.min.js"></script>
 <script src="${docuCdnServer}/js/docu/jquery.gritter.min.js"></script>
 <script src="${docuCdnServer}/js/docu/jquery.uniform.js"></script>
+<script src="${docuCdnServer}/js/docu/jquery.sortElements.js"></script>
 <script>
 	function clearQuery(){
 		$("#userId").val("");
@@ -160,5 +161,25 @@ $!msg
                 }
             });
         });
+		
+		var table = $('#acctDetail_table');
+        $('#userId_header, #updateTime_header')
+    	.wrapInner('<span title="sort this column"/>')
+		.each(function() {
+    		var th = $(this),
+    			thIndex = th.index(),
+    			inverse = false;
+    		th.click(function() {
+    			table.find('td').filter(function() {
+    				return $(this).index() === thIndex;                    
+    			}).sortElements(function(a, b) {
+    				return $(a).text() > $(b).text() ? inverse ? -1 : 1 : inverse ? 1 : -1;
+    			},
+    			function() {
+    				return this.parentNode;                    
+    			});
+    			inverse = !inverse;                    
+    		});
+    	});
     });
 </script>
