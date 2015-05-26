@@ -49,6 +49,7 @@ public class LoginAction {
 				URIBroker loginPageURI = uriBrokerService.getURIBroker("loginLink"); 
 				String page = loginPageURI.render();
 				redirectUrl = EnvUtils.addContextPath(page, rundata); 
+				redirectUrl += "?userId=" + loginUserId;
 			}
 			rundata.setRedirectLocation(redirectUrl);
 		} catch (Exception e) {

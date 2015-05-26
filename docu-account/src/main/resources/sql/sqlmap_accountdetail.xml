@@ -156,6 +156,12 @@
 	     FROM DOCU_ERP_CHARGE A1 WHERE CHARGE_ID = #{chargeId,jdbcType=VARCHAR}
 	    ]]>
 	</select>
+	
+    <delete id="deleteChargeDetail" parameterType="String">
+        <![CDATA[
+			DELETE FROM DOCU_ERP_CHARGE WHERE CHARGE_ID = #{chargeId,jdbcType=VARCHAR}
+		]]>
+    </delete>
     
     <select id="getTotalBalance" parameterType="AccountBalanceCriteria" resultType="String">
 		SELECT SUM(CHANGE_AMOUNT) 

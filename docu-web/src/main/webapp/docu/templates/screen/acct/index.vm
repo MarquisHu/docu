@@ -104,9 +104,7 @@ $!msg
 					                    </td>
 										<td style="width: 30px;" class="center">
 				                            <p>
-												#if($!admin == '1')
 												<a href="$!envUtil.getContextPath()/acct/chargeAccount.htm?userId=$!{account.userId}"><span style="color:red">充值</span></a>
-												#end
 												<a href="$!envUtil.getContextPath()/acct/accountDetails.htm?userId=$!{account.userId}"><span style="color:red">交易明细</span></a>
 											</p>
 				                        </td>

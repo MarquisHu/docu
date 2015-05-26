@@ -13,71 +13,79 @@ $!msg
 					<div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
 						<h5>账户充值</h5>
 					</div>
-					<div class="widget-content nopadding">
-						<div class="widget-content "> 
-						<div class="control-group">
-							<label class="control-label">用户账号：</label>
-							<div class="controls">
-								<input type="text" name="userId" id="userId" value="$!account.userId" style="width:120px" readonly="readonly" autocomplete="off" />
-								<label style="margin-left:10px">用户姓名：</label>
-								<input type="text" style="margin-left:15px" name="userName" id="userName" value="$!account.userName" style="width:150px" readonly="readonly" autocomplete="off" />
-                			</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">账户编号：</label>
-							<div class="controls">
-								<input type="text" name="accountId" id="accountId" value="$!account.accountId" style="width:120px" readonly="readonly" autocomplete="off" />
-                			</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">账户余额：</label>
-							<div class="controls">
-								<input type="text" name="balance" id="balance" value="$!account.balance" style="width:100px" readonly="readonly" autocomplete="off" />
-                			</div>
-						</div>
-						
-						<div class="control-group">
-							<label class="control-label"><span style="color:red">* </span>付款人：</label>
-							<div class="controls">
-								<input type="text" name="payerId" id="payerId" value="$!payerId" style="width:100px" placeholder="请输入付款人信息" />
-								<div class="s_payerId" style="color:red;display:none;"></div>
-                			</div>
-						</div>
-						
-						<div class="control-group">
-							<label class="control-label"><span style="color:red">* </span>充值金额：</label>
-							<div class="controls">
-								<input type="text" name="recvAmount" id="recvAmount" style="width:100px" placeholder="请输入充值金额" />
-								<div class="s_recvAmount" style="color:red;display:none;"></div>
-                			</div>
-						</div>
-						
-						#if($!account.userId!='CMN')
-						<div class="control-group">
-							<label class="control-label"><span style="color:red">* </span>百分比：</label>
-							<div class="controls">
-								<select style="width:60px" name="percent">
-									<option>10</option>
-                                    <option>20</option>
-									<option>30</option>
-									<option>40</option>
-                                    <option>50</option>
-									<option>0</option>
-                               </select>
-							<label >公共账户所占比例</label>
-                			</div>
-						</div>
-						#end
-						
-						<div class="form-actions">
-							<input type="hidden" name="action" value="/acct/AccountAction" />
-							<input type="hidden" name="event_submit_do_save_charge" value="1" />
-							<div class="controls">
-								<input type="submit" value="提交" class="btn btn-success" onclick="return onSubmit();" />
-								&emsp;&emsp;
-								<span style="color:red">$!msg</span>
-							</div>
-						</div>
+					<div class="widget-content nopadding">						
+						<table class="control-group" border="0" cellpadding="20" cellspacing="0">
+							<tr>
+								<td>
+									<div class="widget-content "> 
+									<div class="control-group">
+										<label class="control-label">用户账号：</label>
+										<div class="controls">
+											<input type="text" name="userId" id="userId" value="$!account.userId" style="width:120px" readonly="readonly" autocomplete="off" />
+											<label style="margin-left:10px">用户姓名：</label>
+											<input type="text" style="margin-left:15px" name="userName" id="userName" value="$!account.userName" style="width:150px" readonly="readonly" autocomplete="off" />
+										</div>
+									</div>	
+									<div class="control-group">
+										<label class="control-label">账户编号：</label>
+										<div class="controls">
+											<input type="text" name="accountId" id="accountId" value="$!account.accountId" style="width:120px" readonly="readonly" autocomplete="off" />
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">账户余额：</label>
+										<div class="controls">
+											<input type="text" name="balance" id="balance" value="$!account.balance" style="width:100px" readonly="readonly" autocomplete="off" />
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<label class="control-label"><span style="color:red">* </span>付款人：</label>
+										<div class="controls">
+											<input type="text" name="payerId" id="payerId" value="$!payerId" style="width:100px" placeholder="请输入付款人信息" />
+											<div class="s_payerId" style="color:red;display:none;"></div>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label"><span style="color:red">* </span>充值金额：</label>
+										<div class="controls">
+											<input type="text" name="recvAmount" id="recvAmount" style="width:100px" placeholder="请输入充值金额" />
+											<div class="s_recvAmount" style="color:red;display:none;"></div>
+										</div>
+									</div>
+									
+									#if($!account.userId!='CMN')
+									<div class="control-group">
+										<label class="control-label"><span style="color:red">* </span>百分比：</label>
+										<div class="controls">
+											<select style="width:60px" name="percent">
+												<option>10</option>
+												<option>20</option>
+												<option>30</option>
+												<option>40</option>
+												<option>50</option>
+												<option>0</option>
+										   </select>
+										<label >公共账户所占比例</label>
+										</div>
+									</div>
+									#end
+									
+									<div class="form-actions">
+										<input type="hidden" name="action" value="/acct/AccountAction" />
+										<input type="hidden" name="event_submit_do_save_charge" value="1" />
+										<div class="controls">
+											<input type="submit" value="提交" class="btn btn-success" onclick="return onSubmit();" />
+											&emsp;&emsp;
+											<span style="color:red">$!msg</span>
+										</div>
+									</div>
+								</td>
+								<td>
+									<img src="${docuCdnServer}/images/atr/charge.png" />
+								</td>
+							</tr>
+						</table>
 					</div>
 				</div>
             </form>

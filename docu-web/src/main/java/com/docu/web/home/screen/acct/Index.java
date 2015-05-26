@@ -36,11 +36,11 @@ public class Index {
 		}
 		AccountBalanceCriteria entity = new AccountBalanceCriteria();
 		int pageNum = rundata.getParameters().getInt("pageNum");
-		String criteria = rundata.getParameters().getString("userId");
+		String userId = rundata.getParameters().getString("userId");
 		String accountId = rundata.getParameters().getString("accountId");
 		String accountType = rundata.getParameters().getString("accountType");
 		
-		entity.setUserId(criteria);
+		entity.setUserId(userId);
 		entity.setAccountId(accountId);
 		if (accountType != null && Constants.ACCOUNT_TYPE_ALL.equals(accountType)) {
 			entity.setAccountType(null);
@@ -77,7 +77,7 @@ public class Index {
 		context.put("incomeAmount", incomeAmount);
 		context.put("expendAmount", expendAmount);
 		context.put("admin", admin);
-		context.put("userId", criteria);
+		context.put("userId", userId);
 		context.put("accountId", accountId);
 		if (accountType == null) {
 			context.put("accountType", Constants.ACCOUNT_TYPE_ALL);
