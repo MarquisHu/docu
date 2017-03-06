@@ -54,7 +54,7 @@ hr{ border-top-color:#dadada;}
 	z-index: -9;
 }
 #header h1 {
-	background: url("images/logo.png") no-repeat scroll 0 0 transparent;
+	/*background: url("images/logo.png") no-repeat scroll 0 0 transparent;*/
 	height: 63px;
 	left: 20px;
 	line-height: 600px;
@@ -62,7 +62,7 @@ hr{ border-top-color:#dadada;}
 	position: relative;
 	top: 18px;
 	width: 170px;
-	background-size:135px;
+	background-size:50% 100%;
 	
 }
 #header h1 a {

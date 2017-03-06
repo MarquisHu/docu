@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.docu.account.dao.AccountDetailDao">
     
-    <resultMap id="DETAIL_RESULT_MAP" type="AccountDetail">
+    <resultMap id="DETAIL_RESULT_MAP" type="AccountDetailResult">
         <result property="detailId" column="ACCT_DETAIL_ID" />
         <result property="accountId" column="ACCOUNT_ID" />
 		<result property="userId" column="USER_ID" />
@@ -14,6 +14,32 @@
 		<result property="transactionTime" column="TRANSACTION_TIME" />
 		<result property="activityId" column="ACTIVITY_ID" />
 		<result property="percent" column="PERCENT" />
+		<result property="updateBy" column="UPDATE_BY" />
+		<result property="updateTime" column="UPDATE_TIME" />
+	</resultMap>
+	
+    <resultMap id="CHARGE_RESULT_MAP" type="ChargeDetailResult">
+        <result property="chargeId" column="CHARGE_ID" />
+        <result property="accountId" column="ACCOUNT_ID" />
+		<result property="userId" column="USER_ID" />
+		<result property="recvAmount" column="RECV_AMOUNT" />
+		<result property="recvTime" column="RECV_TIME" />
+		<result property="payerId" column="PAYER_ID" />
+		<result property="percent" column="PERCENT" />
+		<result property="status" column="STATUS" />
+		<result property="updateBy" column="UPDATE_BY" />
+		<result property="updateTime" column="UPDATE_TIME" />
+	</resultMap>
+	
+    <resultMap id="CHARGE_DETAIL_MAP" type="ChargeDetail">
+        <result property="chargeId" column="CHARGE_ID" />
+        <result property="accountId" column="ACCOUNT_ID" />
+		<result property="userId" column="USER_ID" />
+		<result property="recvAmount" column="RECV_AMOUNT" />
+		<result property="recvTime" column="RECV_TIME" />
+		<result property="payerId" column="PAYER_ID" />
+		<result property="percent" column="PERCENT" />
+		<result property="status" column="STATUS" />
 		<result property="updateBy" column="UPDATE_BY" />
 		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
@@ -30,6 +56,19 @@
 		A1.TRANSACTION_TIME		transactionTime,
 		A1.ACTIVITY_ID 			activityId,
 		A1.PERCENT 				percent,
+		A1.UPDATE_BY 			updateBy,
+		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
+	</sql>
+	
+	<sql id="CHARGE_DO_QUERY_COLUMNS">
+	    A1.CHARGE_ID			chargeId,
+	    A1.ACCOUNT_ID			accountId,
+		A1.USER_ID 				userId, 
+		A1.RECV_AMOUNT 			recvAmount, 
+		A1.RECV_TIME 			recvTime, 
+		A1.PAYER_ID 			payerId,
+		A1.PERCENT 				percent,
+		A1.STATUS 				status,
 		A1.UPDATE_BY 			updateBy,
 		date_format(A1.UPDATE_TIME, '%Y-%m-%d %h:%i:%s') updateTime
 	</sql>
@@ -66,17 +105,94 @@
 		)
 	</insert>
 	
+    <insert id="insertChargeDetail" parameterType="ChargeDetail">
+		INSERT INTO DOCU_ERP_CHARGE(
+			CHARGE_ID,
+			ACCOUNT_ID,
+			USER_ID, 
+			RECV_AMOUNT, 
+			RECV_TIME, 
+			PAYER_ID,
+			PERCENT,
+			STATUS,
+			UPDATE_BY,
+			UPDATE_TIME
+		) VALUES (
+			#{chargeId,jdbcType=BIGINT},
+			#{accountId,jdbcType=BIGINT},
+		 	#{userId,jdbcType=VARCHAR},
+		 	#{recvAmount,jdbcType=FLOAT},
+		 	#{recvTime,jdbcType=VARCHAR},
+		 	#{payerId,jdbcType=VARCHAR},
+		 	#{percent,jdbcType=INTEGER},
+		 	#{status,jdbcType=INTEGER},
+		 	#{updateBy,jdbcType=VARCHAR},
+		 	#{updateTime,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+    <update id="updateChargeDetail" parameterType="String">
+	    <![CDATA[
+			UPDATE DOCU_ERP_CHARGE
+		]]>
+		<set>
+			<![CDATA[
+		    	STATUS = '1'
+			]]>
+		</set>
+		WHERE CHARGE_ID = #{chargeId,jdbcType=VARCHAR}
+	</update>
+	
     <delete id="deleteAccountDetail" parameterType="String">
         <![CDATA[
 			DELETE FROM DOCU_ERP_ACCT_DETAIL WHERE ACTIVITY_ID = #{activityId,jdbcType=VARCHAR}
 		]]>
     </delete>
     
-    <select id="getTotalBalance" parameterType="String" resultType="String">
+    <select id="findChargeDetail" parameterType="String" resultMap="CHARGE_DETAIL_MAP">
+		SELECT
+		<include refid="CHARGE_DO_QUERY_COLUMNS" />
+	    <![CDATA[  
+	     FROM DOCU_ERP_CHARGE A1 WHERE CHARGE_ID = #{chargeId,jdbcType=VARCHAR}
+	    ]]>
+	</select>
+	
+    <delete id="deleteChargeDetail" parameterType="String">
+        <![CDATA[
+			DELETE FROM DOCU_ERP_CHARGE WHERE CHARGE_ID = #{chargeId,jdbcType=VARCHAR}
+		]]>
+    </delete>
+    
+    <select id="getTotalBalance" parameterType="AccountBalanceCriteria" resultType="String">
 		SELECT SUM(CHANGE_AMOUNT) 
 	    <![CDATA[  
-	     FROM DOCU_ERP_ACCT_DETAIL A1 WHERE A1.TRANSACTION_TYPE = #{transactionType,jdbcType=VARCHAR}
+	     FROM DOCU_ERP_ACCT_DETAIL A1, DOCU_ERP_ACCOUNT A2
 	    ]]>
+	    <where>
+	        <![CDATA[
+		    		A1.ACCOUNT_ID = A2.ACCOUNT_ID
+		    ]]>
+	        <if test="userId != null">
+			    <![CDATA[
+			    	AND A1.USER_ID = #{userId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="accountId != null">
+			    <![CDATA[
+			    	AND A1.ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="accountType != null">
+			    <![CDATA[
+			    	AND A2.ACCOUNT_TYPE = #{accountType,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="transactionType != null">
+			    <![CDATA[
+			    	AND A1.TRANSACTION_TYPE = #{transactionType,jdbcType=VARCHAR}
+				]]>
+			</if>
+		</where>
 	</select>
 	
     <select id="findAccountDetails" parameterType="AccountDetailCriteria" resultMap="DETAIL_RESULT_MAP">
@@ -243,7 +359,79 @@
 				</otherwise>
 			</choose>
 		</where>
-		ORDER BY A1.ACCOUNT_ID, A1.USER_ID, A1.ACCT_DETAIL_ID 
+		ORDER BY A1.ACCOUNT_ID, A1.USER_ID, A1.UPDATE_TIME DESC, A1.TRANSACTION_TIME DESC
+		LIMIT #{preEndNum}, #{pageSize}
+	</select>
+	
+	<select id="queryChargeDetailTotal" parameterType="com.docu.components.common.QueryBase" resultType="int">
+	    SELECT
+		COUNT(*)
+		<![CDATA[  
+	     	FROM DOCU_ERP_CHARGE A1
+	    ]]>
+	    <where>
+	        <if test="entity.userId != null">
+			    <![CDATA[
+			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<choose>
+				<when test="entity.startDate != null &amp;&amp; entity.endDate != null">
+				    <![CDATA[
+						and DATE_FORMAT(A1.RECV_TIME, '%Y-%m-%d') between DATE_FORMAT(#{entity.startDate,jdbcType=VARCHAR}, '%Y-%m-%d') 
+						and DATE_FORMAT(#{entity.endDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					]]>
+				</when>
+				<otherwise>
+				    <if test="entity.startDate != null">
+					    <![CDATA[
+					    	and DATE_FORMAT(A1.RECV_TIME, '%Y-%m-%d') >= DATE_FORMAT(#{entity.startDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					    ]]>
+				    </if>
+				    <if test="entity.endDate != null">
+					    <![CDATA[
+					    	and DATE_FORMAT(A1.RECV_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{entity.endDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					    ]]>
+				    </if>
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="queryChargeDetail" parameterType="com.docu.components.common.QueryBase" resultMap="CHARGE_RESULT_MAP">
+	    SELECT
+		<include refid="CHARGE_DO_QUERY_COLUMNS" />
+		<![CDATA[  
+	     	FROM DOCU_ERP_CHARGE A1
+	    ]]>
+	    <where>
+	        <if test="entity.userId != null">
+			    <![CDATA[
+			    	AND A1.USER_ID = #{entity.userId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<choose>
+				<when test="entity.startDate != null &amp;&amp; entity.endDate != null">
+				    <![CDATA[
+						and DATE_FORMAT(A1.RECV_TIME, '%Y-%m-%d') between DATE_FORMAT(#{entity.startDate,jdbcType=VARCHAR}, '%Y-%m-%d') 
+						and DATE_FORMAT(#{entity.endDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					]]>
+				</when>
+				<otherwise>
+				    <if test="entity.startDate != null">
+					    <![CDATA[
+					    	and DATE_FORMAT(A1.RECV_TIME, '%Y-%m-%d') >= DATE_FORMAT(#{entity.startDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					    ]]>
+				    </if>
+				    <if test="entity.endDate != null">
+					    <![CDATA[
+					    	and DATE_FORMAT(A1.RECV_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{entity.endDate,jdbcType=VARCHAR}, '%Y-%m-%d')
+					    ]]>
+				    </if>
+				</otherwise>
+			</choose>
+		</where>
+		ORDER BY A1.UPDATE_TIME DESC, A1.RECV_TIME DESC
 		LIMIT #{preEndNum}, #{pageSize}
 	</select>
 </mapper>

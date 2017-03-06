@@ -7,7 +7,8 @@ import javax.annotation.Resource;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
 import com.docu.user.dao.UserDao;
-import com.docu.user.dto.User;
+import com.docu.user.dto.UserResult;
+import com.docu.user.model.User;
 import com.docu.user.service.UserService;
 
 public class UserServiceImpl implements UserService {
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findUsers() {
+	public List<UserResult> findUsers() {
 		return userDao.findUsers();
 	}
 

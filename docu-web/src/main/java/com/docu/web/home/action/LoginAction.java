@@ -12,7 +12,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.docu.components.util.StringUtils;
-import com.docu.user.dto.User;
+import com.docu.user.model.User;
 import com.docu.user.service.UserService;
 import com.docu.web.common.context.EnvUtils;
 
@@ -36,7 +36,7 @@ public class LoginAction {
 			password = DigestUtils.md5Hex(password);
 			User user = userService.queryUser(loginUserId);
 			if (user == null || !password.equals(user.getPassword())) {
-				errmsg="Please input right of UserId and Password!";
+				errmsg="Cannot find the user or UserId and Password are dismatch!";
 				return;
 			}
 			HttpSession session = rundata.getRequest().getSession();
@@ -49,6 +49,7 @@ public class LoginAction {
 				URIBroker loginPageURI = uriBrokerService.getURIBroker("loginLink"); 
 				String page = loginPageURI.render();
 				redirectUrl = EnvUtils.addContextPath(page, rundata); 
+				redirectUrl += "?userId=" + loginUserId;
 			}
 			rundata.setRedirectLocation(redirectUrl);
 		} catch (Exception e) {

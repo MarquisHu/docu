@@ -6,11 +6,12 @@
         <result property="accountId" column="ACCOUNT_ID" />
 		<result property="userId" column="USER_ID" />
 		<result property="balance" column="BALANCE" />
+		<result property="accountType" column="ACCOUNT_TYPE" />
 		<result property="updateBy" column="UPDATE_BY" />
 		<result property="updateTime" column="UPDATE_TIME" />
 	</resultMap>
 	
-    <resultMap id="BALANCE_RESULT_MAP" type="AccountBalance">
+    <resultMap id="BALANCE_RESULT_MAP" type="AccountBalanceResult">
         <result property="userId" column="USER_ID" />
         <result property="accountId" column="ACCOUNT_ID" />
         <result property="userName" column="USER_NAME" />
@@ -39,12 +40,14 @@
 			ACCOUNT_ID,
 			USER_ID, 
 			BALANCE, 
+			ACCOUNT_TYPE,
 			UPDATE_BY,
 			UPDATE_TIME
 		) VALUES (
 			#{accountId,jdbcType=BIGINT},
 		 	#{userId,jdbcType=VARCHAR},
 		 	#{balance,jdbcType=FLOAT},
+		 	#{accountType,jdbcType=VARCHAR},
 		 	#{updateBy,jdbcType=VARCHAR},
 		 	#{updateTime,jdbcType=VARCHAR}
 		)
@@ -82,11 +85,31 @@
 	    ]]>
 	</select>
 	
-    <select id="getTotalBalance" resultType="String">
+    <select id="getTotalBalance" parameterType="AccountBalanceCriteria" resultType="String">
 		SELECT SUM(BALANCE) 
 	    <![CDATA[  
-	     FROM DOCU_ERP_ACCOUNT
+	     FROM DOCU_ERP_USER A1, DOCU_ERP_ACCOUNT A2
 	    ]]>
+	    <where>
+	        <![CDATA[
+		    		A1.USER_ID = A2.USER_ID
+		    ]]>
+	        <if test="userId != null">
+			    <![CDATA[
+			    	AND A1.USER_ID = #{userId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="accountId != null">
+			    <![CDATA[
+			    	AND A2.ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}
+				]]>
+			</if>
+			<if test="accountType != null">
+			    <![CDATA[
+			    	AND A2.ACCOUNT_TYPE = #{accountType,jdbcType=VARCHAR}
+				]]>
+			</if>
+		</where>
 	</select>
 	
     <select id="findAccountBalance" parameterType="String" resultMap="BALANCE_RESULT_MAP">

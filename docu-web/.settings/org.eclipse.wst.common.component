@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="docu-web">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <dependent-module archiveName="docu-components-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/docu-components/docu-components">
+        <dependent-module archiveName="docu-components-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/docu-components/docu-components">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="docu-config-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/docu-config/docu-config">
+        <dependent-module archiveName="docu-config-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/docu-config/docu-config">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="docu-user-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/docu-user/docu-user">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="docu-account-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/docu-account/docu-account">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="docu-activity-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/docu-activity/docu-activity">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="docu-web"/>

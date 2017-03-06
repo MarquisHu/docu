@@ -3,8 +3,9 @@ package com.docu.account.dao.impl;
 import java.util.List;
 
 import com.docu.account.dao.AccountDao;
-import com.docu.account.dto.Account;
-import com.docu.account.dto.AccountBalance;
+import com.docu.account.dto.AccountBalanceCriteria;
+import com.docu.account.dto.AccountBalanceResult;
+import com.docu.account.model.Account;
 import com.docu.components.common.BaseDao;
 import com.docu.components.common.QueryBase;
 
@@ -27,13 +28,13 @@ public class IbatisAccountDao extends BaseDao implements AccountDao {
 	}
 	
 	@Override
-	public String getTotalBalance() {
-		return (String) getSqlSessionTemplate().selectOne(NAMESPACE + "getTotalBalance");
+	public String getTotalBalance(AccountBalanceCriteria criteria) {
+		return (String) getSqlSessionTemplate().selectOne(NAMESPACE + "getTotalBalance", criteria);
 	}
 
 	@Override
-	public AccountBalance findAccountBalance(String userId) {
-		return (AccountBalance) getSqlSessionTemplate().selectOne(NAMESPACE + "findAccountBalance", userId);
+	public AccountBalanceResult findAccountBalance(String userId) {
+		return (AccountBalanceResult) getSqlSessionTemplate().selectOne(NAMESPACE + "findAccountBalance", userId);
 	}
 	
 	@Override
@@ -43,8 +44,8 @@ public class IbatisAccountDao extends BaseDao implements AccountDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AccountBalance> queryAccountBalance(QueryBase query) {
-		return (List<AccountBalance>) getSqlSessionTemplate().selectList(NAMESPACE + "queryAccountBalance", query);
+	public List<AccountBalanceResult> queryAccountBalance(QueryBase query) {
+		return (List<AccountBalanceResult>) getSqlSessionTemplate().selectList(NAMESPACE + "queryAccountBalance", query);
 	}
 	
 	@Override

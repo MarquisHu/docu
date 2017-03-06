@@ -52,14 +52,14 @@ $!msg
     		    		<form id="query_page_form" class="form-horizontal" method="post" action="">
     		    			<input type="hidden" name="pageNum" value="1" />
     		    		</form>
-    				    <table class="table table-bordered table-striped with-check">
+    				    <table id="activityDetail_table" class="table table-bordered table-striped with-check">
     				    	<thead>
     				            <tr>
     								<th style="width: 10px;">活动编号</th>
     				            	<th style="width: 5px;">消费金额</th>
     				                <th style="width: 30px;">活动描述</th>
     				                <th style="width: 30px;">活动地点</th>
-    								<th style="width: 10px;">活动时间</th>
+    								<th id="activityTime_header" style="width: 10px;">活动时间</th>
     								<th style="width: 30px;">操作</th>
     				            </tr>
     				        </thead>
@@ -93,7 +93,9 @@ $!msg
     					                        </span>
     					                    </td>
     										<td style="width: 30px;" class="center">
-    											<a class="undo_apply" href="" activityId="$!activity.activityId" data-toggle="modal" onclick=""><span style="color:red">删除</span></a>
+												#if($!admin == '1')
+												<a class="undo_apply" href="" activityId="$!activity.activityId" data-toggle="modal" onclick=""><span style="color:red">删除</span></a>
+												#end
     				                            <a href="$!envUtil.getContextPath()/acct/accountDetails.htm?activityId=$!{activity.activityId}"><span style="color:red">交易明细</span></a>
     				                        </td>
     					                </tr>
@@ -125,6 +127,7 @@ $!msg
 <script src="${docuCdnServer}/js/docu/select.min.js"></script>
 <script src="${docuCdnServer}/js/docu/jquery.gritter.min.js"></script>
 <script src="${docuCdnServer}/js/docu/jquery.uniform.js"></script>
+<script src="${docuCdnServer}/js/docu/jquery.sortElements.js"></script>
 <script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${docuCdnServer}/js/docu/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>	
 <script type="text/javascript" src="${docuCdnServer}/js/docu/docu-datetime.js" charset="UTF-8"></script>
@@ -174,5 +177,25 @@ $!msg
                 }
             });
         });
+		
+		var table = $('#activityDetail_table');
+        $('#activityTime_header')
+    	.wrapInner('<span title="sort this column"/>')
+		.each(function() {
+    		var th = $(this),
+    			thIndex = th.index(),
+    			inverse = false;
+    		th.click(function() {
+    			table.find('td').filter(function() {
+    				return $(this).index() === thIndex;                    
+    			}).sortElements(function(a, b) {
+    				return $(a).text() > $(b).text() ? inverse ? -1 : 1 : inverse ? 1 : -1;
+    			},
+    			function() {
+    				return this.parentNode;                    
+    			});
+    			inverse = !inverse;                    
+    		});
+    	});
     });
 </script>

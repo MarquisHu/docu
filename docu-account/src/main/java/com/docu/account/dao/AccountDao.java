@@ -2,8 +2,9 @@ package com.docu.account.dao;
 
 import java.util.List;
 
-import com.docu.account.dto.Account;
-import com.docu.account.dto.AccountBalance;
+import com.docu.account.dto.AccountBalanceCriteria;
+import com.docu.account.dto.AccountBalanceResult;
+import com.docu.account.model.Account;
 import com.docu.components.common.QueryBase;
 
 public interface AccountDao {
@@ -13,13 +14,13 @@ public interface AccountDao {
 	
 	Account findAccount(String userId);
 	
-	String getTotalBalance();
+	String getTotalBalance(AccountBalanceCriteria criteria);
 	
-	AccountBalance findAccountBalance(String userId);
+	AccountBalanceResult findAccountBalance(String userId);
 	
 	int queryAccountBalanceTotal(QueryBase query);
 	
-	List<AccountBalance> queryAccountBalance(QueryBase query);
+	List<AccountBalanceResult> queryAccountBalance(QueryBase query);
 	
 	Long getSequenceUuid(String sequenceName);
 }

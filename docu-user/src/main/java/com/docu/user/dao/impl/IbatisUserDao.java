@@ -5,7 +5,8 @@ import java.util.List;
 import com.docu.components.common.BaseDao;
 import com.docu.components.common.QueryBase;
 import com.docu.user.dao.UserDao;
-import com.docu.user.dto.User;
+import com.docu.user.dto.UserResult;
+import com.docu.user.model.User;
 
 public class IbatisUserDao extends BaseDao implements UserDao {
 	private static final String NAMESPACE = "com.docu.user.dao.UserDao.";
@@ -27,8 +28,8 @@ public class IbatisUserDao extends BaseDao implements UserDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> findUsers() {
-		return (List<User>) getSqlSessionTemplate().selectList(NAMESPACE + "findUsers");
+	public List<UserResult> findUsers() {
+		return (List<UserResult>) getSqlSessionTemplate().selectList(NAMESPACE + "findUsers");
 	}
 
 	@Override

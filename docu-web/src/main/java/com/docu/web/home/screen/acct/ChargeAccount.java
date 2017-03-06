@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.webx.WebxException;
-import com.docu.account.dto.AccountBalance;
+import com.docu.account.dto.AccountBalanceResult;
 import com.docu.account.service.AccountService;
 import com.docu.web.common.context.EnvUtils;
 
@@ -28,7 +28,7 @@ public class ChargeAccount {
 		if (userId == null) {
 			userId = loginUserId;
 		}
-		AccountBalance account = accountService.queryAccountBalance(userId);
+		AccountBalanceResult account = accountService.queryAccountBalance(userId);
 		context.put("account", account);
 		context.put("admin", admin);
 		context.put("userId", userId);

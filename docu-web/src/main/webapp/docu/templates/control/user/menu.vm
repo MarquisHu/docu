@@ -11,13 +11,14 @@
         <ul stype='display:block;'>
 	      <li class="#if($!vmUtil.menuEq($menu,'searchBalance'))active#end"><a href="$!envUtil.getContextPath()/acct/index.htm">&emsp;&emsp;&emsp;余额查询</a></li>
 	    </ul>
-		#if($!admin == '1')
-	    <ul stype='display:block;'>
-	      <li class="#if($!vmUtil.menuEq($menu,'chargeAccount'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeAccount.htm">&emsp;&emsp;&emsp;账户充值</a></li>
-	    </ul>
-		#end
 		<ul stype='display:block;'>
 	      <li class="#if($!vmUtil.menuEq($menu,'accountDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/accountDetails.htm">&emsp;&emsp;&emsp;交易明细</a></li>
+	    </ul>
+		<ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargeAccount'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeAccount.htm">&emsp;&emsp;&emsp;账户充值</a></li>
+	    </ul>
+	    <ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'chargeDetails'))active#end"><a href="$!envUtil.getContextPath()/acct/chargeDetails.htm">&emsp;&emsp;&emsp;充值查询</a></li>
 	    </ul>
     </li>
 	
@@ -36,6 +37,9 @@
 	      <li class="#if($!vmUtil.menuEq($menu,'addActivity'))active#end"><a href="$!envUtil.getContextPath()/activity/addActivity.htm">&emsp;&emsp;&emsp;新增活动</a></li>
 	    </ul>	
 		#end
+		<ul stype='display:block;'>
+	      <li class="#if($!vmUtil.menuEq($menu,'lottery'))active#end"><a href="$!envUtil.getContextPath()/activity/lottery.htm">&emsp;&emsp;&emsp;活动抽奖</a></li>
+	    </ul>
     </li>
 	
     <li class="submenu open">

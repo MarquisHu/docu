@@ -133,7 +133,7 @@ $!msg
 					                    </td>
 										<td class="noborder center" style="width: 10px;">
 					                        <span class="">
-					                            $!detail.activityId
+												<a href="$!envUtil.getContextPath()/activity/index.htm?activityId=$!detail.activityId"><span style="color:red">$!detail.activityId</span></a>
 					                        </span>
 					                    </td>
 										<td class="noborder center" style="width: 30px;">

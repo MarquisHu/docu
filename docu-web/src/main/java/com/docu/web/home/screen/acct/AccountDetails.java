@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.webx.WebxException;
-import com.docu.account.dto.AccountDetail;
 import com.docu.account.dto.AccountDetailCriteria;
+import com.docu.account.dto.AccountDetailResult;
 import com.docu.account.service.AccountDetailService;
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
@@ -51,7 +51,7 @@ public class AccountDetails {
 		entity.setEndDate(endDate);
 		
 		QueryBase query = new QueryBase(pageNum, entity);
-		PageDO<AccountDetail> page = detailService.queryAccountDetails(query);
+		PageDO<AccountDetailResult> page = detailService.queryAccountDetails(query);
 		
 		context.put("page", page);
 		context.put("admin", admin);

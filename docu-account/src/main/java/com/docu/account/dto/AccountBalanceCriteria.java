@@ -5,6 +5,7 @@ public class AccountBalanceCriteria {
 	String userId;
 	String accountId;
 	String accountType;
+	String transactionType;
 	
 	public String getUserId() {
 		return userId;
@@ -23,5 +24,11 @@ public class AccountBalanceCriteria {
 	}
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+	public String getTransactionType() {
+		return transactionType;
+	}
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
 	}
 }

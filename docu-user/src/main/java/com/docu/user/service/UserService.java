@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.docu.components.common.PageDO;
 import com.docu.components.common.QueryBase;
-import com.docu.user.dto.User;
+import com.docu.user.dto.UserResult;
+import com.docu.user.model.User;
 
 
 public interface UserService {
@@ -12,7 +13,7 @@ public interface UserService {
 	
 	int updateUser(User user);
 	
-	List<User> findUsers();
+	List<UserResult> findUsers();
 	
 	User queryUser(String userId);
 	
